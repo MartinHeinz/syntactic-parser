@@ -1,0 +1,62 @@
+
+{
+    "Story": "Sentences",
+    "Sentences": "Sentences Sentence | Sentence",
+    "Sentence": "OneWordSentence | BasicSentence | DirectSpeechSingle | DirectSpeechTwoOrMore | ISentenceAndDS | DSAndISentence | DSAndISentenceRepeated | ISentenceAndDSDash | DirectSpeechDash",
+    "SentencesSimple": "SentencesSimple SentenceSimple | SentenceSimple",
+    "SentenceSimple": "OneWordSentence | BasicSentence",
+
+    "OneWordSentence": "StartingToken Punctuation",
+    "BasicSentence": "StartingToken Words Punctuation | Quotation",
+    "ISentenceAndDS": "ISentenceStart DirectSpeechSingle | ISentenceStart DirectSpeechTwo | ISentenceStart DirectSpeechMoreThanTwo",
+    "DSAndISentence": "DirectSpeechStart ISentenceEnd",
+    "DSAndISentenceRepeated": "DirectSpeechStart DSISRepeated",
+    "ISentenceAndDSDash": "ISentenceStart DirectSpeechDash",
+
+    "Quotation": "StartingToken QuoteLeft Words QuoteRight Words Punctuation | StartingToken Words QuoteLeft Words QuoteRight Words Punctuation",
+
+
+    "DSSentences": "QuoteLeft DSSubSentences QuoteRight",
+    "DSSubSentences": "QuoteLeft DSSubSentences DSSentence |  DSSentence QuoteRight",
+    "DSSentence": "StartingToken DSPunctuation | StartingToken Words DSPunctuation",
+    "DSPunctuation": ", | ? | ! | RepeatedPunctuation",
+
+    "ISentenceStart": "StartingToken Words : | StartingToken :",
+    "ISentenceMiddleStart": "Words Punctuation",
+    "ISentenceMiddleFinal": "StartingToken Words , | StartingToken ,",
+    "ISentenceMiddle": "ISentenceMiddleStart Sentences ISentenceMiddleFinal | ISentenceMiddleStart ISentenceMiddleFinal | ISentenceMiddleEnd",
+    "ISentenceMiddleEnd": "Words ,",
+    "ISentenceEnd": "Words Punctuation | Dash Words Punctuation",
+
+    "DirectSpeechStart": "QuoteLeft SentencesSimple DSSentence QuoteRight | QuoteLeft DSSentence QuoteRight | Dash SentencesSimple DSSentence | Dash DSSentence",
+    "DirectSpeech" : "QuoteLeft SentencesSimple QuoteRight",
+    "DirectSpeechEnd": "QuoteLeft Words Punctuation SentencesSimple QuoteRight | QuoteLeft Words Punctuation QuoteRight",
+
+
+
+    "DirectSpeechSingle": "QuoteLeft StartingToken Punctuation QuoteRight | QuoteLeft StartingToken Words Punctuation QuoteRight",
+    "DirectSpeechTwoOrMore": "DirectSpeechTwo | DirectSpeechMoreThanTwo",
+    "DirectSpeechTwo": "DirectSpeechFirst DirectSpeechSecond",
+    "DirectSpeechFirst": "QuoteLeft StartingToken Punctuation | QuoteLeft StartingToken Words Punctuation",
+    "DirectSpeechSecond": "StartingToken Punctuation QuoteRight | StartingToken Words Punctuation QuoteRight",
+    "DirectSpeechMoreThanTwo": "DirectSpeechFirst SentencesSimple DirectSpeechSecond",
+
+    "DSISRepeated": "DSISRepeated ISentenceMiddle DirectSpeechEnd | ISentenceMiddle DirectSpeechEnd",
+
+    "DirectSpeechDash": "SentenceSimpleDash",
+
+    "SentenceSimpleDash": "Dash StartingToken Punctuation | Dash StartingToken Words Punctuation",
+    "SentencesSimpleDash": "SentencesSimpleDash | SentenceSimpleDash",
+
+
+    "StartingToken":"WordCapital | WordAbbr | Number",
+    "Words":"Words WordToken | WordToken",
+    "WordToken":"WordCapital | WordLower | Word | Number | : | , | ; | Ellipsis | Other",
+
+    "Punctuation":". | ? | ! | RepeatedPunctuation | Ellipsis",
+    "Number":"Decimal | Num | Ordinal | Class",
+    "Ordinal":"Num .",
+    "Dash": "-",
+    "QuoteLeft": "\u201E",
+    "QuoteRight": "\u201C"
+}

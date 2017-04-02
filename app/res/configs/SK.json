@@ -1,0 +1,16 @@
+{
+    "rootRule": "Story",
+    "sentenceRule": ["ISentenceStart", "ISentenceEnd", "ISentenceMiddleStart", "ISentenceMiddleFinal", "ISentenceMiddleEnd", "DirectSpeechDash", "OneWordSentence", "OneWordSentenceNoNewLine", "BasicSentence", "ISentenceAndDS", "DSAndISentence", "DSAndISentenceDash", "DSAndISentenceRepeated", "ISentenceAndDSDash", "SentenceSimpleDash", "SentenceSimple", "DirectSpeechSingle", "DirectSpeechFirst", "DirectSpeechSecond", "DSSentence", "DirectSpeechFirstDash", "DirectSpeechDashSecondNoDot", "DirectSpeechSecondNoDot", "DirectSpeechSingleNoDot", "ISentenceEndDash", "DirectSpeechDashSingleNoDot", "DirectSpeechSingleEnd", "DirectSpeechFirstEnd", "DirectSpeechSecondEnd", "DSAndISentenceDashRepeated", "DirectSpeechStartDash", "DirectSpeechEndDash", "ISentenceMiddleDash"],
+    "splittingRegex": "(\\n)|([\\.!\\?]{2,})|([0-9]\\.[A-Z])|(\\d{1,2}[:-]\\d{1,2}[:-]\\d{1,}(,\\d+)*)|([+-]?\\d+(\\.\\d+)*(,\\d+)?(%|,-)?)|([A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]\\.)|[a-zéŕřťýúíóášďľĺžčäôA-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ-]+|[\\.,;:\"„“\\(\\)\\?!'/\\*\\+%$€]|(<\\s*\\D*?>)|[<>]|[\\S+]",
+    "HTMLRegex": "(^<([^>]+)>$)",
+    "tagRegex": "^<\\s*(\\w+)\\s*.*>$",
+    "allTagsExceptForWRegex": "((<s id=\\\"s\\d+\\\">)*(<(b|strong|i|em|mark|small|del|ins|sub|sup|span [^>]*\\\")>)*)",
+    "tagsBeforeContentRegex": "^((<s id=\\\"s\\d+\\\">)*(<(b|strong|i|em|mark|small|del|ins|sub|sup|span [^>]*\\\")>)*(<w id=\\\"w\\d+\\\">)?)",
+    "wordRegexAndFormatRegex": "<\\/w>(<\\/(b|strong|i|em|mark|small|del|ins|sub|sup|span)>)*",
+    "formatRegex": "<\\/(b|strong|i|em|mark|small|del|ins|sub|sup|span)+",
+    "sentenceEndMultipleRegex": "(<\\/s>)+",
+    "sentenceEndTagSingleRegex": "<\\/s>",
+    "sentenceEndPunctuationRegex": "^[\\.“\\\"\\?!]+$",
+    "punctuationRegex": "^[\\.!\\?]{2,}$|^[\\n\\.,;:\\\"„“\\(\\)\\?!'/\\u2014\\u2013\\u2212\\u2010\\u2011-]$",
+    "DirectSpeechRegex": "^[„“-]$"
+}

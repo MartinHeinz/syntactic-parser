@@ -1,0 +1,112 @@
+
+{
+    "Story": "Sentences",
+    "Sentences": "Sentences Sentence | Sentence",
+    "Sentence": "OneWordSentence | BasicSentence | DirectSpeechSingle | DirectSpeechTwoOrMore | ISentenceAndDS | DSAndISentence | DSAndISentenceRepeated",
+    "SentencesSimple": "SentencesSimple SentenceSimple | SentenceSimple",
+    "SentenceSimple": "OneWordSentence | BasicSentence",
+
+    "OneWordSentence": "StartingToken Punctuation",
+    "BasicSentence": "StartingToken Words Punctuation | Quotation",
+    "ISentenceAndDS": "ISentenceStart DirectSpeechSingle | ISentenceStart DirectSpeechTwo | ISentenceStart DirectSpeechMoreThanTwo",
+    "DSAndISentence": "DirectSpeechStart ISentenceEnd",
+    "DSAndISentenceRepeated": "DirectSpeechStart ISAndDSRepeated",
+
+    "Quotation": "QuotationIC | QuotationIDC | QuotationQuote",
+    "QuotationIC": "StartingToken InvertedComa Words InvertedComa Words Punctuation | StartingToken Words InvertedComa Words InvertedComa Words Punctuation",
+    "QuotationIDC": "StartingToken InvertedDoubleComa Words InvertedDoubleComa Words Punctuation | StartingToken Words InvertedDoubleComa Words InvertedDoubleComa Words Punctuation",
+    "QuotationQuote": "StartingToken Quote Words Quote Words Punctuation | StartingToken Words Quote Words Quote Words Punctuation",
+
+    "DSPunctuation": ", | ? | ! | RepeatedPunctuation",
+
+    "ISentenceStart": "StartingToken Words : | StartingToken :",
+    "ISentenceMiddleStart": "Words Punctuation",
+    "ISentenceMiddleFinal": "StartingToken Words , | StartingToken ,",
+    "ISentenceMiddle": "ISentenceMiddleStart Sentences ISentenceMiddleFinal | ISentenceMiddleStart ISentenceMiddleFinal | ISentenceMiddleEnd",
+    "ISentenceMiddleEnd": "Words ,",
+    "ISentenceEnd": "Words Punctuation",
+
+    "DirectSpeechStart": "DirectSpeechSingleNoDot | DirectSpeechTwoNoDot | DirectSpeechMoreThanTwoNoDot",
+    "DirectSpeechEnd": "DirectSpeechSingleEnd | DirectSpeechTwoEnd | DirectSpeechMoreThanTwoEnd",
+
+    "DirectSpeechSingleEnd":"DirectSpeechSingleEndIC | DirectSpeechSingleEndIDC | DirectSpeechSingleEndQuote",
+
+    "DirectSpeechSingleEndIC": "InvertedComa Words Punctuation InvertedComa",
+    "DirectSpeechSingleEndIDC": "InvertedDoubleComa Words Punctuation InvertedDoubleComa",
+    "DirectSpeechSingleEndQuote": "Quote Words Punctuation Quote",
+
+    "DirectSpeechFirstEnd":"DirectSpeechFirstEndIC | DirectSpeechFirstEndIDC | DirectSpeechFirstEndQuote",
+
+    "DirectSpeechFirstEndIC":"InvertedComa Words Punctuation ",
+    "DirectSpeechFirstEndIDC":"InvertedDoubleComa Words Punctuation ",
+    "DirectSpeechFirstEndQuote":"Quote Words Punctuation ",
+
+    "DirectSpeechSecondEnd":"DirectSpeechSecondEndIC | DirectSpeechSecondEndIDC | DirectSpeechSecondEndQuote",
+
+    "DirectSpeechSecondEndIC":" StartingToken Punctuation InvertedComa | StartingToken Words Punctuation InvertedComa",
+    "DirectSpeechSecondEndIDC":" StartingToken Punctuation InvertedDoubleComa | StartingToken Words Punctuation InvertedDoubleComa",
+    "DirectSpeechSecondEndQuote":" StartingToken Punctuation Quote | StartingToken Words Punctuation Quote",
+
+    "DirectSpeechTwoEnd": "DirectSpeechFirstEnd DirectSpeechSecondEnd",
+    "DirectSpeechMoreThanTwoEnd": "DirectSpeechFirstEnd SentencesSimple DirectSpeechSecondEnd",
+
+    "DirectSpeechSingleNoDot": "DirectSpeechSingleNoDotIC | DirectSpeechSingleNoDotIDC | DirectSpeechSingleNoDotQuote",
+
+    "DirectSpeechSingleNoDotIC": "InvertedComa StartingToken DSPunctuation InvertedComa | InvertedComa StartingToken Words DSPunctuation InvertedComa",
+    "DirectSpeechSingleNoDotIDC": "InvertedDoubleComa StartingToken DSPunctuation InvertedDoubleComa | InvertedDoubleComa StartingToken Words DSPunctuation InvertedDoubleComa",
+    "DirectSpeechSingleNoDotQuote": "Quote StartingToken DSPunctuation Quote | Quote StartingToken Words DSPunctuation Quote",
+
+    "DirectSpeechTwoNoDot": "DirectSpeechFirst DirectSpeechSecondNoDot",
+
+    "DirectSpeechSecondNoDot": "DirectSpeechSecondNoDotIC | DirectSpeechSecondNoDotIDC | DirectSpeechSecondNoDotQuote",
+
+    "DirectSpeechSecondNoDotIC": "StartingToken DSPunctuation InvertedComa | StartingToken Words DSPunctuation InvertedComa",
+    "DirectSpeechSecondNoDotIDC": "StartingToken DSPunctuation InvertedDoubleComa | StartingToken Words DSPunctuation InvertedDoubleComa",
+    "DirectSpeechSecondNoDotQuote": "StartingToken DSPunctuation Quote | StartingToken Words DSPunctuation Quote",
+
+    "DirectSpeechMoreThanTwoNoDot": "DirectSpeechFirst SentencesSimple DirectSpeechSecondNoDot",
+
+    "DirectSpeechSingle": "DirectSpeechSingleIC | DirectSpeechSingleIDC | DirectSpeechSingleQuote",
+
+    "DirectSpeechSingleIC": "InvertedComa StartingToken Punctuation InvertedComa | InvertedComa StartingToken Words Punctuation InvertedComa",
+    "DirectSpeechSingleIDC": "InvertedDoubleComa StartingToken Punctuation InvertedDoubleComa | InvertedDoubleComa StartingToken Words Punctuation InvertedDoubleComa",
+    "DirectSpeechSingleQuote": "Quote StartingToken Punctuation Quote | Quote StartingToken Words Punctuation Quote",
+
+    "DirectSpeechTwoOrMore": "DirectSpeechTwo | DirectSpeechMoreThanTwo",
+    "DirectSpeechTwo": "DirectSpeechFirst DirectSpeechSecond",
+
+    "DirectSpeechFirst": "DirectSpeechFirstIC | DirectSpeechFirstIDC | DirectSpeechFirstQuote",
+
+    "DirectSpeechFirstIC": "InvertedComa StartingToken Punctuation | InvertedComa StartingToken Words Punctuation",
+    "DirectSpeechFirstIDC": "InvertedDoubleComa StartingToken Punctuation | InvertedDoubleComa StartingToken Words Punctuation",
+    "DirectSpeechFirstQuote": "Quote StartingToken Punctuation | Quote StartingToken Words Punctuation",
+
+    "DirectSpeechSecond": "DirectSpeechSecondIC | DirectSpeechSecondIDC | DirectSpeechSecondQuote",
+
+    "DirectSpeechSecondIC": "StartingToken Punctuation InvertedComa | StartingToken Words Punctuation InvertedComa",
+    "DirectSpeechSecondIDC": "StartingToken Punctuation InvertedDoubleComa | StartingToken Words Punctuation InvertedDoubleComa",
+    "DirectSpeechSecondQuote": "StartingToken Punctuation Quote | StartingToken Words Punctuation Quote",
+
+    "DirectSpeechMoreThanTwo": "DirectSpeechFirst SentencesSimple DirectSpeechSecond",
+
+    "ISAndDSRepeated": "ISAndDSRepeated ISentenceMiddle DirectSpeechEnd | ISentenceMiddle DirectSpeechEnd",
+
+
+    "StartingToken":"WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName .",
+    "Words":" Words StableTextAbbrs WordToken | StableTextAbbrs WordToken | Words WordToken | WordToken",
+    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | NewLines",
+
+    "StableTextAbbrs": "StableTextAbbrs StableTextAbbr | StableTextAbbr",
+    "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName .",
+
+    "Punctuation":". | ? | ! | RepeatedPunctuation | Ellipsis",
+    "Number":"Decimal | Num | Ordinal | Class | RomanNumeral",
+    "Ordinal":"RomanNumeral .",
+    "Dash": "-",
+
+    "InvertedComa": "‘",
+    "InvertedDoubleComa": "“",
+    "Quote": "\"",
+
+    "NewLines": "NewLines NewLine | NewLine"
+}
