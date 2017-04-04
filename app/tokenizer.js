@@ -1,11 +1,9 @@
-//regex = /([0-9]+(st|nd|rd|th))|(-?\d+(\.\d+)?)|[a-zA-Z-\(\)]+|[\.,;:"\?!'/]|(<([^>]+)>)|[]/g; //Note: nechyti radove cislovky(iba anglicke), Todo:  lomitka? anglicke radove c.? spojovnik v skratkach?
-//regex = /(-?\d+(\.\d+)?)|[a-zA-Z-]+|[\.,;:"„“\(\)\?!'/]|(<([^>]+)>)/g; // TODO: mozno bude treba nahradit za &#60; (< &lt;) a &#62; (> &gt;)
 
 class Tokenizer {
     /**
      *
      * @param {string} text - input text being tokenized
-     * @param {param} path - path to file containing terminalRules
+     * @param {string} path - path to file containing terminalRules
      * @param {Map} config
      * @param {string} grammarLanguage
      */
@@ -14,12 +12,10 @@ class Tokenizer {
         this.text = text;
         this.regex = config["splittingRegex"];
         this.path = path;
-        //this.tokens = this.split(this.text);
-        this.HTMLRegex = config["HTMLRegex"]; ///(^<([^>]+)>$)/g; // TODO: mozno bude treba nahradit za &#60; (< &lt;) a &#62; (> &gt;)
-        this.HTMLTagsPositions = new Map();//this.getTagsPositions(this.tokens);
+        this.HTMLRegex = config["HTMLRegex"];
+        this.HTMLTagsPositions = new Map();
         this.rules = new Map();
-        //this.loadRules(path);
-        this.tokens = [];//this.getSubstitutedTerminals(this.removeTags(this.tokens), this.rules);
+        this.tokens = [];
 
     }
 
@@ -41,7 +37,6 @@ class Tokenizer {
         var result = [];
         for (let token of tokens) {
             if (!token.match(this.HTMLRegex)) {
-                //result[index] = token;
                 result.push(token);
             }
         }
@@ -58,7 +53,6 @@ class Tokenizer {
         let index = 0;
         for (let token of tokens) {
             if (token.match(this.HTMLRegex)) {
-                //result[index] = token;
                 result.set(index, token.toLowerCase());
             }
             index++;
@@ -102,26 +96,10 @@ class Tokenizer {
         });
     };
 
-    substituteQuotesTokens() {
-        var ENQuoteRegex = /^"$/g;
-        var next = "„";
-        for (var i = 0; i < this.tokens.length; i++) {
-            if (ENQuoteRegex.test(this.tokens[i])) {
-                this.tokens[i] = next;
-                if (next === "„") {
-                    next = "“";
-                }
-                else {
-                    next = "„";
-                }
-            }
-        }
-    }
-
     /**
      * Substitutes quotes("") for slovak quotes(„“)
      */
-    substituteQuotes() { // TODO: not tested
+    substituteQuotes() {
         var next = "„";
         for (var i = 0; i < this.tokens.length; i++) {
             this.HTMLRegex.lastIndex = 0;
@@ -143,7 +121,12 @@ class Tokenizer {
     /**
      * Initializes necessary attributes for Tokenizer instance
      */
-    init() { // TODO: otestovat
+    init() {
+        if (this.text.length == 0) {
+            this.tokens = [];
+            this.originalTokens = [];
+            return;
+        }
         this.tokens = this.split(this.text);
         if (this.language === "SK") {
             this.substituteQuotes();
@@ -170,10 +153,5 @@ class UnknownTokenException {
         this.name = "UnknownTokenException";
     }
 }
-
-// t = new Tokenizer("Toto je jednoducha veta.", 'C:/Users/MH/Desktop/parser/app/res/terminalRules.json');
-// t.init();
-// console.log(t.rules);
-// console.log(t.tokens);
 
 module.exports = Tokenizer;

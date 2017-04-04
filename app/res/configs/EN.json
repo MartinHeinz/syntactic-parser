@@ -6,7 +6,7 @@
     "tagRegex": "^<\\s*(\\w+)\\s*.*>$",
     "allTagsExceptForWRegex": "((<s id=\\\"s\\d+\\\">)*(<(b|strong|i|em|mark|small|del|ins|sub|sup|span [^>]*\\\")>)*)",
     "tagsBeforeContentRegex": "^((<s id=\\\"s\\d+\\\">)*(<(b|strong|i|em|mark|small|del|ins|sub|sup|span [^>]*\\\")>)*(<w id=\\\"w\\d+\\\">)?)",
-    "wordRegexAndFormatRegex": "<\\/w>(<\\/(b|strong|i|em|mark|small|del|ins|sub|sup|span)>)*",
+    "wordRegex": "<\\/w>",
     "formatRegex": "<\\/(b|strong|i|em|mark|small|del|ins|sub|sup|span)+",
     "sentenceEndMultipleRegex": "(<\\/s>)+",
     "sentenceEndTagSingleRegex": "<\\/s>",

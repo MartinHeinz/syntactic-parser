@@ -22,6 +22,7 @@ class Parser {
         };
         this.chart = Earley.tinynlp.parse(this.tokenizer.tokens, this.grammar, this.config["rootRule"]);
         this.trees =  this.chart.getFinishedRoot(this.config["rootRule"]).traverse(undefined, this.config["rootRule"]);
+        this.words = [];
         this.tree = this.chooseTree(); //this.trees[0];
     }
 
@@ -223,7 +224,7 @@ class Parser {
     }
 
     /**
-     * Removes(and renames) some unnecessary attributes for readability purposes, can be used in D3 to create tree visualisation
+     * Removes(and renames) some unnecessary attributes for readability purposes, cannot be used for parsing anymore
      * @param {Object} tree
      * @return {Object} - prettified tree
      */
@@ -234,7 +235,7 @@ class Parser {
                 delete node.parent;
                 node.name = node.root;
                 delete node.root;
-                node.size = node.right - node.left;
+                //node.size = node.right - node.left; // potrebne ak by sme chceli vizualivaciu pomocou D3
                 delete node.left;
                 delete node.right;
                 if (node.subtrees.length == 0) {
@@ -274,7 +275,7 @@ class Parser {
                 return console.log(err);
             }
         });
-        console.log("file updated");
+        //console.log("file updated");
     }
 
 
@@ -293,6 +294,7 @@ class Parser {
 
     /**
      * Prints JSON representation of this.trees to console.
+     * Those are trees created by earley-oop.js
      */
     printTrees() {
         for (let i in this.trees) {
@@ -347,7 +349,7 @@ class Parser {
                 return console.log(err);
             }
         });
-        console.log("file updated");
+        //console.log("file updated");
     }
 
     /**
@@ -514,15 +516,15 @@ class Parser {
             this.config["tagsBeforeContentRegex"].lastIndex = 0;
             var tagsBeforeContent = this.config["tagsBeforeContentRegex"].exec(tree.root)[0];
             var contentAndClosingTags = tree.root.slice(tagsBeforeContent.length);
-            this.config["wordRegexAndFormatRegex"].lastIndex = 0;
+            this.config["wordRegex"].lastIndex = 0;
             this.config["formatRegex"].lastIndex = 0;
             this.config["sentenceEndMultipleRegex"].lastIndex = 0;
             this.config["sentenceEndTagSingleRegex"].lastIndex = 0;
             var alreadyContains = new RegExp(tag).test(tree.root);
             var isEndOfSentence = this.config["sentenceEndTagSingleRegex"].test(tree.root);
             if (!(alreadyContains && isEndOfSentence && flag)) {
-                if (this.config["wordRegexAndFormatRegex"].test(tree.root)) {
-                    tree.root = tree.root.slice(0, this.config["wordRegexAndFormatRegex"].lastIndex) + tag + tree.root.slice(this.config["wordRegexAndFormatRegex"].lastIndex);
+                if (this.config["wordRegex"].test(tree.root)) {
+                    tree.root = tree.root.slice(0, this.config["wordRegex"].lastIndex) + tag + tree.root.slice(this.config["wordRegex"].lastIndex);
                 }
                 else if (this.config["formatRegex"].test(contentAndClosingTags)) {
                     this.config["formatRegex"].lastIndex = 0;
@@ -816,11 +818,13 @@ class Parser {
      * @param {Object} tree
      */
     buildXML(tree = this.tree) {
+
         if (!this.isComplete(tree)) {
             this.finishIncompleteTree(tree);
         }
         this.substituteLeafs();
         this.addWordTags();
+        this.saveWords();
         this.addSentenceTags();
         this.addHTMLTags();
         this.addParagraphTags();
@@ -844,7 +848,7 @@ class Parser {
             sentence = Parser.createNode(tree.right, this.tokenizer.tokens.length, this.config["sentenceRule"][0], tree);
             tree.subtrees.push(sentence);
         }
-        else { // TODO: moze toto nastat?
+        else { //moze toto nastat?
             var lastLeaf = leaves[leaves.length - 1];
             while (!this.config["sentenceRule"].includes(lastLeaf.root)) {
                 lastLeaf = Parser.findParent(tree, lastLeaf.parent.left, lastLeaf.parent.right, lastLeaf.parent.root);
@@ -919,66 +923,33 @@ class Parser {
         this.unescapeTags(tempTree);
         return this.prettifyTree(tempTree);
     }
+
+    /**
+     * Retrieves words from tree and saves them into this.words
+     * Used to get words with <w> tag before addition of remaining tags.
+     * @param tree
+     */
+    saveWords(tree = this.tree) {
+        var leaves = Parser.getLeaves(tree);
+        for (let i = 0; i < leaves.length; i++) {
+            this.words.push(leaves[i].root);
+        }
+    }
 }
 
-console.time("parse");
-//var p = new Parser("Toto v r. 1950 je 1., 1.A jednoducha 2.", "SK");
-//var p = new Parser("<p><b>Toto je <strong>1.,</strong> </p> jednoducha Veta. A <i>toto</i> je</b> <em>dalsia 1 kratka veta 2.43!</em>", "SK");
-//var p = new Parser("<small><b>Toto<em> je <strong>1.,</strong> jednoducha Veta</em>. A <i>toto</i> je</b> dalsia</small> 1 kratka veta 2.43!", "SK");
-//var p = new Parser("Toto je <strong>1.</strong> jednoducha Veta.", "SK");
-//var p = new Parser("<p><b>Toto je <strong>1.,</strong> </p> jednoducha Veta. a <i>toto</i> je</b> <em>dalsia 1 kratka veta 2.43!</em>", "SK"); // iba prva veta
-//var p = new Parser("<p><b>toto je <strong>1.,</strong> </p> jednoducha Veta. A <i>toto</i> je</b> <em>dalsia 1 kratka veta 2.43!</em>", "SK"); // Prazdny pars
-//var p = new Parser("Veta s textovymi skratkami: t. j. č. 1, v r. 1950, napr.: nieco.", "SK"); // slovne skratky
-//var p = new Parser("Veta VIII. s titulmi: Mgr. Jozo, Ing. F. Mrkva PhD., doc. prof. RNDr. Jano.", "SK"); // slovne skratky
+var p = new Parser("Vstupny text.", "SK");
 
-//var p = new Parser("<p>Prvá <strong><b>veta. Ďalšia</b></strong> veta.</p>", "SK");
-//var p = new Parser("<P>Prvá. Druhá.</P> Tretia.", "SK");
-//var p = new Parser("Jožo <p>vraví: „</p>Ahoj.“", "SK"); // Ukazka pre text bak.
+p.buildXML(); // Prida vsetky tagy.
+console.log(p.stringifyTree()); // Vysledne XML.
+console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
 
-//var p = new Parser("<strong>„Priama,“ uvadzacia </strong> veta, „priama rec?“", "SK");
+for (let tree of p.trees) {
+    p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
+}
 
-//var p = new Parser("„Toto je priama rec. Veta. Nieco dalsie?“", "SK"); // Priama rec
-//var p = new Parser("Uvadzacia veta. Dalsia veta: „Toto je. Priama rec.“", "SK"); // Uvadzacia veta na zaciatku
-//var p = new Parser("„Toto je. Priama. Rec,“ <br> uvadzacia veta?!?! Pokracovanie textu?", "SK"); // Uvadzacia veta na konci
-//var p = new Parser("„Priama rec. Priama 2,“ dalsia veta. Uvadzacia veta, „priama rec?“", "SK"); // Uvadzacia v strede
-//var p = new Parser("\"Priama<b>. Rec</b>,\" <i>uvadzacia. Veta, „</i>priama rec? Veta...“ uvadzacia. Dalsia, \"priama! Veta. Dalsia veta,\"", "SK"); // Uvadzacia v strede, opakovane
-//var p = new Parser("- To ty si zvonil. Veta. Dalsia veta? - pýta sa opatrne.", "SK"); // priama rec na zaciatku s pomlckou
-//var p = new Parser("Eva sa <p>pytala: - Co ti povedali</p> v opravovni? Je to v poriadku?", "SK"); // priama rec na konci s pomlckou
-//var p = new Parser("- Prídeš? \n - Prídem. \n - Určite? - Určite.", "SK"); // priama rec na konci s pomlckou
-//var p = new Parser("- Tak čo je nové? - spytuje sa zvedavo mama. - Aj sama to vieš, - odpovedá dcéra.", "SK");
-//var p = new Parser("<strong>Zaciatok vety „citat...“</strong> uvadzacia veta!", "SK"); // citat v strede
-var p = new Parser("<p> - <span style=\"font-weight: bold\"><span style=\"color:blue\">Nieco</span>, - nieco dalsie... - </span>pokracovanie.</p>", "SK");
-var text = "Now led tedious shy lasting females off. Dashwood marianne in of entrance be on wondered possible building. Wondered sociable he carriage in speedily margaret. Up devonshire of he thoroughly insensible alteration. An mr settling occasion insisted distance ladyship so. Not attention say frankness intention out dashwoods now curiosity. Stronger ecstatic as no judgment daughter speedily thoughts. Worse downs nor might she court did nay forth these. By spite about do of do allow blush. Additions in conveying or collected objection in. Suffer few desire wonder her object hardly nearer. Abroad no chatty others my silent an. Fat way appear denote who wholly narrow gay settle. Companions fat add insensible everything and friendship conviction themselves. Theirs months ten had add narrow own. Old there any widow law rooms. Agreed but expect repair she nay sir silent person. Direction can dependent one bed situation attempted. His she are man their spite avoid. Her pretended fulfilled extremely education yet. Satisfied did one admitting incommode tolerably how are. Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my exercise so in. Procured shutters mr it feelings. To or three offer house begin taken am at. As dissuade cheerful overcame so of friendly he indulged unpacked. Alteration connection to so as collecting me. Difficult in delivered extensive at direction allowance. Alteration put use diminution can considered sentiments interested discretion. An seeing feebly stairs am branch income me unable. Am increasing at contrasted in favourable he considered astonished. As if made held in an shot. By it enough to valley desire do. Mrs chief great maids these which are ham match she. Abode to tried do thing maids. Doubtful disposed returned rejoiced to dashwood is so up.";
-//var p = new Parser(text+text+text, "SK");
-
-var text2 = `<p>Toto je vstupný text. Obsahuje čísla, napr.: č. 1, 5.(piaty), alebo mená - M. Heinz a aj priamu reč... </p><b>Eva sa pýtala: - Čo ti povedali!</b>
-„Ahoj,“ povedal, „ako sa...“ skočil mu do reči, „<i>ticho!</i>“
-- Prídeš? - spýtal sa.
-<strong>- Prídem.</strong>`;
-
-//var p = new Parser(text2, "SK");
-
-//TODO: Gramatika pridat citaty - uvodzovky vramci vety (moze veta koncit citatom? a je potom bodka vnutri citatu ci za nim?)
-//TODO: Gramatika viacere radove cislovky zasebou?
-
-//console.log(p.tokenizer.HTMLTagsPositions);
-console.timeEnd("parse");
-
-//console.log(p.tokenizer.tokens);
-
-console.time("Build XML");
-p.buildXML();
-console.timeEnd("Build XML");
-
-p.printTrees();
-console.log(p.stringifyTree());
-
-
-p.saveHTMLTree("../app/res/trees/tree.html");
-p.saveJSONTree("../app/res/trees/tree.json");
+p.saveHTMLTree("../app/res/trees/tree.html"); // HTML reprezentacia pouziteho stromu pre debugovanie, da sa aj p.getHTMLTree()
+p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho stromu, da sa aj p.getJSONTree()
 
 module.exports = {Parser};
 
-
-//TODO: zaloha <---------------------
 

@@ -3,157 +3,90 @@
   "children": [
     {
       "name": "Sentences",
-      "size": 10,
       "children": [
         {
           "name": "Sentence",
-          "size": 10,
           "children": [
             {
-              "name": "DSAndISentenceDashRepeated",
-              "size": 10,
+              "name": "ISentenceAndDS",
               "children": [
                 {
-                  "name": "DirectSpeechStartDash",
-                  "size": 3,
+                  "name": "ISentenceStart",
                   "children": [
                     {
-                      "name": "DirectSpeechDashSingleNoDot",
-                      "size": 3,
+                      "name": "StartingToken",
                       "children": [
                         {
-                          "name": "Dash",
-                          "size": 1,
-                          "children": [
-                            {
-                              "name": "<p><s id=\"s1\"><s id=\"s2\">-",
-                              "size": 1
-                            }
-                          ]
-                        },
-                        {
-                          "name": "StartingToken",
-                          "size": 1,
-                          "children": [
-                            {
-                              "name": "<span style=\"font-weight: bold\"><span style=\"color:blue\"><w id=\"w1\">Nieco</w></span>",
-                              "size": 1
-                            }
-                          ]
-                        },
-                        {
-                          "name": "DSPunctuation",
-                          "size": 1,
-                          "children": [
-                            {
-                              "name": ",</span></s>",
-                              "size": 1
-                            }
-                          ]
+                          "name": "<s id=\"s1\"><s id=\"s2\"><w id=\"w1\">Vstupny</w>"
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "name": "ISAndDSDashRepeated",
-                  "size": 7,
-                  "children": [
+                    },
                     {
-                      "name": "ISentenceMiddleDash",
-                      "size": 4,
+                      "name": "Words",
                       "children": [
                         {
-                          "name": "Dash",
-                          "size": 1,
+                          "name": "WordToken",
                           "children": [
                             {
-                              "name": "<s id=\"s3\"><span style=\"font-weight: bold\">-",
-                              "size": 1
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Words",
-                          "size": 2,
-                          "children": [
-                            {
-                              "name": "Words",
-                              "size": 1,
-                              "children": [
-                                {
-                                  "name": "WordToken",
-                                  "size": 1,
-                                  "children": [
-                                    {
-                                      "name": "<w id=\"w2\">nieco</w>",
-                                      "size": 1
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "WordToken",
-                              "size": 1,
-                              "children": [
-                                {
-                                  "name": "<w id=\"w3\">dalsie</w>",
-                                  "size": 1
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "name": "DSPunctuation",
-                          "size": 1,
-                          "children": [
-                            {
-                              "name": "...</span></s>",
-                              "size": 1
+                              "name": "<b><i><w id=\"w2\">text</w>"
                             }
                           ]
                         }
                       ]
                     },
                     {
-                      "name": "DirectSpeechEndDash",
-                      "size": 3,
+                      "name": ":</i></b></s>"
+                    }
+                  ]
+                },
+                {
+                  "name": "DirectSpeechSingle",
+                  "children": [
+                    {
+                      "name": "DirectSpeechSingleIDC",
                       "children": [
                         {
-                          "name": "Dash",
-                          "size": 1,
+                          "name": "InvertedDoubleComa",
                           "children": [
                             {
-                              "name": "<s id=\"s4\"><span style=\"font-weight: bold\">-</span>",
-                              "size": 1
+                              "name": "<s id=\"s3\"><b><i>“"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "StartingToken",
+                          "children": [
+                            {
+                              "name": "<w id=\"w3\">Priama</w></i></b>"
                             }
                           ]
                         },
                         {
                           "name": "Words",
-                          "size": 1,
                           "children": [
                             {
                               "name": "WordToken",
-                              "size": 1,
                               "children": [
                                 {
-                                  "name": "<w id=\"w4\">pokracovanie</w>",
-                                  "size": 1
+                                  "name": "<w id=\"w4\">rec</w>"
                                 }
                               ]
                             }
                           ]
                         },
                         {
-                          "name": "AltPunctuation",
-                          "size": 1,
+                          "name": "Punctuation",
                           "children": [
                             {
-                              "name": ".</s></s></p>",
-                              "size": 1
+                              "name": "."
+                            }
+                          ]
+                        },
+                        {
+                          "name": "InvertedDoubleComa",
+                          "children": [
+                            {
+                              "name": "“</s></s>"
                             }
                           ]
                         }
