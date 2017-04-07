@@ -930,9 +930,22 @@ class Parser {
      * @param tree
      */
     saveWords(tree = this.tree) {
+        var concatWithNext = false;
         var leaves = Parser.getLeaves(tree);
         for (let i = 0; i < leaves.length; i++) {
-            this.words.push(leaves[i].root);
+            if (concatWithNext) {
+                if (leaves[i].root.includes("</w>")) {
+                    concatWithNext = false;
+                }
+                this.words[this.words.length-1] = this.words[this.words.length-1].concat(leaves[i].root);
+            }
+            else {
+                if (/<w id="w\d+">/.test(leaves[i].root) && !leaves[i].root.includes("</w>")) {
+                    concatWithNext = true;
+                }
+                this.words.push(leaves[i].root);
+            }
+
         }
     }
 }

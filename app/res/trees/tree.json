@@ -8,89 +8,34 @@
           "name": "Sentence",
           "children": [
             {
-              "name": "ISentenceAndDS",
+              "name": "BasicSentence",
               "children": [
                 {
-                  "name": "ISentenceStart",
+                  "name": "StartingToken",
                   "children": [
                     {
-                      "name": "StartingToken",
-                      "children": [
-                        {
-                          "name": "<s id=\"s1\"><s id=\"s2\"><w id=\"w1\">Vstupny</w>"
-                        }
-                      ]
-                    },
-                    {
-                      "name": "Words",
-                      "children": [
-                        {
-                          "name": "WordToken",
-                          "children": [
-                            {
-                              "name": "<b><i><w id=\"w2\">text</w>"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    {
-                      "name": ":</i></b></s>"
+                      "name": "<s id=\"s1\"><w id=\"w1\">Vstupny</w>"
                     }
                   ]
                 },
                 {
-                  "name": "DirectSpeechSingle",
+                  "name": "Words",
                   "children": [
                     {
-                      "name": "DirectSpeechSingleIDC",
+                      "name": "WordToken",
                       "children": [
                         {
-                          "name": "InvertedDoubleComa",
-                          "children": [
-                            {
-                              "name": "<s id=\"s3\"><b><i>“"
-                            }
-                          ]
-                        },
-                        {
-                          "name": "StartingToken",
-                          "children": [
-                            {
-                              "name": "<w id=\"w3\">Priama</w></i></b>"
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Words",
-                          "children": [
-                            {
-                              "name": "WordToken",
-                              "children": [
-                                {
-                                  "name": "<w id=\"w4\">rec</w>"
-                                }
-                              ]
-                            }
-                          ]
-                        },
-                        {
-                          "name": "Punctuation",
-                          "children": [
-                            {
-                              "name": "."
-                            }
-                          ]
-                        },
-                        {
-                          "name": "InvertedDoubleComa",
-                          "children": [
-                            {
-                              "name": "“</s></s>"
-                            }
-                          ]
+                          "name": "<w id=\"w2\">text</w>"
                         }
                       ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Punctuation",
+                  "children": [
+                    {
+                      "name": ".</s>"
                     }
                   ]
                 }
