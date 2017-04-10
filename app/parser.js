@@ -965,4 +965,3 @@ p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho st
 
 module.exports = {Parser};
 
-
