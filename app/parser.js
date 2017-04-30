@@ -45,7 +45,12 @@ class Parser {
                 traverse(node, fullTree, self);
             }
         }
-        for (var i = 0; i < this.trees.length; i++) {
+        var max = 200;
+        var start = 0;
+        if (this.trees.length > max) {
+            start = this.trees.length - max;
+        }
+        for (var i = start; i < this.trees.length; i++) {
             currCount = 0;
             traverse(this.trees[i], this.trees[i], this);
             if (currCount > bestCount) {
@@ -329,11 +334,11 @@ class Parser {
      * @return {string} - displayable tree in HTML format
      */
     createHTMLTreeFile() {
-        var start = '<html><head><link rel="stylesheet" type="text/css" href="tree.css"></head><div id="dv"><div class="tree" id="displayTree"><ul>';
+        var start = '<html><head><link rel="stylesheet" type="text/css" href="tree.css"><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/></head><div id="dv"><div class="tree" id="displayTree"><ul>';
         var content = this.createHTMLTree();
         var end = '</ul></div></br></div></html>';
 
-        return (start + content +end);
+        return (start + content + end);
     }
 
     /**
@@ -956,9 +961,9 @@ p.buildXML(); // Prida vsetky tagy.
 console.log(p.stringifyTree()); // Vysledne XML.
 console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
 
-for (let tree of p.trees) {
-    p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
-}
+// for (let tree of p.trees) {
+//     p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
+// }
 
 p.saveHTMLTree("../app/res/trees/tree.html"); // HTML reprezentacia pouziteho stromu pre debugovanie, da sa aj p.getHTMLTree()
 p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho stromu, da sa aj p.getJSONTree()
