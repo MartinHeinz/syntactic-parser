@@ -92,12 +92,13 @@
     "ISAndDSRepeated": "ISAndDSRepeated ISentenceMiddle DirectSpeechEnd | ISentenceMiddle DirectSpeechEnd",
 
 
-    "StartingToken":"WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName .",
-    "Words":" Words StableTextAbbrs WordToken | StableTextAbbrs WordToken | Words WordToken | WordToken",
-    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | NewLines",
+    "StartingToken":"WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName . | TitleAbbr",
+    "Words":"Words WordToken | WordToken",
+    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | StableTextAbbrs | NewLines",
 
     "StableTextAbbrs": "StableTextAbbrs StableTextAbbr | StableTextAbbr",
-    "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName .",
+    "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName . | TitleAbbr",
+    "TitleAbbr": "Title | Title .",
 
     "Punctuation":". | ? | ! | RepeatedPunctuation | Ellipsis",
     "Number":"Decimal | Num | Ordinal | Class | RomanNumeral",

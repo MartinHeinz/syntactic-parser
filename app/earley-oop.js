@@ -177,8 +177,6 @@ var tinynlp = (function(){
         }
         //console.log("NEUPLNY STROM");
         return bestRule;
-        /////////////////////////////////////////////////
-        //return null;
     };
 
     /**
@@ -605,63 +603,6 @@ var tinynlp = (function(){
     return exports;
 })();
 
-// function loadGrammar(path) {
-//     var rules = [];
-//     var fs = require("fs");
-//     var temp = JSON.parse(fs.readFileSync(path).toString());
-//     Object.keys(temp).forEach(key => {
-//         rules.push(key + " -> " + temp[key]);
-//     });
-//     return rules;
-// }
-
-// Define grammar
-// var grammar = new tinynlp.Grammar([
-//     'R -> N',
-//     'S -> S add_sub M | M',
-//     'M -> M mul_div T | T',
-//     'N -> S lt_gt S | S',
-//     'T -> num | ( S )',
-// ]);
-//
-//
-// grammar.terminalSymbols = function(token) {
-//     if ('<' === token || '>' === token) return ['lt_gt'];
-//     if ('+' === token || '-' === token) return ['add_sub'];
-//     if ('*' === token || '/' === token) return ['mul_div'];
-//     if ('(' === token) return ['('];
-//     if (')' === token) return [')'];
-//     // Otherwise - token considered as a number:
-//     return ['num'];
-// };
-//
-// // You have to tokenize input by yourself!
-// // Creating array of tokens
-// var tokens = '7 - 5 * 3'.split(' ');
-//
-// // Parsing
-// var rootRule = 'R';
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// var grammar = new tinynlp.Grammar(loadGrammar('C:/Users/MH/Desktop/parser/app/res/Grammar.json'));
-// grammar.terminalSymbols = function(token) {
-//     return[token];
-// };
-// var tokens = 'WordStart Word WordLower .'.split(' ');
-// var rootRule = 'Story';
-// var chart = tinynlp.parse(tokens, grammar, rootRule);
-//
-// // Get array with all parsed trees
-// // In case of ambiguous grammar - there might be more than 1 parsing tree
-// var trees =  chart.getFinishedRoot(rootRule).traverse();
-//
-// // Iterate over all parsed trees and display them on HTML page
-// for (var i in trees) {
-//     console.log(JSON.stringify(trees[i]))
-// }
-//////////////////////////////////////////////////////////////////////////////////////////////////////////
 exports.tinynlp = tinynlp;
-//module.exports = {
-//    Earley: new tinynlp()
-//};
+
 
