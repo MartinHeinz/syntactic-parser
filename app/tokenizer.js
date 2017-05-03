@@ -9,7 +9,7 @@ class Tokenizer {
      */
     constructor(text, path, config, grammarLanguage) {
         this.language = grammarLanguage;
-        this.text = text;
+        this.text = text.replace(/^\s+/g, "") + "\n";
         this.regex = config["splittingRegex"];
         this.path = path;
         this.HTMLRegex = config["HTMLRegex"];

@@ -1,6 +1,16 @@
 
 {
-    "Story": "Sentences",
+    "Story": "Lines",
+    "Lines": "Lines Line | Line",
+    "Line": "DirectSpeechDashStart NewLines | OtherSentences NewLines",
+
+
+    "DirectSpeechDashStart": "DirectSpeechesDashed | DirectSpeechesDashed DirectSpeechesQuoted",
+    "DirectSpeechesQuoted": "DirectSpeechSingle | DirectSpeechTwoOrMore | ISentenceAndDS | DSAndISentence | DSAndISentenceRepeated",
+    "DirectSpeechesDashed": "DSAndISentenceDash | ISentenceAndDSDash | DirectSpeechDash | DSAndISentenceDashRepeated",
+    "OtherSentences": "OtherSentences SentenceSimpleNoNewLine | OtherSentences DirectSpeechesQuoted | OtherSentences DirectSpeechesDashed | SentenceSimpleNoNewLine | DirectSpeechesQuoted",
+
+
     "Sentences": "Sentences Sentence | Sentence",
     "Sentence": "OneWordSentence | BasicSentence | DirectSpeechSingle | DirectSpeechTwoOrMore | ISentenceAndDS | DSAndISentence | DSAndISentenceDash | DSAndISentenceRepeated | ISentenceAndDSDash | DirectSpeechDash | DSAndISentenceDashRepeated",
     "SentencesSimple": "SentencesSimple SentenceSimple | SentenceSimple",
@@ -15,26 +25,29 @@
     "BasicSentence": "StartingToken Words Punctuation | StartingToken Words Punctuation NewLines | Quotation | Quotation NewLines",
     "ISentenceAndDS": "ISentenceStart DirectSpeechSingle | ISentenceStart DirectSpeechTwo | ISentenceStart DirectSpeechMoreThanTwo",
     "DSAndISentence": "DirectSpeechStart ISentenceEnd",
-    "DSAndISentenceDash": "DirectSpeechStartDash ISentenceEndDash",
+    "DSAndISentenceDash": "DSAndISentenceDash DirectSpeechStartDashNoTag ISentenceEndDashRepeated | DirectSpeechStartDashNoTag ISentenceEndDashRepeated",
 
 
-    "DSAndISentenceDashRepeated": "DirectSpeechStartDash ISAndDSDashRepeated",
+    "DSAndISentenceDashRepeated": "DirectSpeechStartDashNoTag ISAndDSDashRepeated",
+    "DirectSpeechStartDashNoTag": "DirectSpeechDashSingleNoDot | DirectSpeechDashTwoNoDot | DirectSpeechDashMoreThanTwoNoDot",
 
 
     "DSAndISentenceRepeated": "DirectSpeechStart ISAndDSRepeated",
     "ISentenceAndDSDash": "ISentenceStart DirectSpeechDash",
 
-    "Quotation": "StartingToken QuoteLeft Words QuoteRight Words Punctuation | StartingToken Words QuoteLeft Words QuoteRight Words Punctuation | StartingToken QuoteLeft Words QuoteRight Words Punctuation NewLines | StartingToken Words QuoteLeft Words QuoteRight Words Punctuation NewLines",
+    "Quotation": "StartingToken QuoteLeft Words QuoteRight Words Punctuation | StartingToken Words QuoteLeft Words QuoteRight Words Punctuation",
 
     "DSPunctuation": ", | ? | ! | RepeatedPunctuation | Ellipsis",
 
     "ISentenceStart": "StartingToken Words : | StartingToken :",
-    "ISentenceMiddleStart": "Words Punctuation",
+    "ISentenceMiddleStart": "WordNoNewLine Punctuation | WordNoNewLine Words Punctuation",
     "ISentenceMiddleFinal": "StartingToken Words , | StartingToken ,",
     "ISentenceMiddle": "ISentenceMiddleStart SentencesSimple ISentenceMiddleFinal | ISentenceMiddleStart ISentenceMiddleFinal | ISentenceMiddleEnd",
-    "ISentenceMiddleEnd": "Words ,",
-    "ISentenceEnd": "Words Punctuation | Words Punctuation NewLines",
-    "ISentenceEndDash": "Dash Words Punctuation | Dash Words Punctuation NewLines",
+    "ISentenceMiddleEnd": "WordNoNewLine , | Words ,",
+    "ISentenceEnd": "WordNoNewLine Punctuation | WordNoNewLine Words Punctuation",
+    "ISentenceEndDash": "Dash Words Punctuation",
+
+    "ISentenceEndDashRepeated": "ISentenceEnd | ISentenceEnd SentencesSimpleNoNewLine",
 
 
     "ISentenceMiddleDash": "Dash Words DSPunctuation",
@@ -44,15 +57,15 @@
     "DirectSpeechStart": "DirectSpeechSingleNoDot | DirectSpeechTwoNoDot | DirectSpeechMoreThanTwoNoDot",
     "DirectSpeechEnd": "DirectSpeechSingleEnd | DirectSpeechTwoEnd | DirectSpeechMoreThanTwoEnd",
 
-    "DirectSpeechSingleEnd":"QuoteLeft Words AltPunctuation QuoteRight | QuoteLeft Words AltPunctuation QuoteRight NewLines",
+    "DirectSpeechSingleEnd":"QuoteLeft Words AltPunctuation QuoteRight",
     "DirectSpeechFirstEnd":"QuoteLeft Words AltPunctuation ",
-    "DirectSpeechSecondEnd":" StartingToken AltPunctuation QuoteRight | StartingToken Words AltPunctuation QuoteRight | StartingToken AltPunctuation QuoteRight NewLines | StartingToken Words AltPunctuation QuoteRight NewLines",
+    "DirectSpeechSecondEnd":" StartingToken AltPunctuation QuoteRight | StartingToken Words AltPunctuation QuoteRight",
     "DirectSpeechTwoEnd": "DirectSpeechFirstEnd DirectSpeechSecondEnd",
     "DirectSpeechMoreThanTwoEnd": "DirectSpeechFirstEnd SentencesSimple DirectSpeechSecondEnd",
 
     "AltPunctuation": ", | ? | ! | RepeatedPunctuation | Ellipsis | .",
 
-    "DirectSpeechSingleNoDot": "QuoteLeft StartingToken DSPunctuation QuoteRight | QuoteLeft StartingToken Words DSPunctuation QuoteRight | QuoteLeft StartingToken DSPunctuation QuoteRight NewLines | QuoteLeft StartingToken Words DSPunctuation QuoteRight NewLines",
+    "DirectSpeechSingleNoDot": "QuoteLeft StartingToken DSPunctuation QuoteRight | QuoteLeft StartingToken Words DSPunctuation QuoteRight",
     "DirectSpeechTwoNoDot": "DirectSpeechFirst DirectSpeechSecondNoDot",
     "DirectSpeechSecondNoDot": "StartingToken DSPunctuation QuoteRight | StartingToken Words DSPunctuation QuoteRight",
     "DirectSpeechMoreThanTwoNoDot": "DirectSpeechFirst SentencesSimple DirectSpeechSecondNoDot",
@@ -61,14 +74,14 @@
     "DirectSpeechDashSingleNoDot": "Dash StartingToken DSPunctuation | Dash StartingToken Words DSPunctuation",
     "DirectSpeechDashTwoNoDot": "DirectSpeechFirstDash DirectSpeechDashSecondNoDot",
     "DirectSpeechFirstDash": "Dash StartingToken Punctuation | Dash StartingToken Words Punctuation",
-    "DirectSpeechDashSecondNoDot": "StartingToken DSPunctuation | StartingToken Words DSPunctuation | StartingToken DSPunctuation NewLines | StartingToken Words DSPunctuation NewLines",
+    "DirectSpeechDashSecondNoDot": "StartingToken DSPunctuation | StartingToken Words DSPunctuation",
     "DirectSpeechDashMoreThanTwoNoDot": "DirectSpeechFirstDash SentencesSimple DirectSpeechDashSecondNoDot",
 
-    "DirectSpeechSingle": "QuoteLeft StartingToken Punctuation QuoteRight | QuoteLeft StartingToken Words Punctuation QuoteRight | QuoteLeft StartingToken Punctuation QuoteRight NewLines | QuoteLeft StartingToken Words Punctuation QuoteRight NewLines",
+    "DirectSpeechSingle": "QuoteLeft StartingToken Punctuation QuoteRight | QuoteLeft StartingToken Words Punctuation QuoteRight",
     "DirectSpeechTwoOrMore": "DirectSpeechTwo | DirectSpeechMoreThanTwo",
     "DirectSpeechTwo": "DirectSpeechFirst DirectSpeechSecond",
     "DirectSpeechFirst": "QuoteLeft StartingToken Punctuation | QuoteLeft StartingToken Words Punctuation",
-    "DirectSpeechSecond": "StartingToken Punctuation QuoteRight | StartingToken Words Punctuation QuoteRight | StartingToken Punctuation QuoteRight NewLines | StartingToken Words Punctuation QuoteRight NewLines",
+    "DirectSpeechSecond": "StartingToken Punctuation QuoteRight | StartingToken Words Punctuation QuoteRight",
     "DirectSpeechMoreThanTwo": "DirectSpeechFirst SentencesSimple DirectSpeechSecond",
 
     "ISAndDSRepeated": "ISAndDSRepeated ISentenceMiddle DirectSpeechEnd | ISentenceMiddle DirectSpeechEnd",
@@ -78,15 +91,19 @@
     "DirectSpeechEndDash": "Dash Words AltPunctuation",
 
 
-    "DirectSpeechDash": "SentenceSimpleDash SentencesSimple | SentenceSimpleDash",
+    "DirectSpeechDash": "SentenceSimpleDashNoNewLines SentencesSimpleNoNewLine | SentenceSimpleDash",
 
-    "SentenceSimpleDash": "Dash StartingToken Punctuation | Dash StartingToken Words Punctuation | Dash StartingToken Punctuation NewLines | Dash StartingToken Words Punctuation NewLines",
+    "SentenceSimpleDashNoNewLines": "Dash StartingToken Punctuation | Dash StartingToken Words Punctuation",
+    "SentenceSimpleDash": "Dash StartingToken Punctuation | Dash StartingToken Words Punctuation",
     "SentencesSimpleDash": "SentencesSimpleDash | SentenceSimpleDash",
 
 
     "StartingToken":"WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName .",
-    "Words":" Words StableTextAbbrs WordToken | StableTextAbbrs WordToken | Words WordToken | WordToken",
-    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | NewLines",
+    "Words": "Words StableTextAbbrs WordToken | StableTextAbbrs WordToken | Words WordToken | WordToken",
+    "WordToken": "WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | NewLines",
+
+    "WordNoNewLine":" StableTextAbbrs WordTokenNoNewLine | StableTextAbbrs WordTokenNoNewLine | WordTokenNoNewLine",
+    "WordTokenNoNewLine": "WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName .",
 
     "StableTextAbbrs": "StableTextAbbrs StableTextAbbr | StableTextAbbr",
     "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName .",
