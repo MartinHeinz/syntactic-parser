@@ -164,12 +164,12 @@ var tinynlp = (function(){
         //////////////////////////////////////////////////
         var maxLength = -1;
         var bestRule = null;
-        for(let chart of this.chart.reverse()) {
+        for(let chart of this.chart) {
             for (let rule of chart) {
-                //if (rule.left == 0 && maxLength < rule.right) {
-                if (rule.getLeftHandSide() == rootRule && (rule.right - rule.left) > maxLength) {
+                if (rule.left == 0 && maxLength < rule.right) {
+                //if (rule.getLeftHandSide() == rootRule && rule.right > maxLength) {
                     //maxLength = rule.right;
-                    maxLength = rule.right - rule.left;
+                    maxLength = rule.right;
                     bestRule = rule;
                 }
             }

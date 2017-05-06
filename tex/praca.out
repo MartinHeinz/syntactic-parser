@@ -1,0 +1,22 @@
+\BOOKMARK [0][-]{chapter*.4}{\332vod}{}% 1
+\BOOKMARK [0][-]{chapter.1}{V\375chodisk\341}{}% 2
+\BOOKMARK [1][-]{section.1.1}{Ciel}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{Prehlad problematiky}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{Prehlad existuj\372cich syst\351mov}{chapter.1}% 5
+\BOOKMARK [1][-]{section.1.4}{Prehlad technol\363gi\355 a n\341strojov}{chapter.1}% 6
+\BOOKMARK [0][-]{chapter.2}{N\341vrh a implement\341cia}{}% 7
+\BOOKMARK [1][-]{section.2.1}{Perzistentn\351 d\341ta}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.2}{Vstupn\351 a v\375stupn\351 d\341ta}{chapter.2}% 9
+\BOOKMARK [1][-]{section.2.3}{Data-flow diagram}{chapter.2}% 10
+\BOOKMARK [1][-]{section.2.4}{Tokeniz\341cia}{chapter.2}% 11
+\BOOKMARK [1][-]{section.2.5}{Filtrovanie HTML tagov}{chapter.2}% 12
+\BOOKMARK [1][-]{section.2.6}{Substit\372cia termin\341lov netermin\341lmi}{chapter.2}% 13
+\BOOKMARK [1][-]{section.2.7}{Vytvorenie parsovacieho stromu}{chapter.2}% 14
+\BOOKMARK [1][-]{section.2.8}{Vr\341tenie termin\341lov}{chapter.2}% 15
+\BOOKMARK [1][-]{section.2.9}{Oznacenie slov a viet}{chapter.2}% 16
+\BOOKMARK [1][-]{section.2.10}{Vr\341tenie HTML tagov}{chapter.2}% 17
+\BOOKMARK [1][-]{section.2.11}{Vytvorenie XML dokumentu}{chapter.2}% 18
+\BOOKMARK [0][-]{chapter.3}{V\375konnostn\351 testy}{}% 19
+\BOOKMARK [0][-]{chapter.4}{Z\341ver}{}% 20
+\BOOKMARK [0][-]{chapter*.32}{Literat\372ra}{}% 21
+\BOOKMARK [0][-]{chapter*.33}{Pr\355lohy}{}% 22

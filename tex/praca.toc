@@ -1,0 +1,48 @@
+\select@language {czech}
+\select@language {english}
+\select@language {czech}
+\contentsline {chapter}{\numberline {}\IeC {\'U}vod}{2}{chapter*.4}
+\contentsline {chapter}{\numberline {1}V\IeC {\'y}chodisk\IeC {\'a}}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Cie\IeC {\v l}}{3}{section.1.1}
+\contentsline {section}{\numberline {1.2}Preh\IeC {\v l}ad problematiky}{4}{section.1.2}
+\contentsline {subsection}{\numberline {1.2.1}Syntaktick\IeC {\'y} parser}{4}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}\IeC {\v C}o je to parsovanie?}{4}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Context-free grammar}{4}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Typy parserov}{5}{subsection.1.2.4}
+\contentsline {subsubsection}{Top-down parser}{5}{section*.5}
+\contentsline {subsubsection}{Bottom-up parser}{7}{section*.7}
+\contentsline {subsection}{\numberline {1.2.5}Chart parser}{7}{subsection.1.2.5}
+\contentsline {subsubsection}{Chart parser}{7}{subsection.1.2.5}
+\contentsline {subsection}{\numberline {1.2.6}Earley parser}{7}{subsection.1.2.6}
+\contentsline {subsection}{\numberline {1.2.7}Porovnanie parserov}{10}{subsection.1.2.7}
+\contentsline {section}{\numberline {1.3}Preh\IeC {\v l}ad existuj\IeC {\'u}cich syst\IeC {\'e}mov}{10}{section.1.3}
+\contentsline {subsection}{\numberline {1.3.1}Nearly.js}{10}{subsection.1.3.1}
+\contentsline {subsection}{\numberline {1.3.2}Stanford CoreNLP}{10}{subsection.1.3.2}
+\contentsline {subsection}{\numberline {1.3.3}earley-parser-js}{11}{subsection.1.3.3}
+\contentsline {section}{\numberline {1.4}Preh\IeC {\v l}ad technol\IeC {\'o}gi\IeC {\'\i } a n\IeC {\'a}strojov}{11}{section.1.4}
+\contentsline {subsection}{\numberline {1.4.1}Javascript}{11}{subsection.1.4.1}
+\contentsline {subsubsection}{Node.JS}{12}{section*.20}
+\contentsline {subsection}{\numberline {1.4.2}JSON form\IeC {\'a}t}{12}{subsection.1.4.2}
+\contentsline {subsection}{\numberline {1.4.3}XML}{12}{subsection.1.4.3}
+\contentsline {chapter}{\numberline {2}N\IeC {\'a}vrh a implement\IeC {\'a}cia}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Perzistentn\IeC {\'e} d\IeC {\'a}ta}{13}{section.2.1}
+\contentsline {section}{\numberline {2.2}Vstupn\IeC {\'e} a v\IeC {\'y}stupn\IeC {\'e} d\IeC {\'a}ta}{13}{section.2.2}
+\contentsline {section}{\numberline {2.3}Data-flow diagram}{14}{section.2.3}
+\contentsline {section}{\numberline {2.4}Tokeniz\IeC {\'a}cia}{15}{section.2.4}
+\contentsline {section}{\numberline {2.5}Filtrovanie HTML tagov}{16}{section.2.5}
+\contentsline {section}{\numberline {2.6}Substit\IeC {\'u}cia termin\IeC {\'a}lov netermin\IeC {\'a}lmi}{16}{section.2.6}
+\contentsline {section}{\numberline {2.7}Vytvorenie parsovacieho stromu}{18}{section.2.7}
+\contentsline {subsection}{\numberline {2.7.1}Anal\IeC {\'y}za gramatiky}{19}{subsection.2.7.1}
+\contentsline {subsubsection}{Optimaliz\IeC {\'a}cia}{24}{section*.24}
+\contentsline {subsection}{\numberline {2.7.2}Parsovac\IeC {\'\i } strom}{25}{subsection.2.7.2}
+\contentsline {subsection}{\numberline {2.7.3}Ne\IeC {\'u}pln\IeC {\'y} pars}{25}{subsection.2.7.3}
+\contentsline {section}{\numberline {2.8}Vr\IeC {\'a}tenie termin\IeC {\'a}lov}{26}{section.2.8}
+\contentsline {section}{\numberline {2.9}Ozna\IeC {\v c}enie slov a viet}{27}{section.2.9}
+\contentsline {subsection}{\numberline {2.9.1}Ozna\IeC {\v c}enie slov}{27}{subsection.2.9.1}
+\contentsline {subsection}{\numberline {2.9.2}Ozna\IeC {\v c}enie viet}{27}{subsection.2.9.2}
+\contentsline {section}{\numberline {2.10}Vr\IeC {\'a}tenie HTML tagov}{29}{section.2.10}
+\contentsline {section}{\numberline {2.11}Vytvorenie XML dokumentu}{30}{section.2.11}
+\contentsline {chapter}{\numberline {3}V\IeC {\'y}konnostn\IeC {\'e} testy}{31}{chapter.3}
+\contentsline {chapter}{\numberline {4}Z\IeC {\'a}ver}{33}{chapter.4}
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Literat\IeC {\'u}ra}{34}{chapter*.32}
+\contentsline {chapter}{\numberline {}Pr\IeC {\'\i }lohy}{35}{chapter*.33}

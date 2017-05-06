@@ -824,8 +824,8 @@ class Parser {
      * @param {Object} tree
      * @return {boolean}
      */
-    isComplete(tree = this.tree) {
-        var leaves = Parser.getLeaves(tree);
+    isComplete() {
+        var leaves = Parser.getLeaves(this.tree);
         if (leaves.length < this.tokenizer.tokens.length) {
             return false;
         }
@@ -833,13 +833,12 @@ class Parser {
     }
 
     /**
-     * Builds whole XML output from tree
-     * @param {Object} tree
+     * Builds whole XML output from this.tree
      */
-    buildXML(tree = this.tree) {
+    buildXML() {
 
-        if (!this.isComplete(tree)) {
-            this.finishIncompleteTree(tree);
+        if (!this.isComplete()) {
+            this.finishIncompleteTree();
         }
         this.substituteLeafs();
         this.addWordTags();
@@ -851,10 +850,14 @@ class Parser {
 
     /**
      * Finishes(or builds whole) tree, that is not complete(parser could not parse whole input(or any)).
-     * @param {Object} tree
      */
-    finishIncompleteTree(tree = this.tree) {
-        var leaves = Parser.getLeaves(tree);
+    finishIncompleteTree() {
+        var leaves = Parser.getLeaves(this.tree);
+        if (this.tree.root !== this.config["rootRule"]) {
+            this.tree = Parser.createNode(0, this.tree.right, this.config["rootRule"], null, this.tree);
+            //newRoot.subtrees.push(tree);
+            //tree = newRoot;
+        }
         var startNewSentence = null;
         if (leaves.length == 0) {
             startNewSentence = true;
@@ -864,13 +867,13 @@ class Parser {
         }
         var sentence = null;
         if (startNewSentence) {
-            sentence = Parser.createNode(tree.right, this.tokenizer.tokens.length, this.config["sentenceRule"][0], tree);
-            tree.subtrees.push(sentence);
+            sentence = Parser.createNode(this.tree.right, this.tokenizer.tokens.length, this.config["sentenceRule"][0], this.tree, null);
+            this.tree.subtrees.push(sentence);
         }
         else { //moze toto nastat?
             var lastLeaf = leaves[leaves.length - 1];
             while (!this.config["sentenceRule"].includes(lastLeaf.root)) {
-                lastLeaf = Parser.findParent(tree, lastLeaf.parent.left, lastLeaf.parent.right, lastLeaf.parent.root);
+                lastLeaf = Parser.findParent(this.tree, lastLeaf.parent.left, lastLeaf.parent.right, lastLeaf.parent.root);
                 if (lastLeaf.root === this.config["rootRule"]) {
                     break;
                 }
@@ -878,8 +881,8 @@ class Parser {
             sentence = lastLeaf;
         }
         for (var i = leaves.length; i < this.tokenizer.tokens.length; i++) {
-            var HelperNode = Parser.createNode(i, i+1, "Helper", sentence);
-            var newNode = Parser.createNode(i, i+1, this.tokenizer.tokens[i], HelperNode);
+            var HelperNode = Parser.createNode(i, i+1, "Helper", sentence, null);
+            var newNode = Parser.createNode(i, i+1, this.tokenizer.tokens[i], HelperNode, null);
 
             sentence.subtrees.push(HelperNode);
             HelperNode.subtrees.push(newNode);
@@ -888,7 +891,7 @@ class Parser {
             sentence.right = this.tokenizer.tokens.length;
             var right = sentence.parent.right;
             sentence.parent.right = this.tokenizer.tokens.length;
-            sentence = Parser.findParent(tree, sentence.parent.left, right, sentence.parent.root)
+            sentence = Parser.findParent(this.tree, sentence.parent.left, right, sentence.parent.root)
         }
         sentence.right = this.tokenizer.tokens.length;
     }
@@ -923,20 +926,32 @@ class Parser {
      * @param {Number} right
      * @param {string} rootValue
      * @param {Object} parentNode
-     * @return {{root: *, left: *, right: *, parent: {root: *, left: (*|number|Number), right: (*|number|Number), subtrees: Array}, subtrees: Array}}
+     * @param {Object} subtrees
+     * @return {{root: string, left: Number, right: Number, parent: ({root: string, left: Number, right: (Number, subtrees: Array}|null), subtrees: Array}}
      */
-    static createNode(left, right, rootValue, parentNode) {
+    static createNode(left, right, rootValue, parentNode, subtrees) {
+        if (parentNode != null) {
+            return {
+                root: rootValue,
+                left: left,
+                right: right,
+                parent: {
+                    root: parentNode.root,
+                    left: parentNode.left,
+                    right: parentNode.right,
+                    subtrees: []
+                },
+                subtrees: []
+            };
+        }
         return {
             root: rootValue,
             left: left,
             right: right,
             parent: {
-                root: parentNode.root,
-                left: parentNode.left,
-                right: parentNode.right,
                 subtrees: []
             },
-            subtrees: []
+            subtrees: [subtrees]
         };
     }
 
@@ -985,6 +1000,11 @@ class Parser {
         }
     }
 
+    /**
+     * Checks whether node is inside of sentence based on this.config["sentenceRule"] and parent nodes
+     * @param node - node being checked
+     * @return {boolean}
+     */
     isNodeInSentence(node) {
         var result = true;
         while (!this.config["sentenceRule"].includes(node.root)) {
@@ -1012,10 +1032,8 @@ class MissingSentenceTagException {
         this.name = "MissingSentenceTagException";
     }
 }
-// var p = new Parser("\n\n\n - Priama rec, - uvadzacia veta. - Dalsia, - priama. Dalsia.", "SK");
+// var p = new Parser("- Veta. Veta. Veta, - veta. Veta. Veta.", "SK");
 // //var p = new Parser("Text.\"Text?\" \n- Prídem.", "SK"); // TODO: pouzit WordsNoNewline?
-// //var p = new Parser("<b>- Prídeš? \n \n \n - Prídem? \n</b> <i>\n \n  - Určite? \n - Určite. </i>", "SK");
-// //var p = new Parser("<p><b>Toto je <strong>1.,</strong> </p> jednoducha Veta. a <i>toto</i> je</b> <em>dalsia 1 kratka veta 2.43!</em>", "SK"); // TODO: Doparsovat dokonca?
 //
 // p.buildXML(); // Prida vsetky tagy.
 // console.log(p.stringifyTree()); // Vysledne XML.
