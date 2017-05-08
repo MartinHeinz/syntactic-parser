@@ -37,7 +37,12 @@
                                       "name": "StartingToken",
                                       "children": [
                                         {
-                                          "name": "<w id=\"w1\">Veta</w>"
+                                          "name": "StartingTokenBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w1\">Veta</w>"
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -64,7 +69,12 @@
                                               "name": "StartingToken",
                                               "children": [
                                                 {
-                                                  "name": "<s id=\"s3\"><w id=\"w2\">Veta</w>"
+                                                  "name": "StartingTokenBasic",
+                                                  "children": [
+                                                    {
+                                                      "name": "<s id=\"s3\"><w id=\"w2\">Veta</w>"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             },
@@ -89,7 +99,12 @@
                                       "name": "StartingToken",
                                       "children": [
                                         {
-                                          "name": "<s id=\"s4\"><w id=\"w3\">Veta</w>"
+                                          "name": "StartingTokenBasic",
+                                          "children": [
+                                            {
+                                              "name": "<s id=\"s4\"><w id=\"w3\">Veta</w>"
+                                            }
+                                          ]
                                         }
                                       ]
                                     },
@@ -111,23 +126,13 @@
                           "name": "ISentenceEndDash",
                           "children": [
                             {
-                              "name": "ISentenceEnd",
+                              "name": "ISentenceEndDashBasic",
                               "children": [
                                 {
-                                  "name": "WordNoNewLine",
+                                  "name": "Dash",
                                   "children": [
                                     {
-                                      "name": "WordTokenNoNewLine",
-                                      "children": [
-                                        {
-                                          "name": "Dash",
-                                          "children": [
-                                            {
-                                              "name": "<s id=\"s5\">-"
-                                            }
-                                          ]
-                                        }
-                                      ]
+                                      "name": "<s id=\"s5\">-"
                                     }
                                   ]
                                 },
@@ -135,10 +140,15 @@
                                   "name": "Words",
                                   "children": [
                                     {
-                                      "name": "WordToken",
+                                      "name": "WordTokens",
                                       "children": [
                                         {
-                                          "name": "<w id=\"w4\">veta</w>"
+                                          "name": "WordBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w4\">veta</w>"
+                                            }
+                                          ]
                                         }
                                       ]
                                     }
@@ -170,7 +180,12 @@
                                               "name": "StartingToken",
                                               "children": [
                                                 {
-                                                  "name": "<s id=\"s6\"><w id=\"w5\">Veta</w>"
+                                                  "name": "StartingTokenBasic",
+                                                  "children": [
+                                                    {
+                                                      "name": "<s id=\"s6\"><w id=\"w5\">Veta</w>"
+                                                    }
+                                                  ]
                                                 }
                                               ]
                                             },
@@ -198,7 +213,12 @@
                                           "name": "StartingToken",
                                           "children": [
                                             {
-                                              "name": "<s id=\"s7\"><w id=\"w6\">Veta</w>"
+                                              "name": "StartingTokenBasic",
+                                              "children": [
+                                                {
+                                                  "name": "<s id=\"s7\"><w id=\"w6\">Veta</w>"
+                                                }
+                                              ]
                                             }
                                           ]
                                         },

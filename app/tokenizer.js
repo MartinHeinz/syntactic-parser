@@ -16,7 +16,6 @@ class Tokenizer {
         this.HTMLTagsPositions = new Map();
         this.rules = new Map();
         this.tokens = [];
-
     }
 
     /**

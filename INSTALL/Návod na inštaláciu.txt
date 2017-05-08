@@ -9,5 +9,4 @@ presuňte sa do priečinku s aplikáciou(../parser/app/): "cd <cesta k aplikáci
 spustite parser.js: "node parser.js"
 
 Akékoľvek zmeny vstupov pre parser sa dajú robiť na konci súboru parser.js(otvoriť v hocijakom textovom editore).
-Bližšie informácie o tom ako používať aplikáciu, je možné nájsť v texte bakalárskej práce v kapitole
-Používateľká príručka.
+Bližšie informácie o tom ako používať aplikáciu, je možné nájsť v priečinku README v súbore Používateľská príručka.pdf.

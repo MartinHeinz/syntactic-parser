@@ -13,10 +13,10 @@ class Parser {
      * @param {string} grammarLanguage
      */
     constructor(text, grammarLanguage) {
-        this.config = this.setUpConfig("../parser/app/res/configs/"+ grammarLanguage + ".json");
-        this.tokenizer = new Tokenizer(text, "../parser/app/res/terminalRules/"+grammarLanguage+".json", this.config, grammarLanguage);
+        this.config = this.setUpConfig("../app/res/configs/"+ grammarLanguage + ".json");
+        this.tokenizer = new Tokenizer(text, "../app/res/terminalRules/"+grammarLanguage+".json", this.config, grammarLanguage);
         this.tokenizer.init();
-        this.grammar = new Earley.tinynlp.Grammar(this.loadGrammar("../parser/app/res/grammars/"+grammarLanguage+".json"));
+        this.grammar = new Earley.tinynlp.Grammar(this.loadGrammar("../app/res/grammars/"+grammarLanguage+".json"));
         this.grammar.terminalSymbols = function(token) {
             return[token];
         };
@@ -29,7 +29,7 @@ class Parser {
 
     /**
      *
-     * @return {number} bestTree - index of "best" tree in this.trees
+     * @return {Object} bestTree - "best" parse tree in this.trees
      */
     chooseTree() {
         var bestTree = null;
@@ -75,8 +75,7 @@ class Parser {
         var result = new Map();
         for (let [key, value] of tempConfig) {
             if (key.includes("Regex")) { // value je regex, inak je to rule, path etc.
-                var newVal = new RegExp(value, "g");
-                result[key] = newVal;
+                result[key] = new RegExp(value, "g");
             }
             else {
                 result[key] = value;
@@ -281,7 +280,6 @@ class Parser {
                 return console.log(err);
             }
         });
-        //console.log("file updated");
     }
 
 
@@ -355,7 +353,6 @@ class Parser {
                 return console.log(err);
             }
         });
-        //console.log("file updated");
     }
 
     /**
@@ -486,7 +483,7 @@ class Parser {
             var node = Parser.findNode(this.tree, key);
             if (this.isNodeInSentence(node)) {
                 var index = this.findInsertPosition(tree.root);
-                tree.root = tree.root.slice(0, index) + tag + tree.root.slice(index); //TODO isto dobre?
+                tree.root = tree.root.slice(0, index) + tag + tree.root.slice(index);
             }
             return;
         }
@@ -603,7 +600,6 @@ class Parser {
             }
             counter++;
         }
-        return;
     }
 
 
@@ -820,8 +816,7 @@ class Parser {
     }
 
     /**
-     * Checks whether tree is complete based on number of leaves in tree and tokens in input.
-     * @param {Object} tree
+     * Checks whether this.tree is complete based on number of leaves in tree and tokens in input.
      * @return {boolean}
      */
     isComplete() {
@@ -834,6 +829,7 @@ class Parser {
 
     /**
      * Builds whole XML output from this.tree
+     * @return {void}
      */
     buildXML() {
 
@@ -855,8 +851,6 @@ class Parser {
         var leaves = Parser.getLeaves(this.tree);
         if (this.tree.root !== this.config["rootRule"]) {
             this.tree = Parser.createNode(0, this.tree.right, this.config["rootRule"], null, this.tree);
-            //newRoot.subtrees.push(tree);
-            //tree = newRoot;
         }
         var startNewSentence = null;
         if (leaves.length == 0) {
@@ -1001,7 +995,7 @@ class Parser {
     }
 
     /**
-     * Checks whether node is inside of sentence based on this.config["sentenceRule"] and parent nodes
+     * Checks whether node is inside of a sentence based on this.config["sentenceRule"] and parent nodes
      * @param node - node being checked
      * @return {boolean}
      */
@@ -1032,21 +1026,20 @@ class MissingSentenceTagException {
         this.name = "MissingSentenceTagException";
     }
 }
-// var p = new Parser("- Veta. Veta. Veta, - veta. Veta. Veta.", "SK");
-// //var p = new Parser("Text.\"Text?\" \n- Prídem.", "SK"); // TODO: pouzit WordsNoNewline?
-//
-// p.buildXML(); // Prida vsetky tagy.
-// console.log(p.stringifyTree()); // Vysledne XML.
-// //console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
-//
-// console.log(p.trees.length);
-//
-// // for (let tree of p.trees) {
-// //     p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
-// // }
-//
-// p.saveHTMLTree("../app/res/trees/tree.html"); // HTML reprezentacia pouziteho stromu pre debugovanie, da sa aj p.getHTMLTree()
-// p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho stromu, da sa aj p.getJSONTree()
+
+var p = new Parser("- Veta. Veta. Veta, - veta. Veta. Veta.", "SK");
+
+p.buildXML(); // Prida vsetky tagy.
+console.log(p.stringifyTree()); // Vysledne XML.
+//console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
+
+
+// for (let tree of p.trees) {
+//     p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
+// }
+
+p.saveHTMLTree("../app/res/trees/tree.html"); // HTML reprezentacia pouziteho stromu pre debugovanie, da sa aj p.getHTMLTree()
+p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho stromu, da sa aj p.getJSONTree()
 
 module.exports = {Parser};
 
