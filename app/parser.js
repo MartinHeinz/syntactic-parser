@@ -971,10 +971,11 @@ class Parser {
 
     /**
      * Retrieves words from tree and saves them into this.words
-     * Used to get words with <w> tag before addition of remaining tags.
+     * Used to get words without <w> tags before addition of remaining tags.
      * @param tree
      */
     saveWords(tree = this.tree) {
+        var tokens = [];
         var concatWithNext = false;
         var leaves = Parser.getLeaves(tree);
         for (let i = 0; i < leaves.length; i++) {
@@ -982,15 +983,19 @@ class Parser {
                 if (leaves[i].root.includes("</w>")) {
                     concatWithNext = false;
                 }
-                this.words[this.words.length-1] = this.words[this.words.length-1].concat(leaves[i].root);
+                tokens[tokens.length-1] = tokens[tokens.length-1].concat(leaves[i].root);
             }
             else {
                 if (/<w id="w\d+">/.test(leaves[i].root) && !leaves[i].root.includes("</w>")) {
                     concatWithNext = true;
                 }
-                this.words.push(leaves[i].root);
+                tokens.push(leaves[i].root);
             }
-
+        }
+        for (let token of tokens) {
+            if (/^<w id=\"w\d+\">(.+)<\/w>$/g.test(token)) {
+                this.words.push(/^<w id=\"w\d+\">(.+)<\/w>$/g.exec(token)[1])
+            }
         }
     }
 
@@ -1031,7 +1036,7 @@ var p = new Parser("- Veta. Veta. Veta, - veta. Veta. Veta.", "SK");
 
 p.buildXML(); // Prida vsetky tagy.
 console.log(p.stringifyTree()); // Vysledne XML.
-//console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
+console.log(p.words); // Vsetky slova
 
 
 // for (let tree of p.trees) {

@@ -294,11 +294,11 @@ V prípade, že by bolo potrebné upraviť gramatiku - napríklad pridať pravid
 \end{lstlisting}
 Alternatívy, ktoré môžu vzniknúť sa oddeľujú pomocou \verb!|! (zvislá čiara).
 
-V gramatike je možné(a aj nutné) použiť terminály z prislúchajúceho slovníku v priečinku \verb!terminalRules!, ktoré sú vo forme:
+V gramatike je možné(a aj nutné) použiť tokeny z prislúchajúceho slovníku v priečinku \verb!terminalRules!, ktoré sú vo forme:
 \begin{lstlisting}[style=htmlcssjs]
 {
 	...,
-	"RegexKtoryMatchujeToken": "Terminal",
+	"RegexKtoryMatchujeToken": "TypTokenu",
 	"^[0-9]+$":"Num",
 	...,
 }

@@ -257,7 +257,7 @@
 \begin{tabular}{ll}
 %Evidenčné číslo: & ... \\
 Študijný program: & Aplikovaná informatika\\
-Študijný odbor: & 9.2.9. aplikovaná informatika\\
+Študijný odbor: & 2511 aplikovaná informatika\\
 Školiace pracovisko: & \katedra\\
 Školiteľ: & \skolitel
 \end{tabular}\\
@@ -278,7 +278,8 @@
 \thispagestyle{empty}
 
 \begin{figure}[hbtp]
-\includepdf[offset=0 -75]{pracaScanAdjusted}
+%\includepdf[offset=0 -75]{pracaScanAdjusted}
+\includepdf{1492249210766}
 \end{figure}
 
 
@@ -298,41 +299,46 @@ V Bratislave
 
 \begin{abstract}
 
+HEINZ, Martin: \nazov \  [Bakalárska práca]. Fakulta
+matematiky, fyziky a informatiky Univerzita Komenského v Bratislave; Katedra aplikovanej
+informatiky. Školiteľ: \skolitel \ Bratislava 2017. 34 strán.
+
+\bigskip
+
 Cieľom tejto bakalárskej práce je vytvoriť syntaktický parser v jazyku JavaScript, ktorý bude využitý ako modul na parsovanie príbehov v aplikácii Multimediálna čítanka.
-Táto práca obsahuje popis a analýzu problematiky a  parsovacieho algoritmu použitého pri tvorbe tejto aplikácie. Súčasťou práce je aj návrh a implementácia samotnej aplikácie.
-
-
-Táto aplikácia je navrhnutá s cieľom implementovať efektívnu metódu delenia komplexného textu obsahujúceho HTML značky na slová a vety s jednoduchým používaním a modifikovateľnosťou.
+Táto práca obsahuje popis a analýzu problematiky a  parsovacieho algoritmu použitého pri tvorbe tejto aplikácie. Súčasťou práce je aj návrh a implementácia samotnej aplikácie. Táto aplikácia je navrhnutá s cieľom implementovať efektívnu metódu delenia komplexného textu obsahujúceho HTML značky na slová a vety s jednoduchým používaním a modifikovateľnosťou.
 
 \bigskip\noindent
 \textbf{Kľúčové slová:} \textit{parser, javascriptová aplikácia, HTML, XML} 
 
-\bigskip
-HEINZ, Martin: \nazov \  [Bakalárska práca]. Fakulta
-matematiky, fyziky a informatiky Univerzita Komenského v Bratislave; Katedra aplikovanej
-informatiky. Školiteľ: \skolitel \ Bratislava 2017. TODO DOPLNIT strán.
+
 
 \end{abstract}
 
 \begin{otherlanguage}{english}
 \begin{abstract}
 
-Goal of this work is to create a syntactic parser in JavaScript, which is intened to be used as a submodule for parsing of stories in Multimedia reader. This work contains description and analysis of issues and parsing algorithm used for development of this application. This work also contains design and implentation of application itself.
+HEINZ, Martin: Simple Syntactic Parser of Stories from Multimedia Reader [Bachelor thesis]. Faculty of Mathematics, Physics and Informatics;
+Department of Applied Informatics, Comenius University in Bratislava; Supervisor: \skolitel \ Bratislava 2017. 34 pages.
 
 
-This application is developed with goal of implementing effective method to split complex text containing HTML tags into words and sentences, while being easy to use and modify.
+\bigskip
+
+Goal of this work is to create a syntactic parser in JavaScript, which is intened to be used as a submodule for parsing of stories in Multimedia reader. This work contains description and analysis of issues and parsing algorithm used for development of this application. This work also contains design and implentation of application itself. This application is developed with goal of implementing effective method to split complex text containing HTML tags into words and sentences, while being easy to use and modify.
 
 \bigskip\noindent
 \textbf{Keywords:} \textit{parser, javascript, HTML, XML} 
 
-\bigskip
-HEINZ, Martin: Simple Syntactic Parser of Stories from Multimedia Reader [Bachelor thesis]. Faculty of Mathematics, Physics and Informatics;
-Department of Applied Informatics, Comenius University in Bratislava; Supervisor: \skolitel \ Bratislava 2017. TODO DOPLNIT pages.
+
 
 \end{abstract}
 \end{otherlanguage}
+\cleardoublepage
+\pagenumbering{gobble}
 \setcounter{tocdepth}{1}
 \tableofcontents
+\cleardoublepage
+\pagenumbering{arabic}
 
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Úvod}
@@ -428,7 +434,7 @@ $$ aaAbB \to aaaAbB $$
 $$ aaaAbB \to aaaabB $$
 $$ aaaabB \to aaaabb $$
 \subsection{Parse Tree}
-Parse tree alebo strom odvodenia je strom reprezentujúci syntaktickú štruktúru reťazca podľa nejakej formálnej gramatiky. V parsovacom strome koreň reprezentuje začiatočný symbol, všetky vnútorné vrcholy sú označené neterminálnými symbolmi gramatiky, potomkovia týchto vrcholov sú časťami pravej strany použitého substitučného pravidla usporiadané zľava doprava. Listami stromu sú samotné terminály. Príklad stromu na obrázku (\ref{fig:strom})
+Parse tree(parsovací strom) alebo strom odvodenia je strom reprezentujúci syntaktickú štruktúru reťazca podľa nejakej formálnej gramatiky. V parsovacom strome koreň reprezentuje začiatočný symbol, všetky vnútorné vrcholy sú označené neterminálnými symbolmi gramatiky, potomkovia týchto vrcholov sú časťami pravej strany použitého substitučného pravidla usporiadané zľava doprava. Listami stromu sú samotné terminály. Príklad stromu na obrázku (\ref{fig:strom})
 \subsection{Typy parserov}
 \subsubsection*{Top-down parser} 
 \addcontentsline{toc}{subsubsection}{Top-down parser}
@@ -552,7 +558,7 @@ State sety sú množiny Earley item-ov. Sú uložené v dynamickom poli, ktoré 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.75]{stateSet}
+\includegraphics[scale=0.7]{stateSet}
 \caption{Príklad reprezentácie}
 \end{figure}
 
@@ -641,7 +647,7 @@ XML je značkovací jazyk, ktorý je primárne určený na výmenu údajov medzi
 %\subsubsection{Karma}
 
 \chapter{Návrh a implementácia}
-Táto časť práce bude venovaná návrhu a implementácii samotnej aplikácie. V podkapitolách sa najprv pristavím pri návrhu danej časti aplikácie a následne pomocou ukážok zdrojového kódu popíšem aj implementáciu.
+Táto časť práce bude venovaná návrhu a implementácii samotnej aplikácie. V podkapitolách sa najprv pristavím pri návrhu danej časti aplikácie a následne pomocou ukážok zdrojového kódu a príkladov parsovacích stromov popíšem aj implementáciu.
 
 \section{Perzistentné dáta}
 Aplikácia nebude obsahovať vlastnú databázu, keďže bude modulom Multimediálnej čítanky, ktorá databázu má. Dáta(výstupy) aplikácie sa teda budú ukladať priamo do databázy Multimediálnej čítanky.
@@ -726,45 +732,25 @@ Zároveň sa z pôvodného poľa tokenov odstránia tieto tagy:
 \section{Substitúcia terminálov neterminálmi}
 Keby sme chceli parseru poslať tokeny v takom stave v akom sú teraz, tak by sme na to potrebovali kompletný slovník, pomocou ktorého by parser vedel rozlíšiť, čo s ktorým slovom spraviť a zároveň by to tým pádom aj nafúklo gramatiku, ktorá by musela riešiť veľa zbytočných alternatív. Keďže hlbšia analýza slov a viet nie je cieľom tejto práce, tak  môžeme napríklad všetky slová s malými písmenami brať ako jeden typ tokenu($"WordLower"$).
 
-Na tento účel použijeme tabuľku(slovník) pravidiel, ktorou prevedieme terminály na jednotlivé typy tokenov:\\
-\newpage
-\begin{lstlisting}[caption={Slovník s popisom},label={lst:label},style=htmlcssjs]
+Na tento účel použijeme tabuľku(slovník) substitučných pravidiel, ktorou prevedieme terminály na jednotlivé typy tokenov. Táto tabuľka bude uložená v samostatnom súbore v JSON formáte. Kľúčmi atribútov v tomto JSON-e budú jednotlivé regulárne výrazy, s ktorými budeme hľadať zhodu s tokenom. Hodnotou atribútu potom budú názvy vyššie spomínaných typov tokenov.
+
+\begin{lstlisting}[caption={Formát slovníku a príklad substitúcie},label={lst:dict},style=htmlcssjs]
 	{
-	"^\n$": "NewLine", //Nové Riadky
-	"^[0-9]\.[A-Z]$":"Class", //Trieda: napr. 1.A
-	"^(prof|doc|Bc|Mgr|art|Mgr|Ing|Dr|[A-Z][A-Za-z]+Dr)$":
-		"AcTitleBeforeName", //Tituly písané pred menom
-	"^PhD$":"AcTitleAfterName", //Tituly písané za menom
-	"^([A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]\.)$":"Initial", // Iniciály
-	"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$":
-		"RomanNumeral", //Rímske číslice
-	"^(č|t|j|r|tzv|tzn|napr|p|odb|str|písm|n)$":
-		"StableTextAbbrStart", //Ustálené slovné skratky
-	"^[a-zéŕřťýúíóášďľĺžčäô][a-zéŕřťýúíóášďľĺžčäô-]*
-			[a-zéŕřťýúíóášďľĺžčäô]*$":"WordLower", //Slová s malými pís.
+	"^RegexKtoryMatchujeToken$": "TypTokenu",
+	...
 	"^[0-9]+$":"Num", //Čísla
 	"^(\d{1,2}[:-]\d{1,2}[:-]\d{1,}(,\d+)*)|([+-]?\d+(\.\d+)*(,\d+)?(%|,-)?)$":"Decimal", //Desatinné čísla, dátumy a časy
-	"^[\\.]{3,}$":"Ellipsis", //Tri(alebo viac) bodky
-	"^[\.!\?]{2,}$":"RepeatedPunctuation", //Opakujúca sa interpunkcia
-	"^\.$":".", //Bodka
-	"^,$":",", //Čiarka
-	"^;$":";", //Bodkočiarka
-	"^\?$":"?", //Otáznik
-	"^!$":"!", //Výkričník
-	"^[-\u2014\u2013\u2212\u2010\u2011]$":"-", //Pomlčka
-	"^:$":":", //Dvojbodka
-	"^\"$":"\"", //Úvodzovky
-	"\u201E": "\u201E", //Slovenské úvodzovky(dole)
-	"\u201C": "\u201C", //Slovenské úvodzovky(hore)
-	"^[A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ][a-zéŕřťýúíóášďľĺžčäô-]*$":"WordCapital", //Slovo s veľkým začiatočným písmenom
-	"^[A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]{2,}$":"WordAbbr", //Skratky(všetko veľké)
-	"^[A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČa-zéŕřťýúíóášďľĺžčäô-]+$":"Word", //Ostatné slová
+	"^[\.]{3,}$":"Ellipsis", //Tri(alebo viac) bodky
+	...
 	"^\S+$": "Other" // ostatné tokeny(non-whitespace)
 	};
 \end{lstlisting}
-		%"([0-9]+(st|nd|rd|th))":"Ordinal" //radove cislovky(anglicke)
+\bigskip
+Ako môžeme vidieť na ukážke(\ref{lst:dict}), každý regulárny výraz začína \verb!^!(caret) a končí \verb!$!(dolár), teda chceme nájsť plnú zhodu s tokenom. Pri hľadaní zhody prechádzame jednotlivé regexy až kým nenájdeme zhodu, ktorá sa vždy nájde vďaka poslednému regexu - \verb!^\S+$!, ktorý zachytí všetko čo nenašlo zhodu skôr. Ako je už asi zjavné, tak na poradí záleží, teda nemôžeme napríklad hľadať najprv samotnú bodku - \verb!^\.$! a až potom tri alebo viac bodiek -  \verb!^[\.]{3,}$!, lebo by sme nikdy nedostali zhodu na týchto troch bodkách.
 
-\noindent Po tejto úprave môže veta vyzerať napríklad takto: \\
+ Niektoré substitúcie v slovníku ako napríklad už spomínané tri bodky by sa mohli zdať redundantné, keďže v gramatike by sme si vedeli vytvoriť pravidlo, ktoré by rekurzívne poskladalo akýkoľvek počet opakujúcich sa bodiek. To by ale zbytočne nafukovalo gramatiku a spomaľovalo samotné parsovanie textu, preto ak je to možné tak je v takejto situácii lepšie zadefinovať takúto substitúciu tu v slovníku, než v gramatike.
+\bigskip
+\noindent Po tejto úprave pomocou slovníku môže veta vyzerať napríklad takto:
 \begin{lstlisting}[caption={Tokeny po použití slovníku},style=htmlcssjs]
 tokens = 
 ["WordStart",  "WordLower",  "Word", "-", "WordLower", "Decimal", "WordLower", "Word", "?"]
@@ -779,7 +765,7 @@ var grammar = new tinynlp.Grammar([
     'S -> S add_sub M | M',
     'M -> M mul_div T | T',
     'N -> S lt_gt S | S',
-    'T -> num | ( S )',
+    'T -> num | ( S )'
 ]);
 \end{lstlisting}
 
@@ -797,15 +783,15 @@ grammar.terminalSymbols = function(token) {
 };
 \end{lstlisting}
 
-\bigskip Pri termináloch nám prácu uľahčí to, že už máme vytvorený slovník (Listing \ref{lst:label}), teda nebude nutné nijak nahrádzať tokeny, teda v našom prípade: \\
+\bigskip Pri termináloch nám prácu uľahčí to, že už máme vytvorený slovník (Listing \ref{lst:dict}), teda nebude nutné nijak nahrádzať tokeny, teda v našom prípade: \\
 \begin{lstlisting}[style=htmlcssjs]
 grammar.terminalSymbols = function(token) {
     return [token];
 };
 \end{lstlisting}
 \bigskip
-Na to, aby sme zabezpečili možnosť ľahko upravovať gramatiku, tak ju budeme mať uloženú v textovom súbore vo formáte JSON, kde atribútom bude ľavá strana pravidla a hodnotou bude pravá strana. Vyššie uvedená gramatika(Listing \ref{lst:gramatika}) by teda vyzerala takto:
-\newpage
+Na to, aby sme zabezpečili možnosť ľahko upravovať gramatiku, tak ju budeme mať uloženú v textovom súbore vo formáte JSON, tak ako aj pri slovníku, kde atribútom bude ľavá strana pravidla a hodnotou bude pravá strana. Vyššie uvedená gramatika(Listing \ref{lst:gramatika}) by teda vyzerala takto:
+
 \begin{lstlisting}[caption={Ukážková gramatika V JSON-e},label={lst:gramatikaJSON},style=htmlcssjs]
 {
 	"Root":"N",
@@ -823,7 +809,9 @@ var grammar = new tinynlp.Grammar(this.loadGrammar(rulePath));
 \end{lstlisting}
 
 \subsection{Analýza gramatiky}
-%TODO: ked bude hotova gram., tak rozobrat jednotlive pravidla.
+V tejto sekcii podrobne rozoberiem, najdôležitejšie a najkomplikovanejšie pravidlá, ktoré obsahuje gramatika pre parser a následne popíšem aj menšie optimalizácie potrebné pre efektívnosť a jednoznačnosť parsovania.
+
+\bigskip
 
 Koreňom celej gramatiky je $"Story"$, z ktorého sa v prípade slovenskej gramatiky vetvia jednotlivé riadky, teda: $$"Story \to Lines "$$  V anglickej gramatike sú to jednotlivé vety: $$"Story \to Sentences "$$
 
@@ -838,11 +826,11 @@ My nevieme vopred koľko viet/riadkov bude v texte, tým pádom pravidlo pre vet
 Tieto pravidlá sa môžu zdať neprirodzene zapísané(najprv rekurzívny prípad, až potom triviálny). Dôvodom je, že tento parser má lepší výkon pri $"left-recursive"$\  gramatike(testy gramatiky v \hyperref[tests]{kapitole \ref{tests}}) a tiež je to potrebné pri pridávaní \verb!<p>! tagov, ktoré by pri $"right-recursive"$ \ gramatike mohli skončiť na nesprávnom mieste, kvôli tomu, že to zmení ich najbližšieho spoločného parenta, napríklad:
 \begin{figure}[H]
 
-\includegraphics[scale=2.4]{treePTagsCorrect}
+\includegraphics[scale=2.1]{treePTagsCorrect}
 \caption{Správny výstup pre vstup: \texttt{<p>Prvá. Druhá.</p> Tretia.}}
 \end{figure}
 \begin{figure}[H]
-\includegraphics[scale=2.4]{treePTagsIncorrect}
+\includegraphics[scale=2.1]{treePTagsIncorrect}
 \caption{Nesprávny výstup pri $"right-recursive"$ gramatike}
 \end{figure}
 
@@ -955,7 +943,7 @@ Tak ako už bolo spomenuté vyššie tak v Angličtine sa priama reč určená p
 $$InvertedComa \to "\text{`}", \ InvertedDoubleComa \to"\text{``}", \  Quote \to """$$
 
 \subsubsection{Optimalizácia}
-Kvôli skutočnosti, že v Slovenčine môžeme skombinovať takmer hocijakú postupnosť slov a interpunkcie a aj tak vytvoriť valídnu vetu, tak by pre nás bolo najjednoduchšie definovať slová vo vete ako hocijaké slová, interpunkciu a nové riadky. To ale spôsobí veľmi veľké množstvo nejednoznačností v gramatike a parser bude produkovať veľmi veľa zbytočných stromov. Tieto nejednoznačnosti primárne spôsobuje priama reč určená pomlčkami, v ktorej sa za sebou vyskytujú interpunkčné znamienka, ktoré môže obsahovať aj jednoduchá slovenská veta, v tej by sa však nemali objaviť hneď za sebou.
+Kvôli skutočnosti, že v Slovenčine môžeme skombinovať takmer hocijakú postupnosť slov a interpunkcie a aj tak vytvoriť validnú vetu, tak by pre nás bolo najjednoduchšie definovať slová vo vete ako hocijaké slová, interpunkciu a nové riadky. To ale spôsobí veľmi veľké množstvo nejednoznačností v gramatike a parser bude produkovať veľmi veľa zbytočných stromov. Tieto nejednoznačnosti primárne spôsobuje priama reč určená pomlčkami, v ktorej sa za sebou vyskytujú interpunkčné znamienka, ktoré môže obsahovať aj jednoduchá slovenská veta, v tej by sa však nemali objaviť hneď za sebou.
 \begin{lstlisting}[caption={Nejednoznačný vstup},style=htmlcssjs]
 - Priama reč, - uvádzacia veta, - Priama reč...
 \end{lstlisting}
@@ -1040,12 +1028,12 @@ Keďže jednotlivé listy stromu sú v tom istom poradí, ako boli tokeny, ktor�
 %TODO: pridat obrazok HTML stromu.
 \begin{figure}[h]
 \centering
-\includegraphics[scale=2.6]{treeBeforeSubstitution}
+\includegraphics[scale=2.1]{treeBeforeSubstitution}
 \caption{Strom bez terminálov}
 \end{figure}
 
 \begin{figure}[H]
-\includegraphics[scale=2.4]{treeAfterSubstitution}
+\includegraphics[scale=2.1]{treeAfterSubstitution}
 \caption{Strom po substitúcii}
 \end{figure}
 
@@ -1077,7 +1065,7 @@ Ak list obsahuje iba interpunkciu, tak ho vynechávame, lebo nás v tejto chvíl
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=2.2]{treeWordsAdded}
+\includegraphics[scale=2]{treeWordsAdded}
 \caption{Strom s \textit{"Word"} tagmi}
 \end{figure}
 
@@ -1113,6 +1101,8 @@ addSentenceTags(tree = this.tree) {
 
 Funkcia sa volá na každý vrchol parsovacieho stromu vrátane vrcholov podstromu, ktorý už bol označený \verb@<s>@ tagom, keďže vety v texte sa môžu vnárať jedna do druhej. Funkcia zároveň zabezpečuje, že všetky tagy budú v správnom poradí, teda že na vrchu bude vždy tag s najmenším poradovým číslom.
 
+Štandardne je vytvorený \verb!config["sentenceRule"]! tak aby sa jednotlivé vety vnárali do seba, teda dostaneme označenie \verb@<s>@ tagom pre celé skupiny viet skladajúce sa z jednotlivých uvádzacích viet a priamych rečí, tak ako aj označenie pre tieto jednotlivé uvádzacie vety a priame reči. Toto správanie sa dá veľmi ľahko zmeniť vymazaním niektorých pravidiel z \verb!config["sentenceRule"]! a dosiahnuť tak označovanie buď len celých skupín viet alebo len ich menších častí, prípadne označovanie na základe úplne niečoho iného.
+
 \begin{figure}[H]
 \centering
 \includegraphics[scale=2.8]{sentenceTagsAndNestedSentenceLeft}
@@ -1126,17 +1116,21 @@ Funkcia sa volá na každý vrchol parsovacieho stromu vrátane vrcholov podstro
 
 \section{Vrátenie HTML tagov}
 Pri HTML tagoch rozlišujeme formátovacie tagy(\verb!<b>, <i>, <span>...!) a paragrafy (\verb!<p> </p>!). Paragrafy by sa po správnosti nemali nachádzať vnútri viet, na to sa však nedá plne spoliehať. Keby sa vyskytla takáto chyba v texte, spôsobilo by to, že by sa prekrížili \verb@<s>@ tagy s tými paragrafovými, preto je potrebné skontrolovať a prípadne posunúť paragrafové tagy na začiatok, respektíve na koniec vety, v ktorej sa nachádzajú.
+
 \begin{figure}[H]
 \centering
-\includegraphics[scale=2.6]{adjustedPTags}
+\includegraphics[scale=2.5]{adjustedPTags}
 \captionsetup{width=.7\linewidth}
 \caption{Príklad stromu s posunutým \texttt{<p>} tagom pre vstup: \texttt{\char`\"Jožo <p>vraví: \char`\"</p>Ahoj.\char`\"\char`\"}}
 \end{figure}
+Toto posunutie zabezpečí, že paragrafové tagy budú úplne navrchu a teda budú obaľovať celé vety, tým pádom sa už nemajú s čím prekrížiť.
 
 Pokiaľ ide o formátovacie tagy, tie môžu zahŕňať jedno slovo, jednu vetu alebo kľudne môžu aj začínať v strede jednej a končiť v strede druhej. Formátovacie tagy, ale na rozdiel od tých paragrafových vieme rozdeliť na časti, tak aby sa zabránilo kríženiu. Ak teda tag prechádza cez hranice viet, tak ho na konci prvej uzatvoríme a na začiatku ďalšej zase otvoríme.
+
+Tu zároveň treba myslieť aj na to, že tieto tagy sa budú vnárať jeden do druhého a pri \verb!<span>! tagoch to teda často budú rovnaké tagy s rôznymi atribútmi(napr. \verb!style!), ktoré je teda potrebné uzatvárať a otvárať v správnom poradí a pri otváracích tagoch použiť prislúchajúce atribúty.
 \begin{figure}[H]
 \centering
-\includegraphics[scale=2.6]{dividedFormattingTags}
+\includegraphics[scale=2.5]{dividedFormattingTags}
 \captionsetup{width=.7\linewidth}
 \caption{Príklad stromu s rozdeleným \texttt{<b>} tagom pri vstupe: \texttt{\char`\"<p>Prvá <b>veta. Ďalšia</b> veta.</p>\char`\"}}
 \end{figure}
@@ -1381,6 +1375,7 @@ Pokiaľ ide o nejednoznačné vstupy, tak zložitosť sa môže pohybovať od li
 %\end{lstlisting}
 
 \chapter{Záver}
+%%\addcontentsline{toc}{chapter}{\protect\numberline{}Záver}
 Cieľom tejto bakalárskej práce bolo vytvoriť aplikáciu, ktorá by bola schopná sparsovať vstupný text v slovenskom alebo anglickom jazyku obsahujúci HTML a vytvoriť z neho XML dokument, v ktorom by boli označené jednotlivé vety a slová XML tagmi.
 
 Na začiatku prebiehalo rozsiahle hľadanie rôznych parserov a ich implementácií vhodných pre parsovanie prirodzeného jazyka, spolu s oboznamovaním sa s problematikou a následnou analýzou možných implementácií s ohľadom na efektívnosť a modifikovateľnosť daného riešenia pre naše potreby.

@@ -69,7 +69,7 @@ class Tokenizer {
         for (let token of tokens) {
             var found = false;
             for (let rule of rules.keys()) {
-                var currRule = new RegExp("^"+rule+"$");
+                var currRule = new RegExp(rule);
                 if (currRule.test(token)) {
                     result.push(rules.get(rule));
                     found = true;
