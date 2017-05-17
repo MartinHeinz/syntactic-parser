@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.8)  12 MAY 2017 13:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9 64-bit) (preloaded format=pdflatex 2016.1.8)  17 MAY 2017 15:28
 entering extended mode
 **./praca.tex
 (praca.tex
@@ -1566,7 +1566,7 @@ l.334 \end{abstract}
  been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.360 \chapter
+l.364 \chapter
               {VÃ½chodiskÃ¡} [1
 
 
@@ -1575,7 +1575,7 @@ Kapitola 1.
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 361.
+(hyperref)                removing `\textasciicaron' on input line 365.
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstlang1.sty"
 File: lstlang1.sty 2015/06/04 1.6 listings language file
@@ -1583,19 +1583,19 @@ File: lstlang1.sty 2015/06/04 1.6 listings language file
 ("C:\Program Files\MiKTeX 2.9\tex\latex\listings\lstmisc.sty"
 File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
 )
-LaTeX Font Info:    Try loading font information for IL2+cmtt on input line 365
+LaTeX Font Info:    Try loading font information for IL2+cmtt on input line 369
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\cslatex\base\il2cmtt.fd"
 File: il2cmtt.fd 1997/08/20 CSLaTeX font definitions
 )
 LaTeX Font Info:    Font shape `IL2/cmtt/bx/n' in size <10> not available
-(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 366.
+(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 370.
 pdfTeX warning (ext4): destination with the same identifier (name{page.2}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.385 \noindent
+l.389 \noindent
                 \textit{PoznÃ¡mka: VÅ¡etko okrem prvej vety je uvedenÃ© vo f...
 [2
 
@@ -1603,10 +1603,10 @@ l.385 \noindent
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 387.
+(hyperref)                removing `\textasciicaron' on input line 391.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 399--401
+Underfull \hbox (badness 10000) in paragraph at lines 403--405
 
  []
 
@@ -1614,63 +1614,59 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.3}) has
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.410 \end{itemize}
+l.414 \end{itemize}
                     [3]pdfTeX warning (ext4): destination with the same identif
 ier (name{page.4}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.438 \subsection
+l.442 \subsection
                  {Typy parserov} [4]
-Underfull \hbox (badness 10000) in paragraph at lines 452--455
-
- []
-
-<images/mathTree.png, id=247, 67.2111pt x 51.0708pt>
+<images/mathTree.png, id=248, 67.2111pt x 51.0708pt>
 File: images/mathTree.png Graphic file (type png)
  <use images/mathTree.png>
-Package pdftex.def Info: images/mathTree.png used on input line 460.
+Package pdftex.def Info: images/mathTree.png used on input line 464.
 (pdftex.def)             Requested size: 207.27887pt x 157.51982pt.
 
-<images/mathForest.png, id=248, 60.4659pt x 63.8385pt>
+<images/mathForest.png, id=249, 60.4659pt x 63.8385pt>
 File: images/mathForest.png Graphic file (type png)
 
 <use images/mathForest.png>
-Package pdftex.def Info: images/mathForest.png used on input line 467.
-(pdftex.def)             Requested size: 154.35889pt x 163.00224pt.
+Package pdftex.def Info: images/mathForest.png used on input line 471.
+(pdftex.def)             Requested size: 176.40439pt x 186.28215pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.5}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.528 
+l.532 
        [5 <./images/mathTree.png> <./images/mathForest.png>]
-<images/stateSet.png, id=266, 473.1276pt x 220.6644pt>
+<images/stateSet.png, id=267, 473.1276pt x 220.6644pt>
 File: images/stateSet.png Graphic file (type png)
 
 <use images/stateSet.png>
-Package pdftex.def Info: images/stateSet.png used on input line 561.
-(pdftex.def)             Requested size: 331.18706pt x 154.46402pt.
+Package pdftex.def Info: images/stateSet.png used on input line 565.
+(pdftex.def)             Requested size: 378.50258pt x 176.53174pt.
  [6]
-<images/prediction.png, id=277, 530.4618pt x 261.6174pt>
+<images/prediction.png, id=278, 530.4618pt x 261.6174pt>
 File: images/prediction.png Graphic file (type png)
 
 <use images/prediction.png>
-Package pdftex.def Info: images/prediction.png used on input line 573.
-(pdftex.def)             Requested size: 371.32072pt x 183.13092pt.
- [7 <./images/stateSet.png> <./images/prediction.png>] <images/scan.png, id=289
+Package pdftex.def Info: images/prediction.png used on input line 577.
+(pdftex.def)             Requested size: 397.84537pt x 196.21255pt.
+ [7 <./images/stateSet.png> <./images/prediction.png>] <images/scan.png, id=290
 , 533.8344pt x 239.4546pt>
 File: images/scan.png Graphic file (type png)
  <use images/scan.png>
-Package pdftex.def Info: images/scan.png used on input line 581.
-(pdftex.def)             Requested size: 373.68152pt x 167.61707pt.
+Package pdftex.def Info: images/scan.png used on input line 585.
+(pdftex.def)             Requested size: 400.3748pt x 179.5905pt.
 
-<images/completition.png, id=290, 545.8794pt x 338.7054pt>
+<images/completition.png, id=291, 545.8794pt x 338.7054pt>
 File: images/completition.png Graphic file (type png)
 
 <use images/completition.png>
-Package pdftex.def Info: images/completition.png used on input line 589.
-(pdftex.def)             Requested size: 382.11296pt x 237.09216pt.
+Package pdftex.def Info: images/completition.png used on input line 593.
+(pdftex.def)             Requested size: 409.40854pt x 254.02843pt.
  [8 <./images/scan.png> <./images/completition.png>]
-Overfull \hbox (4.70859pt too wide) in paragraph at lines 606--607
+Overfull \hbox (4.70859pt too wide) in paragraph at lines 610--611
 \IL2/cmr/m/n/12 teµný pre na-tu-ral lan-gu-age pro-ces-sing. Al-go-rit-mus má v
 ý-poè-tovú zlo¾i-tos» $\OML/cmm/m/it/12 O\OT1/cmr/m/n/12 (\OML/cmm/m/it/12 n[]\
 OT1/cmr/m/n/12 )$\IL2/cmr/m/n/12 ,
@@ -1679,22 +1675,22 @@ OT1/cmr/m/n/12 )$\IL2/cmr/m/n/12 ,
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 609.
+(hyperref)                removing `\textasciicaron' on input line 613.
 
-[9] <images/onlineDemo.png, id=313, 858.20625pt x 511.9125pt>
+[9] <images/onlineDemo.png, id=316, 858.20625pt x 511.9125pt>
 File: images/onlineDemo.png Graphic file (type png)
 
 <use images/onlineDemo.png>
-Package pdftex.def Info: images/onlineDemo.png used on input line 621.
+Package pdftex.def Info: images/onlineDemo.png used on input line 625.
 (pdftex.def)             Requested size: 343.27641pt x 204.76137pt.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+l'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 626.
+(hyperref)                removing `\textasciicaron' on input line 630.
 
 [10 <./images/onlineDemo.png>]
-Overfull \hbox (4.61655pt too wide) in paragraph at lines 631--632
+Overfull \hbox (4.61655pt too wide) in paragraph at lines 635--636
 []\IL2/cmr/m/n/12 Pri pí-saní tejto apli-ká-cie bu-dem vy-u-¾í-va» ak-tu-álnu ¹
 pe-ci-fi-ká-ciu EC-MAScript 6(2015),
  []
@@ -1703,150 +1699,157 @@ pe-ci-fi-ká-ciu EC-MAScript 6(2015),
 Kapitola 2.
 [12
 
-] <images/DFD.png, id=341, 1977.3875pt x 1455.4375pt>
+] <images/DFD.png, id=346, 1977.3875pt x 1455.4375pt>
 File: images/DFD.png Graphic file (type png)
  <use images/DFD.png>
-Package pdftex.def Info: images/DFD.png used on input line 669.
+Package pdftex.def Info: images/DFD.png used on input line 673.
 (pdftex.def)             Requested size: 395.4705pt x 291.08234pt.
 
 [13 <./images/DFD.png>]<<ot1tt.cmap>>
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 698
+LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 702
 .
 
 ("C:\Program Files\MiKTeX 2.9\tex\latex\base\ts1cmtt.fd"
 File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Underfull \hbox (badness 10000) in paragraph at lines 710--711
+Underfull \hbox (badness 10000) in paragraph at lines 714--715
 
  []
 
 [14] [15] [16]
-Underfull \hbox (badness 10000) in paragraph at lines 786--787
+Underfull \hbox (badness 10000) in paragraph at lines 794--795
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 805--806
+Underfull \hbox (badness 10000) in paragraph at lines 813--814
 
  []
 
 [17]
-Underfull \hbox (badness 10000) in paragraph at lines 818--819
+Underfull \hbox (badness 10000) in paragraph at lines 826--827
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 820--824
+Underfull \hbox (badness 10000) in paragraph at lines 828--832
 
  []
 
-<images/treePTagsCorrect.png, id=433, 146.7081pt x 87.6876pt>
+<images/treePTagsCorrect.png, id=438, 146.7081pt x 87.6876pt>
 File: images/treePTagsCorrect.png Graphic file (type png)
 
 <use images/treePTagsCorrect.png>
-Package pdftex.def Info: images/treePTagsCorrect.png used on input line 829.
-(pdftex.def)             Requested size: 308.08713pt x 184.14403pt.
+Package pdftex.def Info: images/treePTagsCorrect.png used on input line 837.
+(pdftex.def)             Requested size: 322.75656pt x 192.91196pt.
 
-<images/treePTagsIncorrect.png, id=434, 147.1899pt x 87.6876pt>
+<images/treePTagsIncorrect.png, id=439, 147.1899pt x 87.6876pt>
 File: images/treePTagsIncorrect.png Graphic file (type png)
 
 <use images/treePTagsIncorrect.png>
-Package pdftex.def Info: images/treePTagsIncorrect.png used on input line 833.
-(pdftex.def)             Requested size: 309.0989pt x 184.14403pt.
+Package pdftex.def Info: images/treePTagsIncorrect.png used on input line 842.
+(pdftex.def)             Requested size: 323.81651pt x 192.91196pt.
  [18]
-Underfull \hbox (badness 10000) in paragraph at lines 843--844
+Underfull \hbox (badness 10000) in paragraph at lines 856--857
 
  []
 
 [19 <./images/treePTagsCorrect.png> <./images/treePTagsIncorrect.png>]
-Overfull \hbox (2.45544pt too wide) in paragraph at lines 849--851
+Overfull \hbox (2.45544pt too wide) in paragraph at lines 862--864
 []$\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 BasicSentence\OT1/cmr/m/n/12 "$ \IL2/cmr/m
 /n/12 je vo forme: $\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 StartingToken  Words Punc
 tuation \OMS/cmsy/m/n/12 j \OML/cmm/m/it/12 Quotation\OT1/cmr/m/n/12 "$
  []
 
 [20]
-Overfull \hbox (1.09435pt too wide) in paragraph at lines 890--891
+Overfull \hbox (1.09435pt too wide) in paragraph at lines 903--904
 [][]\IL2/cmtt/m/n/12 ...uvádzacia veta,[]priama reè[,?!]+\IL2/cmr/m/n/12 \ []\I
 L2/cmtt/m/n/12 uvádzacia veta,[]priama reè[.?!]+\IL2/cmr/m/n/12 \ 
  []
 
 [21] [22] [23]
 LaTeX Font Info:    Font shape `IL2/cmtt/bx/n' in size <9> not available
-(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 984.
+(Font)              Font shape `IL2/cmtt/m/n' tried instead on input line 997.
  [24]
-<images/treeBeforeSubstitution.png, id=522, 138.5175pt x 87.4467pt>
+<images/treeBeforeSubstitution.png, id=527, 138.5175pt x 87.4467pt>
 File: images/treeBeforeSubstitution.png Graphic file (type png)
 
 <use images/treeBeforeSubstitution.png>
 Package pdftex.def Info: images/treeBeforeSubstitution.png used on input line 1
-031.
+044.
 (pdftex.def)             Requested size: 290.88686pt x 183.63812pt.
 
-<images/treeAfterSubstitution.png, id=523, 132.495pt x 88.6512pt>
+<images/treeAfterSubstitution.png, id=528, 132.495pt x 88.6512pt>
 File: images/treeAfterSubstitution.png Graphic file (type png)
 
 <use images/treeAfterSubstitution.png>
 Package pdftex.def Info: images/treeAfterSubstitution.png used on input line 10
-36.
+49.
 (pdftex.def)             Requested size: 278.23958pt x 186.16757pt.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 1040.
+(hyperref)                removing `\textasciicaron' on input line 1053.
 
 [25 <./images/treeBeforeSubstitution.png> <./images/treeAfterSubstitution.png>]
-<images/treeWordsAdded.png, id=532, 194.6472pt x 105.7551pt>
+<images/treeWordsAdded.png, id=537, 194.6472pt x 105.7551pt>
 File: images/treeWordsAdded.png Graphic file (type png)
 
 <use images/treeWordsAdded.png>
-Package pdftex.def Info: images/treeWordsAdded.png used on input line 1068.
+Package pdftex.def Info: images/treeWordsAdded.png used on input line 1081.
 (pdftex.def)             Requested size: 389.29343pt x 211.50967pt.
  [26 <./images/treeWordsAdded.png>]
-Overfull \hbox (11.15805pt too wide) in paragraph at lines 1080--1081
+Overfull \hbox (11.15805pt too wide) in paragraph at lines 1093--1094
 []\IL2/cmr/m/n/12 Tieto tagy, teda pri-dá-vame v¾dy na-jµa-vej¹i-emu(otvárací) 
 a naj-pra-vej¹i-emu(uzatvárací)
  []
 
 
-<images/sentenceTagsAndNestedSentenceLeft.png, id=543, 148.1535pt x 49.8663pt>
+<images/sentenceTagsAndNestedSentenceLeft.png, id=548, 148.1535pt x 49.8663pt>
 File: images/sentenceTagsAndNestedSentenceLeft.png Graphic file (type png)
 
 <use images/sentenceTagsAndNestedSentenceLeft.png>
 Package pdftex.def Info: images/sentenceTagsAndNestedSentenceLeft.png used on i
-nput line 1108.
+nput line 1121.
 (pdftex.def)             Requested size: 414.82922pt x 139.62541pt.
 
-<images/sentenceTagsAndNestedSentenceRight.png, id=544, 148.3944pt x 73.7154pt>
+<images/sentenceTagsAndNestedSentenceRight.png, id=549, 148.3944pt x 73.7154pt>
 File: images/sentenceTagsAndNestedSentenceRight.png Graphic file (type png)
 <use images/sentenceTagsAndNestedSentenceRight.png>
 Package pdftex.def Info: images/sentenceTagsAndNestedSentenceRight.png used on 
-input line 1113.
+input line 1126.
 (pdftex.def)             Requested size: 385.82536pt x 191.65994pt.
  [27 <./images/sentenceTagsAndNestedSentenceLeft.png>]
-<images/adjustedPTags.png, id=570, 119.4864pt x 108.6459pt>
+<images/adjustedPTags.png, id=575, 119.4864pt x 108.6459pt>
 File: images/adjustedPTags.png Graphic file (type png)
 
 <use images/adjustedPTags.png>
-Package pdftex.def Info: images/adjustedPTags.png used on input line 1122.
-(pdftex.def)             Requested size: 298.71524pt x 271.61403pt.
+Package pdftex.def Info: images/adjustedPTags.png used on input line 1137.
+(pdftex.def)             Requested size: 310.66458pt x 282.47925pt.
  [28 <./images/sentenceTagsAndNestedSentenceRight.png> <./images/adjustedPTags.
 png>]
-<images/dividedFormattingTags.png, id=579, 118.041pt x 133.2177pt>
+<images/dividedFormattingTags.png, id=584, 118.041pt x 133.2177pt>
 File: images/dividedFormattingTags.png Graphic file (type png)
 
 <use images/dividedFormattingTags.png>
 Package pdftex.def Info: images/dividedFormattingTags.png used on input line 11
-33.
+49.
 (pdftex.def)             Requested size: 295.10173pt x 333.0434pt.
  [29 <./images/dividedFormattingTags.png>]
 Kapitola 3.
+
+Overfull \hbox (1.4772pt too wide) in paragraph at lines 1221--1223
+\IL2/cmr/m/n/12 Je vi-die», ¾e par-ser par-suje jed-no-zna-èné vstupy vy-u-¾í-v
+aj-úce slo-ven-skú $\OT1/cmr/m/n/12 "\OML/cmm/m/it/12 left \OMS/cmsy/m/n/12   \
+OML/cmm/m/it/12 recursive\OT1/cmr/m/n/12 "$
+ []
+
 [30
 
 ]
-Overfull \hbox (0.53891pt too wide) in paragraph at lines 1245--1246
- [] 
+Overfull \hbox (0.53891pt too wide) in paragraph at lines 1274--1275
+ [][] 
  []
 
 [31]
@@ -1854,25 +1857,25 @@ Kapitola 4.
 [32
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 1399--1400
+Underfull \hbox (badness 10000) in paragraph at lines 1430--1431
 []\IL2/cmtt/m/n/12 http://l2r.cs.uiuc.edu/~danr/Teaching/CS598-05/Lectures/Roxa
 na.pdf
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1405--1409
+Underfull \hbox (badness 10000) in paragraph at lines 1436--1440
 []\IL2/cmtt/m/n/12 http://staff.icar.cnr.it/ruffolo/progetti/projects/09.Parsin
 g\
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1405--1409
+Underfull \hbox (badness 10000) in paragraph at lines 1436--1440
 []\IL2/cmtt/m/n/12 %20CYK/A\%20Comparison\%20of\%20CYK\%20and\%20Earley\%20Pars
 ing\
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1416--1417
+Underfull \hbox (badness 10000) in paragraph at lines 1450--1451
 []\IL2/cmtt/m/n/12 https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 rence\IL2/cmr/m/n/12 ,
  []
@@ -1882,23 +1885,23 @@ rence\IL2/cmr/m/n/12 ,
 ] [34
 
 ]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1435.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1435.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1469.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1469.
  (praca.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1435.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1435.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1469.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1469.
 
 Package rerunfilecheck Info: File `praca.out' has not changed.
-(rerunfilecheck)             Checksum: CFD7D9B516F383B1FE27094B5FA03D01;1457.
+(rerunfilecheck)             Checksum: E45A1A417D64153C83624BEC0B152696;1457.
  ) 
 Here is how much of TeX's memory you used:
- 37392 strings out of 493634
- 854457 string characters out of 3143754
- 1163076 words of memory out of 3000000
- 39852 multiletter control sequences out of 15000+200000
+ 37401 strings out of 493634
+ 854608 string characters out of 3143754
+ 1163297 words of memory out of 3000000
+ 39857 multiletter control sequences out of 15000+200000
  18223 words of font info for 49 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 62i,18n,99p,810b,2194s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 62i,19n,99p,810b,2338s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Program Files/MiKTeX 2.9/fonts/enc/dvips/cm-super/cm-super-ts1.enc}<C:/Pr
 ogram Files/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi12.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Program Files/MiKTe
@@ -1916,9 +1919,9 @@ X 2.9/fonts/type1/public/cs/cstt10.pfb><C:/Program Files/MiKTeX 2.9/fonts/type1
 pfb><C:/Program Files/MiKTeX 2.9/fonts/type1/public/cm-super/sfrm1200.pfb><C:/P
 rogram Files/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1000.pfb><C:/Program Fi
 les/MiKTeX 2.9/fonts/type1/public/cm-super/sftt1200.pfb>
-Output written on praca.pdf (42 pages, 837136 bytes).
+Output written on praca.pdf (42 pages, 841339 bytes).
 PDF statistics:
- 737 PDF objects out of 1000 (max. 8388607)
- 268 named destinations out of 1000 (max. 500000)
+ 749 PDF objects out of 1000 (max. 8388607)
+ 272 named destinations out of 1000 (max. 500000)
  314 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -36,7 +36,7 @@
 \contentsline {subsection}{\numberline {2.7.1}Anal\IeC {\'y}za gramatiky}{18}{subsection.2.7.1}
 \contentsline {subsubsection}{Optimaliz\IeC {\'a}cia}{23}{section*.24}
 \contentsline {subsection}{\numberline {2.7.2}Parsovac\IeC {\'\i } strom}{24}{subsection.2.7.2}
-\contentsline {subsection}{\numberline {2.7.3}Ne\IeC {\'u}pln\IeC {\'y} pars}{24}{subsection.2.7.3}
+\contentsline {subsection}{\numberline {2.7.3}Ne\IeC {\'u}pln\IeC {\'y} parsovac\IeC {\'\i } strom}{24}{subsection.2.7.3}
 \contentsline {section}{\numberline {2.8}Vr\IeC {\'a}tenie termin\IeC {\'a}lov}{25}{section.2.8}
 \contentsline {section}{\numberline {2.9}Ozna\IeC {\v c}enie slov a viet}{26}{section.2.9}
 \contentsline {subsection}{\numberline {2.9.1}Ozna\IeC {\v c}enie slov}{26}{subsection.2.9.1}
@@ -45,5 +45,5 @@
 \contentsline {section}{\numberline {2.11}Vytvorenie XML dokumentu}{29}{section.2.11}
 \contentsline {chapter}{\numberline {3}V\IeC {\'y}konnostn\IeC {\'e} testy}{30}{chapter.3}
 \contentsline {chapter}{\numberline {4}Z\IeC {\'a}ver}{32}{chapter.4}
-\contentsline {chapter}{\hbox to\@tempdima {\hfil }Literat\IeC {\'u}ra}{33}{chapter*.32}
-\contentsline {chapter}{\numberline {}Pr\IeC {\'\i }lohy}{34}{chapter*.33}
+\contentsline {chapter}{\hbox to\@tempdima {\hfil }Literat\IeC {\'u}ra}{33}{chapter*.34}
+\contentsline {chapter}{\numberline {}Pr\IeC {\'\i }lohy}{34}{chapter*.35}

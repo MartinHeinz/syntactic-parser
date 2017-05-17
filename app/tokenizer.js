@@ -1,7 +1,6 @@
 
 class Tokenizer {
     /**
-     *
      * @param {string} text - input text being tokenized
      * @param {string} path - path to file containing terminalRules
      * @param {Map} config

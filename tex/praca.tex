@@ -229,7 +229,7 @@
 \def\nazov{Jednoduchý syntaktický parser príbehov z Multimediálnej čítanky}
 \def\autor{Martin Heinz}
 \def\skolitel{RNDr.~Marek Nagy,~PhD.}
-\def\katedra{Katedra Aplikovanej Informatiky}
+\def\katedra{Katedra aplikovanej informatiky}
 \def\fakulta{Fakulta matematiky, fyziky a~informatiky}
 \def\univerzita{Univerzita Komenského v~Bratislave}
 \def\mesto{Bratislava}
@@ -327,7 +327,7 @@ Department of Applied Informatics, Comenius University in Bratislava; Supervisor
 Goal of this work is to create a syntactic parser in JavaScript, which is intened to be used as a submodule for parsing of stories in Multimedia reader. This work contains description and analysis of issues and parsing algorithm used for development of this application. This work also contains design and implentation of application itself. This application is developed with goal of implementing effective method to split complex text containing HTML tags into words and sentences, while being easy to use and modify.
 
 \bigskip\noindent
-\textbf{Keywords:} \textit{parser, javascript, HTML, XML} 
+\textbf{Keywords:} \textit{parser, javascript application, HTML, XML} 
 
 
 
@@ -342,11 +342,15 @@ Goal of this work is to create a syntactic parser in JavaScript, which is intene
 
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Úvod}
-V dnešnej dobe je spracovávanie textu bežnou vecou, s ktorou sa stretávame veľmi často a vo veľa rôznych situáciách. Mnohé aplikácie pre svoje správne fungovanie potrebujú text rozdelený do nejakých menších celkov, napríklad viet a slov. Vo veľa prípadoch však správnosť, prípadne efektívnosť takéhoto spracovania nie je na dostatočnej úrovni a ani zďaleka sa nepribližuje presnosti, s ktorou vie takýto text spracovať človek, ktorý však ďaleko zaostáva za počítačmi v efektívnosti.
+V dnešnej dobe je spracovávanie textu bežnou vecou, s ktorou sa stretávame veľmi často a vo veľa rôznych situáciách. Mnohé aplikácie pre svoje správne fungovanie potrebujú text rozdelený do nejakých menších celkov, napríklad viet a slov. Vo veľa prípadoch však správnosť, prípadne efektívnosť takéhoto spracovania nie je na dostatočnej úrovni a ani zďaleka sa nepribližuje presnosti, s ktorou vie takýto text spracovať človek. Takéto spracovávanie ľuďmi je však nerealistické, kvôli množstvu textu a zdĺhavosti samotného procesu.
 \bigskip
 
 
 Hlavným cieľom tejto bakalárskej práce je vytvoriť aplikáciu  - syntaktický parser - ktorá bude využitá na parsovanie príbehov z Multimediálnej čítanky, ktoré bude schopná s čo najväčšou presnosťou a efektívnosťou deliť na jednotlivé slová a vety, so zachovaním pôvodného formátovania textu a s dôrazom na univerzálnosť tohoto riešenia.
+\bigskip
+
+Motiváciou pre vytvorenie tejto aplikácie bol fakt, že mnohé časti Multimediálnej čítanky pracujú s vetami alebo jednotlivými slovami a spoliehajú sa ich korektnosť. Či už je to výpočet syntaktickej náročnosti, generovanie otázok z viet,  rôzne úlohy na čítanie s porozumením alebo analýza viet. Všetky tieto procesy sú priamo závislé od správneho rozdelenia textu a preto si myslím, že je potrebné vytvoriť aplikáciu, ktorá by toto zabezpečovala.
+
 \bigskip
 
 
@@ -392,7 +396,7 @@ V tejto časti sa budem snažiť popísať, čo vlastne parsovanie je a na akom 
 Parsovanie ako pojem popisuje proces tvorby syntaktickej analýzy vety na základe vopred danej formálnej gramatiky(Context-free Grammar - CFG) a slovníku. Výsledná  syntaktická analýza môže byť použitá pre ďalšiu sémantickú interpretáciu. V tejto práci sa však budeme zaoberať len syntaktickou analýzou pomocou CFG, keďže našim cieľom nie hlbšia analýza slov. \cite{Pulman}\cite{Girju}
 
 \subsection{Context-free grammar}
-Context-free grammar\cite{foja}, skrátene CFG je typ formálnej gramatiky. Je to množina substitučných pravidiel, ktoré popisujú všetky existujúce reťazce v danom jazyku. Príklady substitučných pravidiel:
+Context-free grammar\cite{Girju}\cite{foja}, skrátene CFG je typ formálnej gramatiky. Je to množina substitučných pravidiel, ktoré popisujú všetky existujúce reťazce v danom jazyku. Príklady substitučných pravidiel:
 $$ A \to \alpha $$
 $$ A \to \beta $$
 
@@ -434,7 +438,7 @@ $$ aaAbB \to aaaAbB $$
 $$ aaaAbB \to aaaabB $$
 $$ aaaabB \to aaaabb $$
 \subsection{Parse Tree}
-Parse tree(parsovací strom) alebo strom odvodenia je strom reprezentujúci syntaktickú štruktúru reťazca podľa nejakej formálnej gramatiky. V parsovacom strome koreň reprezentuje začiatočný symbol, všetky vnútorné vrcholy sú označené neterminálnými symbolmi gramatiky, potomkovia týchto vrcholov sú časťami pravej strany použitého substitučného pravidla usporiadané zľava doprava. Listami stromu sú samotné terminály. Príklad stromu na obrázku (\ref{fig:strom})
+Parse tree(parsovací strom) alebo strom odvodenia je strom reprezentujúci syntaktickú štruktúru reťazca podľa nejakej formálnej gramatiky. V parsovacom strome koreň reprezentuje začiatočný symbol, všetky vnútorné vrcholy sú označené neterminálnymi symbolmi gramatiky, potomkovia týchto vrcholov sú časťami pravej strany použitého substitučného pravidla usporiadané zľava doprava. Listami stromu sú samotné terminály. Príklad stromu na obrázku (\ref{fig:strom})
 \subsection{Typy parserov}
 \subsubsection*{Top-down parser} 
 \addcontentsline{toc}{subsubsection}{Top-down parser}
@@ -451,7 +455,7 @@ Factor \to Number \\
 Number \to [0-9]+
 \end{align}
 \noindent 
-Príklad pre vstup: $ 5 + (3 * 2)$ a príklad stromu, ktorý vznikne pre tento vstup: \\
+Príklad pre vstup: $ 5 + (3 * 2)$ a príklad stromu, ktorý vznikne pre tento vstup: 
 
 \begin{figure}[H]
 \centering
@@ -462,7 +466,7 @@ Príklad pre vstup: $ 5 + (3 * 2)$ a príklad stromu, ktorý vznikne pre tento v
   \label{fig:test1}
 \end{minipage}%
 \hfill
-\begin{minipage}{0.35\textwidth}
+\begin{minipage}{0.4\textwidth}
   \centering
   \includegraphics[width=\textwidth]{mathForest}
   \captionof{figure}{Príklad stromu}
@@ -527,7 +531,7 @@ Príklad pre vstup: $ 5 + (3 * 2)$ a príklad stromu, ktorý vznikne pre tento v
 V tomto príklade sme ale v každom kroku vybrali správne pravidlo, ktoré by nás doviedlo k výsledku, v skutočnosti by sme pri naivnom algoritme museli vyskúšať všetky možnosti.
 
 
-\textit{Poznámka: Vo všetkých príkladoch budem pre ľahkú pochopiteľnosť využívať jednoduchú aritmetiku pre CFG(popísané nižšie).} 
+\textit{Poznámka: Vo všetkých príkladoch budem pre ľahkú pochopiteľnosť využívať vyššie uvedenú jednoduchú aritmetiku pre CFG.} 
 \subsubsection*{Bottom-up parser} 
 \addcontentsline{toc}{subsubsection}{Bottom-up parser}
 
@@ -558,7 +562,7 @@ State sety sú množiny Earley item-ov. Sú uložené v dynamickom poli, ktoré 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{stateSet}
+\includegraphics[scale=0.8]{stateSet}
 \caption{Príklad reprezentácie}
 \end{figure}
 
@@ -570,7 +574,7 @@ Prvou z troch možností je predikcia - symbol napravo od bodky je neterminál. 
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{prediction}
+\includegraphics[scale=0.75]{prediction}
 \caption{Príklad predikcie}
 \end{figure}
 \subsubsection*{Scan}
@@ -578,7 +582,7 @@ Druhá možnosť - symbol napravo od bodky je terminál. Skontrolujeme či sa to
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.7]{scan}
+\includegraphics[scale=0.75]{scan}
 \caption{Príklad scanu}
 \end{figure}
 
@@ -586,7 +590,7 @@ Druhá možnosť - symbol napravo od bodky je terminál. Skontrolujeme či sa to
 Posledná možnosť - napravo od bodky už nie je nič. To znamená, že sme dokončili čiastočný pars. Pokúsime sa nájsť rodiča tohto item-u a pridáme ho do aktuálneho state setu, s tým že ho posunieme o krok dopredu.
 
 \begin{figure}[H]
-\includegraphics[scale=0.7]{completition}
+\includegraphics[scale=0.75]{completition}
 \caption{Príklad completion}
 \end{figure}
 
@@ -600,20 +604,20 @@ Existujú dve situácie kedy môže parser zlyhať:
 \subsection{Porovnanie parserov}
 Za zmienku stoja aj ďalšie parsovacie algoritmy, ktoré však majú určité nevýhody, čím robia z Earley parseru najlepšiu voľbu pre túto aplikáciu:
 \begin{itemize}
-\item CYK algorithm: Má síce tiež výpočtovú zložitosť ako Earley, ale pamäťová zložitosť je $O(n^2)$, pričom u Earley parseru to je len $O(n)$ \cite{complexity}. CYK zároveň potrebuje gramatiku v CNF, kde Earley funguje pre akúkoľvej gramatiku a tak ako už bolo spomenuté skôr, tak pre niektoré gramatiky parsuje aj s lepšou zložitosťou ako $O(n^3)$.
+\item CYK algorithm: Má síce tiež výpočtovú zložitosť ako Earley, ale pamäťová zložitosť je $O(n^2)$, pričom u Earley parseru to je len $O(n)$ \cite{complexity}. CYK zároveň potrebuje gramatiku v CNF, kde Earley funguje pre akúkoľvek gramatiku a tak ako už bolo spomenuté skôr, tak pre niektoré gramatiky parsuje aj s lepšou zložitosťou ako $O(n^3)$.
 \item LR parser: Je síce schopný parsovať vstupný reťazec v lineárnom čase, ale nie je dostatočne flexibilný pre parsovanie prirodzeného jazyka(je vhodnejší pre programovacie jazyky)
 \item LL parser: Je veľmi jednoduchý, nie je však schopný parsovať akýkoľvek context-free grammar.
-\item Valiant’s algorithm: (Teoreticky)Rýchlejší algoritmus než Earley algorithm použiteľný pre natural language processing. Algoritmus má výpočtovú zložitosť $O(n^{2.81})$, čo je lepšie ako Earley algorithm, ale jeho koeficienty sú také veľké, že v praxi by bol rýchlejší len pre obrovské vstupy.\cite{Tomita}
+\item Valiant’s algorithm: (Teoreticky)rýchlejší algoritmus než Earley algorithm použiteľný pre natural language processing. Algoritmus má výpočtovú zložitosť $O(n^{2.81})$, čo je lepšie ako Earley algorithm, ale jeho koeficienty sú také veľké, že v praxi by bol rýchlejší len pre obrovské vstupy.\cite{Tomita}
 \end{itemize}
 
 \section{Prehľad existujúcich systémov}
 V nasledujúcej podkapitole sa budem venovať existujúcim riešeniam podobného problému. Medzi takéto riešenia môžeme zaradiť rôzne syntaktické parsery alebo knižnice určené pre natural language processing.
 
 \subsection{Nearly.js}
-Nearly.js je parsovací tool kit využívajúci Earley parser napísaný v JavaScripte. Parser využíva vlastnú gramatiku a umožňuje používanie makier. Je tiež schopný parsovať nejednoznačnú gramatiku a vracia v tomto prípade všetky parsy. Nearly tiež umožňuje debugovanie a má aj určitú detekciu chýb. Ďalšou funkcionalitou je aj možnosť konvertovať gramatiku na čitateľnejšie SVG "koľajnicové" diagramy.
+Nearly.js\cite{nearley} je parsovací tool kit využívajúci Earley parser napísaný v JavaScripte. Parser využíva vlastnú gramatiku a umožňuje používanie makier. Je tiež schopný parsovať nejednoznačnú gramatiku a vracia v tomto prípade všetky parsy. Nearly tiež umožňuje debugovanie a má aj určitú detekciu chýb. Ďalšou funkcionalitou je aj možnosť konvertovať gramatiku na čitateľnejšie SVG "koľajnicové" diagramy.
 
 \subsection{Stanford CoreNLP}
-Stanford CoreNLP poskytuje viaceré nástroje pre natural language processing. Je napísaný v Jave, s tým, že poskytuje interface aj ďalšie programovacie jazyky. Medzi funkcionality CoreNLP patrí aj part-of-speech tagger, named entity recognizer, parser, extrakcia informácií, sentiment analysis, pattern learning a ďalšie. Toolkit tiež podporuje okrem angličtiny aj ďalšie jazyky, napríklad: čínština, francúzština, nemčina, španielčina alebo arabčina.
+Stanford CoreNLP\cite{corenlp} poskytuje viaceré nástroje pre natural language processing. Je napísaný v Jave, s tým, že poskytuje interface aj ďalšie programovacie jazyky. Medzi funkcionality CoreNLP patrí aj part-of-speech tagger, named entity recognizer, parser, extrakcia informácií, sentiment analysis, pattern learning a ďalšie. Toolkit tiež podporuje okrem angličtiny aj ďalšie jazyky, napríklad: čínština, francúzština, nemčina, španielčina alebo arabčina.
 
 \subsection{earley-parser-js}
 Tento parser je najjednoduchším z tu menovaných implementácií/systémov. Takisto ako Nearley.js využíva Earley algorithm. Využíva jednoduchší zápis gramatiky a jeho výstupom je parsovací strom. Táto implementácia tiež obsahuje online grafické demo (\ref{fig:demo}), ktoré zobrazuje celý parsovací strom a je použiteľné na jednoduché testovanie gramatiky. Earley-parser-js\cite{earley-oop} budem využívať vo výslednej aplikácii, keďže jeho jednoduchosť, minimalistickosť a ľahká modifikovateľnosť v porovnaní s inými systémami sú výhodné pre tvorbu tejto aplikácie.
@@ -639,7 +643,7 @@ JSON je dátová štruktúra, respektíve formát, využívajúci pre človeka �
 
 
 \subsection{XML}
-XML je značkovací jazyk, ktorý je primárne určený na výmenu údajov medzi aplikáciami a na zverejňovanie dokumentov. Jazyk umožňuje opísať štruktúru dokumentu z hľadiska vecného obsahu jednotlivých častí. Sila XML je najmä v jeho hierarchickej štruktúre a pomerne jednoduchom spôsobe zápisu. Jazyk XML zároveň neobsahuje žiadne preddefinované tagy, teda užívateľ si ich definuje podľa vlastnej potreby, teda v našom prípade napríklad sentence a word tagy. XML dokument bude výstupom výslednej aplikácie.
+XML je značkovací jazyk, ktorý je primárne určený na výmenu údajov medzi aplikáciami a na zverejňovanie dokumentov. Jazyk umožňuje opísať štruktúru dokumentu z hľadiska vecného obsahu jednotlivých častí. Sila XML je najmä v jeho hierarchickej štruktúre a pomerne jednoduchom spôsobe zápisu. Jazyk XML zároveň neobsahuje žiadne preddefinované tagy, teda užívateľ si ich definuje podľa vlastnej potreby, teda v našom prípade napríklad $"sentence"$ a $"word"$ tagy. XML dokument bude výstupom výslednej aplikácie.
 
 %\subsection{Unit testy}
 %\subsubsection{Jasmine}
@@ -653,7 +657,7 @@ Táto časť práce bude venovaná návrhu a implementácii samotnej aplikácie.
 Aplikácia nebude obsahovať vlastnú databázu, keďže bude modulom Multimediálnej čítanky, ktorá databázu má. Dáta(výstupy) aplikácie sa teda budú ukladať priamo do databázy Multimediálnej čítanky.
 
 \section{Vstupné a výstupné dáta}
-Vstupom pre aplikáciu bude reťazec v slovenskom alebo anglickom jazyku obsahujúci HTML formátovacie tagy(napr.: \verb@<b>, <i>, <span>@) a paragrafové tagy. Očakávaná dĺžka tohoto reťazca je maximálne okolo 1000 slov.
+Vstupom pre aplikáciu bude reťazec v slovenskom alebo anglickom jazyku obsahujúci HTML tagy(napr.: \verb@<b>, <i>, <span>, <p>@). Očakávaná dĺžka tohoto reťazca je maximálne okolo 1000 slov.
 
 Výstupom bude XML reťazec, v ktorom budú tagmi označené jednotlivé slová a vety, s tým, že sa zachovajú všetky pôvodné HTML tagy zo vstupu bez toho, aby sa prekrížili s pridanými XML tagmi. Interpunkcia sa bude nachádzať mimo slovných tagov, pokiaľ teda nie je súčasťou slova. Príklad vstupu aj výstupu je možné vidieť v listingu (\ref{lst:vstup}) a (\ref{lst:vystup})
 \begin{itemize}
@@ -696,7 +700,7 @@ Text je nutné rozdeliť na tokeny, s ktorými sa bude dať ďalej pracovať. Ti
 \item čísla - \verb@([+-]?\d+(\.\d+)*(,\d+)?(%|,-)?)@ %(anglické radové číslovky) - % ([0-9]+(st|nd|rd|th))|(-?\d+(\.\d+)?)
 \item bežné slová - keďže písmená so slovenskou diakritikou nepatria do rozsahov a-z prípadne A-Z, je nutné ich takýmto spôsobom vypísať - \\ \verb@((?!-)[a-zéŕřťýúíóášďľĺžčäôA-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ-]+)@
 \item interpunkčné znamienka a ďalšie znaky - \verb@[\.,;:\"„“\(\)\?!'/\*\+%$€]@
-\item HTML tagy - \verb@(<\s*\D*?>)@
+\item HTML tagy - \verb@(<\s*.*?>)@
 \item znamineka menšie/väčšie - \verb@[<>]@ - tieto znamienka musia byť samostatne až za HTML tagmi, aby sa nestalo, že regex nájde samostatne len znamienka namiesto celých HTML tagov
 \item všetko ostatné(non-whitespace) - \verb@[\S+]@
 \end{itemize}
@@ -748,8 +752,12 @@ Na tento účel použijeme tabuľku(slovník) substitučných pravidiel, ktorou 
 \bigskip
 Ako môžeme vidieť na ukážke(\ref{lst:dict}), každý regulárny výraz začína \verb!^!(caret) a končí \verb!$!(dolár), teda chceme nájsť plnú zhodu s tokenom. Pri hľadaní zhody prechádzame jednotlivé regexy až kým nenájdeme zhodu, ktorá sa vždy nájde vďaka poslednému regexu - \verb!^\S+$!, ktorý zachytí všetko čo nenašlo zhodu skôr. Ako je už asi zjavné, tak na poradí záleží, teda nemôžeme napríklad hľadať najprv samotnú bodku - \verb!^\.$! a až potom tri alebo viac bodiek -  \verb!^[\.]{3,}$!, lebo by sme nikdy nedostali zhodu na týchto troch bodkách.
 
- Niektoré substitúcie v slovníku ako napríklad už spomínané tri bodky by sa mohli zdať redundantné, keďže v gramatike by sme si vedeli vytvoriť pravidlo, ktoré by rekurzívne poskladalo akýkoľvek počet opakujúcich sa bodiek. To by ale zbytočne nafukovalo gramatiku a spomaľovalo samotné parsovanie textu, preto ak je to možné tak je v takejto situácii lepšie zadefinovať takúto substitúciu tu v slovníku, než v gramatike.
+ Niektoré substitúcie v slovníku ako napríklad už spomínané tri bodky by sa mohli zdať redundantné, keďže v gramatike by sme si vedeli vytvoriť pravidlo, ktoré by rekurzívne poskladalo akýkoľvek počet opakujúcich sa bodiek. To by ale zbytočne nafukovalo gramatiku a spomaľovalo samotné parsovanie textu, preto ak je to možné tak je v takejto situácii lepšie zadefinovať takúto substitúciu tu v slovníku, než v gramatike. 
+ 
+ 
 \bigskip
+
+
 \noindent Po tejto úprave pomocou slovníku môže veta vyzerať napríklad takto:
 \begin{lstlisting}[caption={Tokeny po použití slovníku},style=htmlcssjs]
 tokens = 
@@ -757,7 +765,7 @@ tokens =
 \end{lstlisting}
 
 \section{Vytvorenie parsovacieho stromu}
-Na vytvorenie parsovacie stromu bude použitý earley-parser-js, ten však potrebuje pre svoju prácu tokeny(popísané v predchádzajúcej podkapitole) a gramatiku. Gramatika bude vo forme poľa pravidiel, kde $"\to"$ označuje rozdelenie na ľavú a pravú stranu pravidla a $"\mid"$ označuje alternatívu(v tomto príklade je použitá gramatika na parsovanie jednoduchej aritmetiky):
+Na vytvorenie parsovacie stromu bude použitý earley-parser-js, ten však potrebuje pre svoju prácu tokeny(popísané v predchádzajúcej podkapitole) a gramatiku. Gramatika bude vo forme poľa pravidiel, kde $" ->"$ označuje rozdelenie na ľavú a pravú stranu pravidla a $"\mid"$ označuje alternatívu(v tomto príklade je použitá gramatika na parsovanie jednoduchej aritmetiky):
 
 \begin{lstlisting}[caption={Ukážková gramatika},label={lst:gramatika},style=htmlcssjs]
 var grammar = new tinynlp.Grammar([
@@ -815,7 +823,7 @@ V tejto sekcii podrobne rozoberiem, najdôležitejšie a najkomplikovanejšie pr
 
 Koreňom celej gramatiky je $"Story"$, z ktorého sa v prípade slovenskej gramatiky vetvia jednotlivé riadky, teda: $$"Story \to Lines "$$  V anglickej gramatike sú to jednotlivé vety: $$"Story \to Sentences "$$
 
-Tento rozdiel je spôsobený tým, že v Slovenčine sa používa priama reč vymedzená pomlčkami a tam sa zvyknú dávať jednotlivé súvetia, respektíve prehovor jednej osoby, do samostatných riadkov, teda vedieť kde končí riadok je veľmi užitočné, napríklad: \\
+Tento rozdiel je spôsobený tým, že v Slovenčine, na rozdiel od Angličtiny sa používa priama reč vymedzená pomlčkami a tam sa zvyknú dávať jednotlivé súvetia, respektíve prehovor jednej osoby, do samostatných riadkov, teda vedieť kde končí riadok je veľmi užitočné, napríklad: \\
 
 \noindent - Prídeš? - spýtal sa Jožko.\\
 - Prídem...\\
@@ -823,18 +831,23 @@ Tento rozdiel je spôsobený tým, že v Slovenčine sa používa priama reč vy
 - Určite! \\
 
 My nevieme vopred koľko viet/riadkov bude v texte, tým pádom pravidlo pre vety/riadky musí byť rekurzívne: $$"Sentences \to Sentences \ Sentence \ | \ Sentence"$$  $$"Lines \to Lines \ Line \ | \ Line"$$
-Tieto pravidlá sa môžu zdať neprirodzene zapísané(najprv rekurzívny prípad, až potom triviálny). Dôvodom je, že tento parser má lepší výkon pri $"left-recursive"$\  gramatike(testy gramatiky v \hyperref[tests]{kapitole \ref{tests}}) a tiež je to potrebné pri pridávaní \verb!<p>! tagov, ktoré by pri $"right-recursive"$ \ gramatike mohli skončiť na nesprávnom mieste, kvôli tomu, že to zmení ich najbližšieho spoločného parenta, napríklad:
+Tieto pravidlá sa môžu zdať neprirodzene zapísané(najprv rekurzívny prípad, až potom triviálny). Dôvodom je, že tento parser má lepší výkon pri $"left-recursive"$\  gramatike(testy gramatiky v \hyperref[tests]{kapitole \ref{tests}}) a tiež je to potrebné pri pridávaní blokových tagov, ktoré by pri $"right-recursive"$ \ gramatike mohli skončiť na nesprávnom mieste, kvôli tomu, že to zmení ich najbližšieho spoločného rodiča, napríklad:
 \begin{figure}[H]
 
-\includegraphics[scale=2.1]{treePTagsCorrect}
+\includegraphics[scale=2.2]{treePTagsCorrect}
+%\setlength{\belowcaptionskip}{-10pt}
 \caption{Správny výstup pre vstup: \texttt{<p>Prvá. Druhá.</p> Tretia.}}
 \end{figure}
 \begin{figure}[H]
-\includegraphics[scale=2.1]{treePTagsIncorrect}
-\caption{Nesprávny výstup pri $"right-recursive"$ gramatike}
+\includegraphics[scale=2.2]{treePTagsIncorrect}
+%\setlength{\belowcaptionskip}{-10pt}
+\captionsetup{width=.6\linewidth}
+\caption{Nesprávny výstup pri $"right-recursive"$ gramatike: \texttt{<p>Prvá. Druhá. Tretia.</p>}}
 \end{figure}
 
 \textit{Poznámka: Všetky ukážky stromov sú zjednodušené kvôli čitateľnosti a kompaktnosti.}
+
+
 \textit{Keďže v ostatných pravidlách sa poväčšine anglická a slovenská gramatika líšia v štruktúre a nie veľmi v zmysle, tak budem popisovať iba tú slovenskú, keďže je pre nás relevantnejšia.} 
 
 Ďaľším pravidlom je $"Line"$, ktorý rozlišuje medzi dvomi typmi viet a logicky končí novými riadkami(aspoň jedným):
@@ -843,7 +856,7 @@ $$"Line \to \ DirectSpeechDashStart \ NewLines \ | \ OtherSentences \ NewLines "
 \noindent $"DirectSpeechDashStart"$ je skupinou pravidiel, ktoré definujú priamu reč vymedzenú pomlčkami a $"OtherSentences"$ združujú priamu reč v úvodzovkách a ostatné jednoduché vety. Najprv sa pozrieme na jednoduché vety a následne na priame reči: \\
 
 
-\noindent Najjednoduchšou formou vety je $"Sentence"$ z nej môže vzniknúť \\ $"OneWordSentence"$ alebo $"BasicSentence"$
+ Najjednoduchšou formou vety je $"Sentence"$ z nej môže vzniknúť \\ $"OneWordSentence"$ alebo $"BasicSentence"$
 \begin{itemize}
 \item $"OneWordSentence"$ sa musí skladať z $"StartingToken"$ a $"Punctuation"$, kde prvý z nich je slovom s veľkým začiatočným písmenom, číslom alebo iným tokenom, ktorým môže začínať veta a druhým je interpunkcia, ktorá môže ukončovať vetu - napríklad: bodka, otáznik, tri bodky, ale nie čiarka.
 \item $"BasicSentence"$ je vo forme: $"StartingToken \ \ Words \ Punctuation \ | \ Quotation"$
@@ -966,7 +979,7 @@ Táto podkapitola samozrejme neobsahuje všetky pravidlá, ktoré sa nachádzaj�
 
 \subsection{Parsovací strom}
 Earley-parser-js vráti ako výstup parsovací strom, ktorý je v JSON formáte, kde atribútmi sú $"root"$(koreň) podstromu(ľavá strana pravidla, ktoré sa začína v danom vrchole), $"left"$(začiatok, respektíve index tokenu pred ktorým pravidlo začalo), $"right"$(koniec, respektíve index tokenu, za ktorým končí toto pravidlo) a $"subtrees"$ \\ (podstromy, respektíve potomkovia tohto vrcholu). Napríklad: 
-\begin{lstlisting}[style=htmlcssjs, basicstyle=\fontsize{9}{11}\ttfamily]
+\begin{lstlisting}[caption=Parsovací strom vytvorený pomocou earley-parser-js,style=htmlcssjs, basicstyle=\fontsize{9}{11}\ttfamily]
  {
  	...
 	"root": "SentenceSimple",
@@ -987,7 +1000,7 @@ Earley-parser-js vráti ako výstup parsovací strom, ktorý je v JSON formáte,
 					"subtrees": []
 				}]
 			},
-			{ ... }]}]}]}]}
+{ ... }]}]}]}]}
 \end{lstlisting}
 
 %			"root": "Punctuation",
@@ -1001,8 +1014,8 @@ Earley-parser-js vráti ako výstup parsovací strom, ktorý je v JSON formáte,
 
 
 
-\subsection{Neúplný pars}
-V prípade, že by sa parseru nepodarilo získať zo vstupu úplný pars(vo vstupe je chyba), tak je earley-parser-js upravený tak, aby vrátil strom zahŕňajúci najdlhší čiastočný pars textu, ktorý začína na začiatku vstupného textu. Pre zachovanie štruktúry stromu sa ostávajúci nesparsovaný text spojí do jednej vety. Všetky ostatné tagy sa umiestnia, tak ako pri úplnom parse.
+\subsection{Neúplný parsovací strom}
+V prípade, že by sa parseru nepodarilo získať zo vstupu úplný parsovací strom(vo vstupe je chyba), tak je earley-parser-js upravený tak, aby vrátil strom zahŕňajúci najdlhší čiastočný pars textu, ktorý začína na začiatku vstupného textu. Pre zachovanie štruktúry stromu sa ostávajúci nesparsovaný text spojí do jednej vety. Všetky ostatné tagy sa umiestnia, tak ako pri úplnom parsovacom strome.
 
 Toto riešenie by malo pomôcť užívateľovi ľahšie si nájsť chybu vo svojom texte, keďže je zjavné, od ktorej vety už text nie je rozdelený a chyba by prirodzene mala byť niekde na začiatku tejto vety(napríklad malé písmeno na začiatku vety).
 
@@ -1111,22 +1124,25 @@ Funkcia sa volá na každý vrchol parsovacieho stromu vrátane vrcholov podstro
 \begin{figure}[H]
 \centering
 \includegraphics[scale=2.6]{sentenceTagsAndNestedSentenceRight}
+\setlength{\belowcaptionskip}{-10pt}
+
 \caption{Strom s \texttt{<s>}  tagmi a vnorenou vetou(pravá strana)}
 \end{figure}
 
 \section{Vrátenie HTML tagov}
-Pri HTML tagoch rozlišujeme formátovacie tagy(\verb!<b>, <i>, <span>...!) a paragrafy (\verb!<p> </p>!). Paragrafy by sa po správnosti nemali nachádzať vnútri viet, na to sa však nedá plne spoliehať. Keby sa vyskytla takáto chyba v texte, spôsobilo by to, že by sa prekrížili \verb@<s>@ tagy s tými paragrafovými, preto je potrebné skontrolovať a prípadne posunúť paragrafové tagy na začiatok, respektíve na koniec vety, v ktorej sa nachádzajú.
+Pri HTML tagoch rozlišujeme riadkové - inline tagy(\verb!<b>, <span>...!) a blokové tagy (\verb!<p>, <h1-6>, <div>!) . Blokové tagy by po správnosti nemali začínať ani končiť vnútri viet, na to sa však nedá plne spoliehať. Keby sa vyskytla takáto chyba v texte, spôsobilo by to, že by sa prekrížili \verb@<s>@ tagy s tými blokovými, preto je potrebné skontrolovať a prípadne posunúť blokové tagy na začiatok, respektíve na koniec vety, v ktorej sa nachádzajú. Toto posunutie zabezpečí, že blokové tagy budú úplne navrchu a teda budú obaľovať celé vety, tým pádom sa už nemajú s čím prekrížiť.
 
 \begin{figure}[H]
 \centering
-\includegraphics[scale=2.5]{adjustedPTags}
-\captionsetup{width=.7\linewidth}
+\includegraphics[scale=2.6]{adjustedPTags}
+\captionsetup{width=.55\linewidth}
+\setlength{\belowcaptionskip}{-15pt}
+\setlength{\abovecaptionskip}{0pt}
 \caption{Príklad stromu s posunutým \texttt{<p>} tagom pre vstup: \texttt{\char`\"Jožo <p>vraví: \char`\"</p>Ahoj.\char`\"\char`\"}}
 \end{figure}
-Toto posunutie zabezpečí, že paragrafové tagy budú úplne navrchu a teda budú obaľovať celé vety, tým pádom sa už nemajú s čím prekrížiť.
+Pri týchto tagoch sa neočakáva, že by sa vnárali jeden do druhého, keďže to Multimediálna čítanka nepotrebuje, teda na vrchu bude vždy maximálne jeden z vyššie uvedených blokových tagov.
 
-Pokiaľ ide o formátovacie tagy, tie môžu zahŕňať jedno slovo, jednu vetu alebo kľudne môžu aj začínať v strede jednej a končiť v strede druhej. Formátovacie tagy, ale na rozdiel od tých paragrafových vieme rozdeliť na časti, tak aby sa zabránilo kríženiu. Ak teda tag prechádza cez hranice viet, tak ho na konci prvej uzatvoríme a na začiatku ďalšej zase otvoríme.
-
+Pokiaľ ide o riadkové tagy, tie môžu zahŕňať jedno slovo, jednu vetu alebo kľudne môžu aj začínať v strede jednej a končiť v strede druhej. Riadkové tagy, ale na rozdiel od tých blokových vieme rozdeliť na časti, tak aby sa zabránilo kríženiu. Ak teda tag prechádza cez hranice viet, tak ho na konci prvej uzatvoríme a na začiatku ďalšej zase otvoríme.
 Tu zároveň treba myslieť aj na to, že tieto tagy sa budú vnárať jeden do druhého a pri \verb!<span>! tagoch to teda často budú rovnaké tagy s rôznymi atribútmi(napr. \verb!style!), ktoré je teda potrebné uzatvárať a otvárať v správnom poradí a pri otváracích tagoch použiť prislúchajúce atribúty.
 \begin{figure}[H]
 \centering
@@ -1145,8 +1161,11 @@ Po všetkých predchádzajúcich krokoch už máme v listoch stromu kompletný t
 \definecolor{ppurple}{HTML}{9F4C7C}
 \pgfplotsset{width=0.9\textwidth, height=10cm}
 
-V tejto kapitole sa pozrieme na výkonnosť aplikácie(parseru) a porovnáme slovenskú a anglickú gramatiku v left-recursive a right-recursive forme, pre jednoznačné aj nejednoznačné vstupy.
+V tejto kapitole sa pozrieme na výkonnosť aplikácie(parseru) a porovnáme slovenskú a anglickú gramatiku v $"left-recursive"$ a $"right-recursive"$ forme, pre jednoznačné aj nejednoznačné vstupy.
 \begin{center}
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{-30pt}
+\setlength{\floatsep}{0pt}
 \begin{tikzpicture}[scale=0.9]
 \begin{axis}[
 yticklabel style={align=right,inner sep=0pt,xshift=-0.1cm}, % No inner sep, to remove whitespace on left, manually offset by given distance
@@ -1192,14 +1211,23 @@ tick style={semithick,color=black},
  
 \end{axis}
 \end{tikzpicture}
+
+\caption{Porovnanie \textit{left} a \textit{right-recurise} gramatiky} \label{fig:graf1}
+
+\end{figure}
 \end{center}
 
-Na grafe môžeme vidieť, že parser parsuje jednoznačné vstupy využívajúce slovenskú left-recursive gramatiku v lineárnom čase, a že v priebehu 1,2 sekundy zvládne vstupy okolo 1000 tokenov,  čo je reálne najväčší vstup aký môže z Multimediálnej čítanky dostať.
+Na grafe(\ref{fig:graf1}) môžeme vidieť v akom čase je parser schopný parsovať vstupy rôznych veľkostí. Týmito vstupmi boli jednoduché vety bez priamej reči, na ktorých je najlepšie vidieť rozdiel medzi $"left"$ a $"right-recursive"$ gramatikou. Testované gramatiky boli rovnaké ako gramatika, ktorú využíva výsledná aplikácia, s tým, že $"right-recusive"$ gramatika má všetky rekurzívne pravidlá otočené opačne. Napríklad:
+$$"Lines \to Lines \ Line \ | \ Line" \ \ \to \ \ "Lines \to Line \ | \ Line \ Lines"$$
+Je vidieť,  že parser parsuje jednoznačné vstupy využívajúce slovenskú $"left-recursive"$ gramatiku v lineárnom čase, a že v priebehu 1,2 sekundy zvládne vstupy okolo 1000 tokenov,  čo je reálne najväčší vstup aký môže z Multimediálnej čítanky dostať.
 
-Zároveň je zjavné, že right-recursive gramatika je oveľa pomalšia. Parser v tomto prípade parsuje približne v kvadratickom čase, čo je stále omnoho lepšie ako $O(n^3)$(general case pre Earley algorithm), ale je to zbytočné mrhanie prostriedkami v porovnaní s left-recursive gramatikou. 
+Zároveň je zjavné, že $"right-recursive"$ gramatika je oveľa pomalšia. Parser v tomto prípade parsuje približne v kvadratickom čase, čo je stále omnoho lepšie ako $O(n^3)$(general case pre Earley algorithm), ale je to zbytočné spomalenie v porovnaní s $"left-recursive"$ gramatikou. 
 
-Dôvodom prečo k tomuto dochádza je, že parser v tomto prípade vykonáva veľa zbytočných krokov($prediction$ a $completion$), ktoré pre získanie parsu nepotrebuje. Left-recursive gramatika sa naopak dostáva k výsledku úplne priamočiaro\cite{leftRightRecursive}.
+Dôvodom prečo k tomuto dochádza je, že parser v tomto prípade vykonáva veľa zbytočných krokov($prediction$ a $completion$), ktoré pre získanie parsu nepotrebuje. $"Left-recursive"$ gramatika sa naopak dostáva k výsledku úplne priamočiaro\cite{leftRightRecursive}.
 \begin{center}
+\begin{figure}[h]
+\setlength{\belowcaptionskip}{-30pt}
+\setlength{\floatsep}{0pt}
 \begin{tikzpicture}[scale=0.9]
 \begin{axis}[
 yticklabel style={align=right,inner sep=0pt,xshift=-0.1cm}, % No inner sep, to remove whitespace on left, manually offset by given distance
@@ -1241,13 +1269,16 @@ tick style={semithick,color=black},
     };
    \addlegendentry{anglická gramatika}
  
+
 \end{axis}
 \end{tikzpicture}
+\caption{Porovnanie slovenskej a anglickej gramatiky} \label{fig:graf2}
+\end{figure}
 \end{center}
 
-Na tomto grafe vidíme porovnanie slovenskej a anglickej gramatiky, pokiaľ ide o čas potrebný na parsovanie textu. Medzi gramatikami je v tomto ohľade minimálny rozdiel, s tým, že tá slovenská je o trochu pomalšia, z dôvodu, že obsahuje niektoré komplikovanejšie pravidlá hlavne pri priamej reči.
+Na tomto grafe(\ref{fig:graf2}) vidíme porovnanie slovenskej a anglickej gramatiky, pokiaľ ide o čas potrebný na parsovanie textu, pri použití rovnakých vstupov ako v predchádzajúcom prípade. Medzi gramatikami je v tomto ohľade minimálny rozdiel, s tým, že tá slovenská je o trochu pomalšia, z dôvodu, že obsahuje niektoré komplikovanejšie pravidlá hlavne pri priamej reči.
 
-Pokiaľ ide o nejednoznačné vstupy, tak zložitosť sa môže pohybovať od lineárnej až po kubickú. S tým, že všetko veľmi záleží od konkrétneho vstupu,  množstva nejednoznačností, ktoré sa v ňom nachádzajú a počtu úplných aj neúplných parsov, ktoré parser vytvorí. Preto tu nebudem uvádzať graf, lebo by nemal veľkú výpovednú hodnotu. 
+Pokiaľ ide o nejednoznačné vstupy, tak zložitosť sa môže pohybovať od lineárnej až po kubickú. S tým, že všetko veľmi záleží od konkrétneho vstupu,  množstva nejednoznačností, ktoré sa v ňom nachádzajú a počtu úplných aj neúplných parsovacích stromov, ktoré parser vytvorí. Preto tu nebudem uvádzať graf, lebo by nemal veľkú výpovednú hodnotu. 
 
 
 
@@ -1382,13 +1413,13 @@ Na začiatku prebiehalo rozsiahle hľadanie rôznych parserov a ich implementác
 
 Po zhromaždení technológií a potrebných nástrojov, prišlo na rad vytvorenie jednoduchého prototypu, schopného parsovať čistý text pomocou veľmi jednoduchej gramatiky. Nasledovalo vytvorenie plnej verzie aplikácie spolu s gramatikou, slovníkom a vizualizáciou. 
 
-Splnenie cieľu bolo úspešné a aplikácia je pripravená na používanie ako podporný modul v rámci multimediálnej čítanky, pre ktorú bola navrhnutá, prípadne v iných situáciách, kde by bolo potrebné deliť komplexný text na vety a slová. Za  úspech považujem, fakt, že aplikácia parsuje text oveľa efektívnejšie než sa pôvodne očakávalo, čo možno vidieť v \hyperref[tests]{kapitole \ref{tests}}(Výkonnostné testy).
+Splnenie cieľu bolo úspešné a aplikácia je pripravená na používanie ako podporný modul v rámci Multimediálnej čítanky, pre ktorú bola navrhnutá, prípadne v iných situáciách, kde by bolo potrebné deliť komplexný text na vety a slová. Za  úspech považujem, fakt, že aplikácia parsuje text oveľa efektívnejšie než sa pôvodne očakávalo, čo možno vidieť v \hyperref[tests]{kapitole \ref{tests}}.
 
 
 
-Počas implementácie sa vyskytlo zopár problémov, ako napríklad nutnosť upraviť pôvodný parser, ktorý aplikácia využíva. Takisto bolo potrebné veľakrát meniť gramatiku a slovník parseru, kvôli nevyspytateľnosti slovenského jazyka. Všetky problémy sa však podarilo vyriešiť.
+Počas implementácie sa vyskytlo zopár problémov, ako napríklad nutnosť upraviť pôvodný parser, ktorý aplikácia využíva. Takisto bolo potrebné veľakrát meniť gramatiku a slovník parseru, kvôli nejednoznačnosti a veľkej flexibilite syntaxe slovenského jazyka. Všetky problémy sa však podarilo vyriešiť.
 
-Aj napriek tomu, že všetky požiadavky zo zadania boli splnené, tak stále existuje priestor pre zlepšenie a úpravy, napríklad pokiaľ ide gramatiku, ktorú by bolo možné viac optimalizovať, prípadne ďalej rozširovať pre zlepšenie parsovania alebo použiť expresívnejšiu formu ako napríklad BNF alebo EBNF. Tiež tu je možnosť parsovania iných jazykov okrem slovenčiny alebo angličtiny, čo by určite pomohlo k rozšíreniu možností využitia tejto aplikácie. 
+Aj napriek tomu, že všetky požiadavky zo zadania boli splnené, tak stále existuje priestor pre zlepšenie a úpravy, napríklad pokiaľ ide gramatiku, ktorú by bolo možné viac optimalizovať, prípadne ďalej rozširovať alebo použiť expresívnejšiu formu ako napríklad BNF alebo EBNF. Ďalšou možnosťou je použitie štatistického parsovania pre zlepšenie parsovania, prípadne pridanie gramatík iných jazykov okrem slovenčiny a angličtiny, čo by určite pomohlo k rozšíreniu možností využitia tejto aplikácie. 
 
 \renewcommand\bibname{Literatúra}
 \begin{thebibliography}{99}
@@ -1408,7 +1439,10 @@ Te Li, Devi Alagappan, \\
 \verb@%20Algorithms-cykeReport.pdf@ [Prístup 18.11.2016],
 \bibitem{Tomita}
 Masaru Tomita, \emph{Efficient Parsing for Natural Language: A Fast Algorithm for Practical Systems}, Springer US, ISBN 978-1-4757-1885-0, 1986, 201 s.
-
+\bibitem{nearley}
+\emph{\href{http://nearley.js.org/}{Nearley.js}} \\ \verb!http://nearley.js.org/! [Prístup: 13.11.2016]
+\bibitem{corenlp}
+\emph{\href{https://stanfordnlp.github.io/CoreNLP/}{Stanford CoreNLP}} \ \ \verb!http://nearley.js.org/! [Prístup: 13.11.2016]
 \bibitem{earley-oop}
 \emph{\href{https://github.com/lagodiuk/earley-parser-js}{earley-parser-js}}  \\
 \verb@https://github.com/lagodiuk/earley-parser-js@ [Prístup: 4.4.2017]
@@ -1422,13 +1456,13 @@ Dick Grune, Ceriel J.H. Jacobs, \emph{Parsing Techniques: A Practical Guide. 2. 
 \addcontentsline{toc}{chapter}{\protect\numberline{}Prílohy}
 
 \begin{itemize}
-\item Digitálna príloha - CD s:
+\item Digitálna príloha - CD obsahuje:
 	\begin{itemize}
 	\item zdrojovými kódmi aplikácie
 	\item návod na inštaláciu
 	\item používateľská príručka
 	\item dokumentácia zdrojového kódu
-	\item tester a vizualizácia
+	\item tester a vizualizáciu
 	\end{itemize}
 \end{itemize}
 

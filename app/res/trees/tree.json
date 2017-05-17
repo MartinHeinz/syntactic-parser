@@ -29,7 +29,7 @@
                                       "name": "Dash",
                                       "children": [
                                         {
-                                          "name": "<s id=\"s1\"><s id=\"s2\">-"
+                                          "name": "<div style=\"color:#0000ff\"><s id=\"s1\"><s id=\"s2\">-"
                                         }
                                       ]
                                     },
@@ -112,7 +112,7 @@
                                       "name": "DSPunctuation",
                                       "children": [
                                         {
-                                          "name": ",</s>"
+                                          "name": ",</s></div>"
                                         }
                                       ]
                                     }
@@ -132,7 +132,7 @@
                                   "name": "Dash",
                                   "children": [
                                     {
-                                      "name": "<s id=\"s5\">-"
+                                      "name": "<h3><s id=\"s5\">-"
                                     }
                                   ]
                                 },
@@ -158,7 +158,7 @@
                                   "name": "Punctuation",
                                   "children": [
                                     {
-                                      "name": ".</s>"
+                                      "name": ".</s></h3>"
                                     }
                                   ]
                                 }

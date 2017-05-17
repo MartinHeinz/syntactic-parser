@@ -1,7 +1,7 @@
 {
     "rootRule": "Story",
     "sentenceRule": ["SentenceDashNoNewLines", "ISentenceStart", "ISentenceEnd", "ISentenceMiddleStart", "ISentenceMiddleFinal", "ISentenceMiddleEnd", "DirectSpeechDash", "OneWordSentence", "OneWordSentenceNoNewLine", "BasicSentence", "BasicSentenceNoNewLine", "ISentenceAndDS", "DSAndISentence", "DSAndISentenceRepeated", "ISentenceAndDSDash", "SentenceDash", "DirectSpeechSingle", "DirectSpeechFirst", "DirectSpeechSecond", "DirectSpeechDashFirst", "DirectSpeechDashSecondNoDot", "DirectSpeechSecondNoDot", "DirectSpeechSingleNoDot", "DirectSpeechDashSingleNoDot", "DirectSpeechSingleEnd", "DirectSpeechFirstEnd", "DirectSpeechSecondEnd", "DSAndISentenceDashRepeated", "DirectSpeechStartDash", "DirectSpeechEndDashStart", "DirectSpeechesDashed", "ISentenceMiddleDashSingle", "ISentenceMiddleDashStart", "ISentenceMiddleDashFinal", "DSAndISentenceDash", "ISentenceEndDashBasic"],
-    "splittingRegex": "(\\n)|([\\.!\\?]{2,})|([0-9]\\.[A-Z])|(\\d{1,2}[:-]\\d{1,2}[:-]\\d{1,}(,\\d+)*)|([+-]?\\d+(\\.\\d+)*(,\\d+)?(%|,-)?)|([A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]\\.)|((?!-)[a-zéŕřťýúíóášďľĺžčäôA-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ-]+)|[\\.,;:\"„“\\(\\)\\?!'/\\*\\+%$€]|(<\\s*\\D*?>)|[<>]|[\\S+]",
+    "splittingRegex": "(\\n)|([\\.!\\?]{2,})|([0-9]\\.[A-Z])|(\\d{1,2}[:-]\\d{1,2}[:-]\\d{1,}(,\\d+)*)|([+-]?\\d+(\\.\\d+)*(,\\d+)?(%|,-)?)|([A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]\\.)|((?!-)[a-zéŕřťýúíóášďľĺžčäôA-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ-]+)|[\\.,;:\"„“\\(\\)\\?!'/\\*\\+%$€]|(<\\s*.*?>)|[<>]|[\\S+]",
     "HTMLRegex": "(^<([^>]+)>$)",
     "tagRegex": "^<\\s*(\\w+)\\s*.*>$",
     "allTagsExceptForWRegex": "((<s id=\\\"s\\d+\\\">)*(<(b|strong|i|em|mark|small|del|ins|sub|sup|span [^>]*\\\")>)*)",
