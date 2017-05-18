@@ -11,5 +11,6 @@ stačí napríklad spustiť pythonovsky server z priečinka visualization(ktorý
         otvorit si http://127.0.0.1:8000/
 
 Poznámka: Tento tester nie súčasťou bakalárskej práce, je určený len pre jednoduché debuggovanie a
-vizualizáciu funkčnosti. Keďže tester beží vo webovom prehliadači, nedá sa garantovať efektívnosť parsovanie a
-kvalita internetového pripojenia tiež môže ovplyvniť rýchlosť načítavania vizualizácie stromov.
+vizualizáciu funkčnosti. Keďže tester beží vo webovom prehliadači, nedá sa garantovať efektívnosť parsovania a
+kvalita internetového pripojenia tiež môže ovplyvniť rýchlosť načítavania vizualizácie
+stromov(hlavne ak nie sú nacacheované potrebné knižnice).

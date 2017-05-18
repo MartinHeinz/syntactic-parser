@@ -608,7 +608,7 @@ class Parser {
      * Adds paragraph, div and heading tags to this.tree, moving them as needed to avoid causing nesting errors, while
      * keeping structure of input text.
      * Requires sentence tags to be present in this.tree.
-     * Does not work for nested tags.
+     * Not guaranteed to work with nested block tags.
      */
     addBlockTags() {
         var realIndex = 0;
@@ -628,14 +628,21 @@ class Parser {
                 openingRegexResult.lastIndex = 0;
             }
             else if (closingRegexResult != null) {
+                var tagIndex = null;
                 if (key - realIndex - 1 < 1) {
-                    closingTagNode = Parser.findNode(this.tree, 1);
+                    tagIndex = 1;
                 }
                 else {
-                    closingTagNode = Parser.findNode(this.tree, key - realIndex - 1);
+                    tagIndex = key - realIndex - 1;
                 }
-
-                var ancestor = this.findLowestCommonAncestor(this.tree, openingTagNode, closingTagNode);
+                var ancestor = null;
+                if (this.isInCompoundSentence(this.tree, tagIndex)) {
+                    ancestor = this.getCompoundSentenceRoot(this.tree, Parser.findNode(this.tree, tagIndex));
+                }
+                else {
+                    closingTagNode = Parser.findNode(this.tree, tagIndex);
+                    ancestor = this.findLowestCommonAncestor(this.tree, openingTagNode, closingTagNode);
+                }
                 this.moveToEndingOfSentence(ancestor, closingRegexResult[1]);
                 closingRegexResult.lastIndex = 0;
             }
@@ -644,7 +651,47 @@ class Parser {
     }
 
     /**
-     * moves tag to beginning of sentence its in.
+     * Checks whether node to tagIndex belongs is in compound sentence or not.
+     * @param tree
+     * @param tagIndex - index of leaf to which tag belongs
+     * @return {boolean}
+     */
+    isInCompoundSentence(tree = this.tree, tagIndex) {
+        var counter = 0;
+        let node = Parser.findNode(tree, tagIndex);
+        var parent = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+        while (parent.root !== this.config["rootRule"]) {
+            if (parent.subtrees.length > 1 && this.config["sentenceRule"].includes(parent.root)) {
+                counter++;
+            }
+            parent = Parser.findParent(tree, parent.parent.left, parent.parent.right, parent.parent.root);
+        }
+        if (counter > 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns tree node which is root of compound sentence to which node belongs.
+     * @param tree
+     * @param node - node from sentence
+     * @return {Object} node
+     */
+    getCompoundSentenceRoot(tree = this.tree, node) {
+        var result = node;
+        var parent = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+        while (parent.root !== this.config["rootRule"]) {
+            if (parent.subtrees.length > 1 && this.config["sentenceRule"].includes(parent.root)) {
+                result = parent;
+            }
+            parent = Parser.findParent(tree, parent.parent.left, parent.parent.right, parent.parent.root);
+        }
+        return result;
+    }
+
+    /**
+     * moves tag to beginning of sentence(possibly beginning of whole compound sentence) its in.
      * @param {Object} tree
      * @param {Number} tagIndex - index of leaf to which tag belongs
      * @param {Number} tagKey - key of tag from this.tokenizer.HTMLTagsPositions
@@ -656,12 +703,16 @@ class Parser {
         if (node == undefined) {
             return;
         }
-
-        while (!this.config["sentenceRule"].includes(node.root)) {
-            node = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
-            if (node.root === this.config["rootRule"]) {
-                throw new MissingSentenceTagException("Sentence not found in when adding "+ tag + " tag with tagIndex: " + tagIndex + " and tagKey: " + tagKey +
-                 ". Check your config[\"sentenceRule\"] for missing rules.");
+        if (this.isInCompoundSentence(tree, tagIndex)) {
+            node = this.getCompoundSentenceRoot(tree, node);
+        }
+        else {
+            while (!this.config["sentenceRule"].includes(node.root)) {
+                node = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+                if (node.root === this.config["rootRule"]) {
+                    throw new MissingSentenceTagException("Sentence not found in when adding "+ tag + " tag with tagIndex: " + tagIndex + " and tagKey: " + tagKey +
+                        ". Check your config[\"sentenceRule\"] for missing rules.");
+                }
             }
         }
         while (node.subtrees.length != 0) {
@@ -826,7 +877,7 @@ class Parser {
      */
     isComplete() {
         var leaves = Parser.getLeaves(this.tree);
-        if (leaves.length < this.tokenizer.tokens.length) {
+        if (leaves.length < this.tokenizer.tokens.length || this.tree.root !== this.config["rootRule"]) {
             return false;
         }
         return true;
@@ -857,7 +908,7 @@ class Parser {
             this.tree = Parser.createNode(0, this.tree.right, this.config["rootRule"], null, this.tree);
         }
         var startNewSentence = null;
-        if (leaves.length == 0) {
+        if (leaves.length == 0 || !this.containsSentence()) {
             startNewSentence = true;
         }
         else {
@@ -892,6 +943,29 @@ class Parser {
             sentence = Parser.findParent(this.tree, sentence.parent.left, right, sentence.parent.root)
         }
         sentence.right = this.tokenizer.tokens.length;
+    }
+
+    /**
+     * Checks whether tree contains any sentence Nodes
+     * @return {boolean}
+     */
+    containsSentence() {
+        var stack = [];
+        var current = null;
+        stack.push(this.tree);
+        while (stack.length != 0) {
+            current = stack.pop();
+
+            if (this.config["rootRule"].includes(current.root)) {
+                return true;
+            }
+            if (current.subtrees.length != 0) {
+                for (let node of current.subtrees) {
+                    stack.push(node);
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -1036,7 +1110,7 @@ class MissingSentenceTagException {
     }
 }
 
-var p = new Parser("<div style=\"color:#0000FF\">- Veta. Veta.</div>Veta, - <h3>veta.</h3> Veta. Veta.", "SK");
+var p = new Parser(`Toto ,"citat", "citat", slova slova.`, "SK");
 
 p.buildXML(); // Prida vsetky tagy.
 console.log(p.stringifyTree()); // Vysledne XML.

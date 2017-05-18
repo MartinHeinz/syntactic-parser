@@ -22,7 +22,9 @@
     "OneWordSentenceNoNewLine": "StartingToken Punctuation",
     "BasicSentenceNoNewLine": "StartingToken Words Punctuation | Quotation",
 
-    "Quotation": "StartingToken QuoteLeft Words QuoteRight Words Punctuation | StartingToken Words QuoteLeft Words QuoteRight Words Punctuation | StartingToken QuoteLeft Words QuoteRight Punctuation | StartingToken Words QuoteLeft Words QuoteRight Punctuation",
+    "Quotation": "StartingToken Words QuotationsInner Punctuation | StartingToken QuotationsInner Punctuation",
+    "QuotationsInner": "QuotationsInner QuotationInner | QuotationInner",
+    "QuotationInner": "QuoteLeft WordsAndPunctuation QuoteRight WordsAndPunctuation | QuoteLeft WordsAndPunctuation QuoteRight",
 
     "ISentenceAndDS": "ISentenceStart DirectSpeechSingle | ISentenceStart DirectSpeechTwo | ISentenceStart DirectSpeechMoreThanTwo",
     "DSAndISentence": "DirectSpeechStart ISentenceEnd",
@@ -105,9 +107,11 @@
     "StartingToken": "StartingTokenBasic | StartingTokenWithPunctuation",
 
     "StartingTokenBasic": "WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName .",
-    "StartingTokenWithPunctuation":"WordCapital MidSentencePunctuation | Initial MidSentencePunctuation | WordAbbr MidSentencePunctuation | Number MidSentencePunctuation | AcTitleBeforeName . MidSentencePunctuation",
+    "StartingTokenWithPunctuation":"WordBasicStart MidSentencePunctuation",
+    "WordBasicStart": "WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName .",
 
     "Words": "Words WordTokens | WordTokens | Words NewLines | NewLines",
+    "WordsAndPunctuation": "WordsAndPunctuation WordTokensAndPunctuation | WordTokensAndPunctuation | WordsAndPunctuation NewLines | NewLines",
 
     "WordNoNewLine": "WordTokens",
 
@@ -115,6 +119,7 @@
     "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName .",
 
     "WordBasic": "WordCapital | WordLower | Initial | Word | Number | Other | AcTitleAfterName . | StableTextAbbrs",
+    "WordTokensAndPunctuation": "WordTokens | MidSentencePunctuation",
     "WordTokens": "WordBasic | WordBasic MidSentencePunctuation | WordBasic NewLines MidSentencePunctuation",
     "MidSentencePunctuation": ", | ; | : | Dash | Ellipsis",
 
@@ -123,6 +128,8 @@
     "Number":"Decimal | Num | Ordinal | Class | RomanNumeral",
     "Ordinal":"Num . | RomanNumeral .",
     "Dash": "-",
+
+    "Quotes": "QuoteLeft | QuoteRight",
     "QuoteLeft": "\u201E",
     "QuoteRight": "\u201C",
 

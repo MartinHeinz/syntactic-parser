@@ -659,7 +659,7 @@ Aplikácia nebude obsahovať vlastnú databázu, keďže bude modulom Multimedi�
 \section{Vstupné a výstupné dáta}
 Vstupom pre aplikáciu bude reťazec v slovenskom alebo anglickom jazyku obsahujúci HTML tagy(napr.: \verb@<b>, <i>, <span>, <p>@). Očakávaná dĺžka tohoto reťazca je maximálne okolo 1000 slov.
 
-Výstupom bude XML reťazec, v ktorom budú tagmi označené jednotlivé slová a vety, s tým, že sa zachovajú všetky pôvodné HTML tagy zo vstupu bez toho, aby sa prekrížili s pridanými XML tagmi. Interpunkcia sa bude nachádzať mimo slovných tagov, pokiaľ teda nie je súčasťou slova. Príklad vstupu aj výstupu je možné vidieť v listingu (\ref{lst:vstup}) a (\ref{lst:vystup})
+Výstupom bude XML reťazec, v ktorom budú tagmi označené jednotlivé slová a vety, s tým, že sa zachovajú všetky pôvodné HTML tagy zo vstupu bez toho, aby sa prekrížili s pridanými XML tagmi. Multimediálna čítanka využíva WYSIWYG editor, takže nehrozí, že by sa do aplikácie dostali nekorektné tagy(napr. neukončené alebo krížiace sa tagy). Interpunkcia sa bude nachádzať mimo slovných tagov, pokiaľ teda nie je súčasťou slova. Príklad vstupu aj výstupu je možné vidieť v listingu (\ref{lst:vstup}) a (\ref{lst:vystup}).  
 \begin{itemize}
 \item formát vetného XML tagu: \verb@<s id="s\d+"></s>@
 \item formát slovného XML tagu: \verb@<w id="w\d+"></w>@
@@ -700,7 +700,7 @@ Text je nutné rozdeliť na tokeny, s ktorými sa bude dať ďalej pracovať. Ti
 \item čísla - \verb@([+-]?\d+(\.\d+)*(,\d+)?(%|,-)?)@ %(anglické radové číslovky) - % ([0-9]+(st|nd|rd|th))|(-?\d+(\.\d+)?)
 \item bežné slová - keďže písmená so slovenskou diakritikou nepatria do rozsahov a-z prípadne A-Z, je nutné ich takýmto spôsobom vypísať - \\ \verb@((?!-)[a-zéŕřťýúíóášďľĺžčäôA-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ-]+)@
 \item interpunkčné znamienka a ďalšie znaky - \verb@[\.,;:\"„“\(\)\?!'/\*\+%$€]@
-\item HTML tagy - \verb@(<\s*.*?>)@
+\item HTML tagy - \verb@(<[^\d\s>]+[^>\n]*?>)@
 \item znamineka menšie/väčšie - \verb@[<>]@ - tieto znamienka musia byť samostatne až za HTML tagmi, aby sa nestalo, že regex nájde samostatne len znamienka namiesto celých HTML tagov
 \item všetko ostatné(non-whitespace) - \verb@[\S+]@
 \end{itemize}

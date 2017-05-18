@@ -4,7 +4,7 @@ Návod ako nainštalovať Node.js na Linux/Windows na https://nodejs.org/en/down
 Pre spustenie a používanie aplikácie odporúčam používať WebStorm IDE: https://www.jetbrains.com/webstorm/
 
 Aplikácia sa dá spustiť aj pomocou príkazového riadku(Bash na Linuxe)
-(na Windows to musí byť aplikácia s názvom "Node.js command prompt" - hladať v Start menu):
+(na Windows to musí byť aplikácia s názvom "Node.js command prompt" - hľadať v Start menu):
 presuňte sa do priečinku s aplikáciou(../parser/app/): "cd <cesta k aplikácii>"
 spustite parser.js: "node parser.js"
 

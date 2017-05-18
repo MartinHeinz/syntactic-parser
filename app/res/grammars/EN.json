@@ -12,10 +12,14 @@
     "DSAndISentence": "DirectSpeechStart ISentenceEnd",
     "DSAndISentenceRepeated": "DirectSpeechStart ISAndDSRepeated",
 
-    "Quotation": "QuotationIC | QuotationIDC | QuotationQuote",
-    "QuotationIC": "StartingToken InvertedComa Words InvertedComa Words Punctuation | StartingToken Words InvertedComa Words InvertedComa Words Punctuation | StartingToken InvertedComa Words InvertedComa Punctuation | StartingToken Words InvertedComa Words InvertedComa Punctuation",
-    "QuotationIDC": "StartingToken InvertedDoubleComa Words InvertedDoubleComa Words Punctuation | StartingToken Words InvertedDoubleComa Words InvertedDoubleComa Words Punctuation | StartingToken InvertedDoubleComa Words InvertedDoubleComa Punctuation | StartingToken Words InvertedDoubleComa Words InvertedDoubleComa Punctuation",
-    "QuotationQuote": "StartingToken Quote Words Quote Words Punctuation | StartingToken Words Quote Words Quote Words Punctuation | StartingToken Quote Words Quote Punctuation | StartingToken Words Quote Words Quote Punctuation",
+
+    "Quotation": "StartingToken Words QuotationsInner Punctuation | StartingToken QuotationsInner Punctuation",
+    "QuotationsInner": "QuotationsInner QuotationInner | QuotationInner",
+    "QuotationInner": "QuotationIC | QuotationIDC | QuotationQuote",
+    "QuotationIC": "InvertedComa Words InvertedComa Words | InvertedComa Words InvertedComa",
+    "QuotationIDC": "InvertedDoubleComa Words InvertedDoubleComa Words | InvertedDoubleComa Words InvertedDoubleComa",
+    "QuotationQuote": "Quote Words Quote Words | Quote Words Quote",
+
 
     "DSPunctuation": ", | ? | ! | RepeatedPunctuation | Ellipsis",
 
