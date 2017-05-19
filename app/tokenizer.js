@@ -125,6 +125,7 @@ class Tokenizer {
             this.originalTokens = [];
             return;
         }
+        this.text = this.text.replace(/(<(s|w) id="(s|w)\d">)|(<\/(s|w)>)/g, "");
         this.tokens = this.split(this.text);
         if (this.language === "SK") {
             this.substituteQuotes();
