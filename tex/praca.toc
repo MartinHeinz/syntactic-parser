@@ -5,17 +5,16 @@
 \contentsline {chapter}{\numberline {1}V\IeC {\'y}chodisk\IeC {\'a}}{2}{chapter.1}
 \contentsline {section}{\numberline {1.1}Cie\IeC {\v l}}{2}{section.1.1}
 \contentsline {section}{\numberline {1.2}Preh\IeC {\v l}ad problematiky}{3}{section.1.2}
-\contentsline {subsection}{\numberline {1.2.1}Syntaktick\IeC {\'y} parser}{3}{subsection.1.2.1}
-\contentsline {subsection}{\numberline {1.2.2}\IeC {\v C}o je to parsovanie?}{3}{subsection.1.2.2}
-\contentsline {subsection}{\numberline {1.2.3}Context-free grammar}{3}{subsection.1.2.3}
-\contentsline {subsection}{\numberline {1.2.4}Parse Tree}{4}{subsection.1.2.4}
-\contentsline {subsection}{\numberline {1.2.5}Typy parserov}{5}{subsection.1.2.5}
+\contentsline {subsection}{\numberline {1.2.1}\IeC {\v C}o je to parsovanie?}{3}{subsection.1.2.1}
+\contentsline {subsection}{\numberline {1.2.2}Context-free grammar}{3}{subsection.1.2.2}
+\contentsline {subsection}{\numberline {1.2.3}Parse Tree}{4}{subsection.1.2.3}
+\contentsline {subsection}{\numberline {1.2.4}Typy parserov}{5}{subsection.1.2.4}
 \contentsline {subsubsection}{Top-down parser}{5}{section*.5}
 \contentsline {subsubsection}{Bottom-up parser}{6}{section*.7}
-\contentsline {subsection}{\numberline {1.2.6}Chart parser}{6}{subsection.1.2.6}
-\contentsline {subsubsection}{Chart parser}{6}{subsection.1.2.6}
-\contentsline {subsection}{\numberline {1.2.7}Earley parser}{6}{subsection.1.2.7}
-\contentsline {subsection}{\numberline {1.2.8}Porovnanie parserov}{9}{subsection.1.2.8}
+\contentsline {subsection}{\numberline {1.2.5}Chart parser}{6}{subsection.1.2.5}
+\contentsline {subsubsection}{Chart parser}{6}{subsection.1.2.5}
+\contentsline {subsection}{\numberline {1.2.6}Earley parser}{6}{subsection.1.2.6}
+\contentsline {subsection}{\numberline {1.2.7}Porovnanie parserov}{9}{subsection.1.2.7}
 \contentsline {section}{\numberline {1.3}Preh\IeC {\v l}ad existuj\IeC {\'u}cich syst\IeC {\'e}mov}{9}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}Nearly.js}{10}{subsection.1.3.1}
 \contentsline {subsection}{\numberline {1.3.2}Stanford CoreNLP}{10}{subsection.1.3.2}

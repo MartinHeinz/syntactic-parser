@@ -36,6 +36,8 @@
 \usepackage{Pgfplots}
 \usepackage{amsmath}
 
+\usepackage{setspace}
+
 \usepackage{amsthm}
 \newtheorem{veta}{Veta}[section]
 \newtheorem{lema}[veta]{Lema}
@@ -222,7 +224,7 @@
 \g@addto@macro\@floatboxreset{\centering}
 \makeatother
 \begin{document}
-
+\pagenumbering{gobble}
 %\includepdf{zadanie.pdf}
 
 %%% DEFINÍCIE NÁZVOV
@@ -234,13 +236,15 @@
 \def\univerzita{Univerzita Komenského v~Bratislave}
 \def\mesto{Bratislava}
 \def\typprace{Bakalárska práca}
-\def\rok{2016}
+\def\rok{2017}
 %%% OBAL
 \thispagestyle{empty}
 \begin{center}
+
 \textsc{\LARGE\univerzita}\\
 \bigskip\textsc{\LARGE\fakulta}\\
-\vfill\textsc{\Huge\nazov}\\
+{\setstretch{1.5}
+\vfill\textsc{\Huge\nazov}\\}
 \medskip{\Large\typprace}\\
 \vfill{\large\rok\hfill\autor}
 \end{center}
@@ -250,7 +254,7 @@
 \begin{center}
 \textsc{\LARGE\univerzita}\\
 \medskip\textsc{\LARGE\fakulta}\\
-\vskip 0cm plus 2fill\textsc{\Huge\nazov}\\
+\vskip 0cm plus 2fill{\setstretch{1.5}\textsc{\Huge\nazov}\\}
 \medskip{\Large\typprace}\\
 
 \vskip 0cm plus 1fill
@@ -301,7 +305,7 @@ V Bratislave
 
 HEINZ, Martin: \nazov \  [Bakalárska práca]. Fakulta
 matematiky, fyziky a informatiky Univerzita Komenského v Bratislave; Katedra aplikovanej
-informatiky. Školiteľ: \skolitel \ Bratislava 2017. 34 strán.
+informatiky. Školiteľ: \skolitel \ Bratislava \rok. 34 strán.
 
 \bigskip
 
@@ -319,12 +323,12 @@ Táto práca obsahuje popis a analýzu problematiky a  parsovacieho algoritmu po
 \begin{abstract}
 
 HEINZ, Martin: Simple Syntactic Parser of Stories from Multimedia Reader [Bachelor thesis]. Faculty of Mathematics, Physics and Informatics;
-Department of Applied Informatics, Comenius University in Bratislava; Supervisor: \skolitel \ Bratislava 2017. 34 pages.
+Department of Applied Informatics, Comenius University in Bratislava; Supervisor: \skolitel \ Bratislava \rok. 34 pages.
 
 
 \bigskip
 
-Goal of this work is to create a syntactic parser in JavaScript, which is intened to be used as a submodule for parsing of stories in Multimedia reader. This work contains description and analysis of issues and parsing algorithm used for development of this application. This work also contains design and implentation of application itself. This application is developed with goal of implementing effective method to split complex text containing HTML tags into words and sentences, while being easy to use and modify.
+Goal of this work is to create a syntactic parser in JavaScript, which is intened to be used as a submodule for parsing of stories in Multimedia Reader. This work contains description and analysis of issues and parsing algorithm used for development of this application. This work also contains design and implentation of application itself. This application is developed with goal of implementing effective method to split complex text containing HTML tags into words and sentences, while being easy to use and modify.
 
 \bigskip\noindent
 \textbf{Keywords:} \textit{parser, javascript application, HTML, XML} 
@@ -343,19 +347,17 @@ Goal of this work is to create a syntactic parser in JavaScript, which is intene
 \chapter*{Úvod}
 \addcontentsline{toc}{chapter}{\protect\numberline{}Úvod}
 V dnešnej dobe je spracovávanie textu bežnou vecou, s ktorou sa stretávame veľmi často a vo veľa rôznych situáciách. Mnohé aplikácie pre svoje správne fungovanie potrebujú text rozdelený do nejakých menších celkov, napríklad viet a slov. Vo veľa prípadoch však správnosť, prípadne efektívnosť takéhoto spracovania nie je na dostatočnej úrovni a ani zďaleka sa nepribližuje presnosti, s ktorou vie takýto text spracovať človek. Takéto spracovávanie ľuďmi je však nerealistické, kvôli množstvu textu a zdĺhavosti samotného procesu.
-\bigskip
+
 
 
 Hlavným cieľom tejto bakalárskej práce je vytvoriť aplikáciu  - syntaktický parser - ktorá bude využitá na parsovanie príbehov z Multimediálnej čítanky, ktoré bude schopná s čo najväčšou presnosťou a efektívnosťou deliť na jednotlivé slová a vety, so zachovaním pôvodného formátovania textu a s dôrazom na univerzálnosť tohoto riešenia.
-\bigskip
+
 
 Motiváciou pre vytvorenie tejto aplikácie bol fakt, že mnohé časti Multimediálnej čítanky pracujú s vetami alebo jednotlivými slovami a spoliehajú sa ich korektnosť. Či už je to výpočet syntaktickej náročnosti, generovanie otázok z viet,  rôzne úlohy na čítanie s porozumením alebo analýza viet. Všetky tieto procesy sú priamo závislé od správneho rozdelenia textu a preto si myslím, že je potrebné vytvoriť aplikáciu, ktorá by toto zabezpečovala.
 
-\bigskip
 
 
 Práca je rozdelená do štyroch kapitol. Prvá z nich sa zaoberá cieľom, problematikou parsovania, porovnaním jednotlivých parsovacích algoritmov a analýzou algoritmu zvoleného pre túto aplikáciu. Táto kapitola tiež zahŕňa prehľad existujúcich podobných systémov a stručný náhľad na použité technológie potrebné pri implementácii výslednej aplikácie. Druhá kapitola je zameraná na návrh a samotnú implementáciu. V tejto kapitole sú predstavené jednotlivé časti aplikácie, ich funkcionalita a popis realizácie niektorých funkcií. Posledná kapitola pozostáva z testov a porovnaní  efektívnosti samotného riešenia.
-\bigskip
 
 
 Záver tejto bakalárskej práce poskytuje zhodnotenie naplnenia stanovených cieľov, ako aj pohľad na ďalšie možnosti vývoja v tejto oblasti.
@@ -389,7 +391,7 @@ Eva sa <b> pýtala: - Čo ti povedali!?</b>
 \noindent \textit{Poznámka: Všetko okrem prvej vety je uvedené vo forme polí kvôli čitateľnosti. Skutočný výstup by mal rovnakú štruktúru ako prvá uvedená veta.}
 
 \section{Prehľad problematiky}
-\subsection{Syntaktický parser}
+%\subsection{Syntaktický parser}
 V tejto časti sa budem snažiť popísať, čo vlastne parsovanie je a na akom princípe pracuje, zároveň vysvetlím aj dôležité pojmy, ktoré budem v práci používať. Rozoberiem niektoré spôsoby parsovania, ich výhody a nevýhody. Tiež podrobnejšie vysvetlím vybraný algoritmus použitý na vytvorenie aplikácie.
 
 \subsection{Čo je to parsovanie?}
@@ -670,7 +672,8 @@ Výstupom bude takisto aj parsovací strom použitý pre vytvorenie XML výstupu
 \section{Data-flow diagram}
 \begin{figure}[h]
 \centering
-\includegraphics[scale=0.2]{DFD}
+\setlength{\belowcaptionskip}{-4pt}
+\includegraphics[scale=0.21]{DFD}
 \caption{Data-Flow diagram}
   \label{fig:dataflow}
 \end{figure}
@@ -694,7 +697,7 @@ Text je nutné rozdeliť na tokeny, s ktorými sa bude dať ďalej pracovať. Ti
 \begin{itemize}
 \item nové riadky - \verb@\n@
 \item Opakujúca sa interpunkcia(napr.: ...(tri bodky), !?, !!!) - \verb|([\.!\?]{2,})|
-\item triedy - \verb@([0-9]\.[A-Z])@ 
+\item triedy - \verb@([0-9]\.[A-Z])@ - napríklad: 3.A, 2.B
 \item iniciály - \verb@([A-ZÉŘŔŤÝÚÍÓÁŠĎĹĽŽČ]\.)@
 \item dátumy a časy vo formáte DD-MM-YYYY, HH:MM:SS,XXX \\ \verb@(\d{1,2}[:-]\d{1,2}[:-]\d{1,}(,\d+)*)@
 \item čísla - \verb@([+-]?\d+(\.\d+)*(,\d+)?(%|,-)?)@ %(anglické radové číslovky) - % ([0-9]+(st|nd|rd|th))|(-?\d+(\.\d+)?)
@@ -765,7 +768,7 @@ tokens =
 \end{lstlisting}
 
 \section{Vytvorenie parsovacieho stromu}
-Na vytvorenie parsovacie stromu bude použitý earley-parser-js, ten však potrebuje pre svoju prácu tokeny(popísané v predchádzajúcej podkapitole) a gramatiku. Gramatika bude vo forme poľa pravidiel, kde $" ->"$ označuje rozdelenie na ľavú a pravú stranu pravidla a $"\mid"$ označuje alternatívu(v tomto príklade je použitá gramatika na parsovanie jednoduchej aritmetiky):
+Na vytvorenie parsovacie stromu bude použitý earley-parser-js, ten však potrebuje pre svoju prácu tokeny(popísané v predchádzajúcej podkapitole) a gramatiku. Gramatika bude vo forme poľa pravidiel, kde \verb!" -> "! označuje rozdelenie na ľavú a pravú stranu pravidla a \verb!"|"! označuje alternatívu(v tomto príklade je použitá gramatika na parsovanie jednoduchej aritmetiky):
 
 \begin{lstlisting}[caption={Ukážková gramatika},label={lst:gramatika},style=htmlcssjs]
 var grammar = new tinynlp.Grammar([
@@ -968,7 +971,7 @@ Kvôli skutočnosti, že v Slovenčine môžeme skombinovať takmer hocijakú po
  
  ["-", "Priama", "reč", ",", "-", "uvádzacia", "veta", "-", "Priama", "reč", "."] // jeden z nekorektných výstupov
 \end{lstlisting}
-Ako môžeme vidieť v listingu (\ref{lst:opt}) parser nemusí nutne rozoznať čiarku a pomlčku ako koniec a začiatok priamej reči. Preto potrebujeme kombinácie niektorých interpunkčných znamienok vylúčiť z gramatiky. CFG však nepozná negácie, preto v tejto situácii zadefinujeme slová ako dve alternatívy. Prvou z nich je, že slovo bude samostatne a druhou, že slovo bude vo dvojici s našou nechcenou interpunkciou, to zamedzí tomu, aby sa priamo za sebou v bežných vetách vyskytla napríklad čiarka a pomlčka.
+Ako môžeme vidieť v listingu (\ref{lst:opt}) parser nemusí nutne rozoznať čiarku a pomlčku ako koniec a začiatok priamej reči. Preto potrebujeme kombinácie niektorých interpunkčných znamienok vylúčiť z gramatiky. Naša gramatika však nepozná negácie, preto v tejto situácii zadefinujeme slová ako dve alternatívy. Prvou z nich je, že slovo bude samostatne a druhou, že slovo bude vo dvojici s našou nechcenou interpunkciou, to zamedzí tomu, aby sa priamo za sebou v bežných vetách vyskytla napríklad čiarka a pomlčka.
 $$"MidSentencePunctuation \to \ , \ | \ ; \ | \ : \ | \ Dash \  | \ Ellipsis"$$
 $$"WordBasic \to  \ WordCapital \ | \ WordLower \ | \ Initial \ | \ Word \ | \ Number ..."$$
 $$"WordTokens  \to\  WordBasic \ | \ WordBasic \ MidSentencePunctuation"$$
@@ -1052,9 +1055,9 @@ Keďže jednotlivé listy stromu sú v tom istom poradí, ako boli tokeny, ktor�
 
 \section{Označenie slov a viet}
 \subsection{Označenie slov}
-Pri pridávaní $"Word"$ tagov je potrebné si dať pozor na tokeny, ktoré sú rozdelené do viacerých listov, napríklad: $"Ordinal \to Num $ $ "." \ "$. Tieto "slová"  \ síce nie sú v jednom vrchole, ale aj tak ich chceme označiť jedným tagom.
+Pri pridávaní \verb!<w>! tagov je potrebné si dať pozor na tokeny, ktoré sú rozdelené do viacerých listov, napríklad: $"Ordinal \to Num $ $ "." \ "$. Tieto "slová"  \ síce nie sú v jednom vrchole, ale aj tak ich chceme označiť jedným tagom.
 
-Vďaka štruktúre stromu vieme povedať, že to čo chceme obaliť $"Word"$ tagom, sú všetky listy prislúchajúce jednému priamemu rodičovi. Teda ak sú všetci potomkovia vrcholu listy a aspoň jeden z nich nie je interpunkcia, tak prvému z týchto listov dáme otvárací tag a poslednému uzatvárací(vo väčšine prípadov je to len jeden vrchol).
+Vďaka štruktúre stromu vieme povedať, že to čo chceme obaliť \verb!<w>! tagom, sú všetky listy prislúchajúce jednému priamemu rodičovi. Teda ak sú všetci potomkovia vrcholu listy a aspoň jeden z nich nie je interpunkcia, tak prvému z týchto listov dáme otvárací tag a poslednému uzatvárací(vo väčšine prípadov je to len jeden vrchol).
 
 %\begin{lstlisting}[style=htmlcssjs]
 %addWordTags() {
@@ -1079,7 +1082,7 @@ Ak list obsahuje iba interpunkciu, tak ho vynechávame, lebo nás v tejto chvíl
 \begin{figure}[H]
 \centering
 \includegraphics[scale=2]{treeWordsAdded}
-\caption{Strom s \textit{"Word"} tagmi}
+\caption{Strom s \texttt{<w>} tagmi}
 \end{figure}
 
 
@@ -1419,7 +1422,7 @@ Splnenie cieľu bolo úspešné a aplikácia je pripravená na používanie ako 
 
 Počas implementácie sa vyskytlo zopár problémov, ako napríklad nutnosť upraviť pôvodný parser, ktorý aplikácia využíva. Takisto bolo potrebné veľakrát meniť gramatiku a slovník parseru, kvôli nejednoznačnosti a veľkej flexibilite syntaxe slovenského jazyka. Všetky problémy sa však podarilo vyriešiť.
 
-Aj napriek tomu, že všetky požiadavky zo zadania boli splnené, tak stále existuje priestor pre zlepšenie a úpravy, napríklad pokiaľ ide gramatiku, ktorú by bolo možné viac optimalizovať, prípadne ďalej rozširovať alebo použiť expresívnejšiu formu ako napríklad BNF alebo EBNF. Ďalšou možnosťou je použitie štatistického parsovania pre zlepšenie parsovania, prípadne pridanie gramatík iných jazykov okrem slovenčiny a angličtiny, čo by určite pomohlo k rozšíreniu možností využitia tejto aplikácie. 
+Aj napriek tomu, že všetky požiadavky zo zadania boli splnené, tak stále existuje priestor pre zlepšenie a úpravy, napríklad pokiaľ ide gramatiku, ktorú by bolo možné viac optimalizovať, prípadne ďalej rozširovať alebo použiť expresívnejšiu notáciu ako napríklad BNF alebo EBNF. Ďalšou možnosťou je použitie štatistického parsovania pre zlepšenie parsovania, prípadne pridanie gramatík iných jazykov okrem slovenčiny a angličtiny, čo by určite pomohlo k rozšíreniu možností využitia tejto aplikácie. 
 
 \renewcommand\bibname{Literatúra}
 \begin{thebibliography}{99}
@@ -1440,9 +1443,9 @@ Te Li, Devi Alagappan, \\
 \bibitem{Tomita}
 Masaru Tomita, \emph{Efficient Parsing for Natural Language: A Fast Algorithm for Practical Systems}, Springer US, ISBN 978-1-4757-1885-0, 1986, 201 s.
 \bibitem{nearley}
-\emph{\href{http://nearley.js.org/}{Nearley.js}} \\ \verb!http://nearley.js.org/! [Prístup: 13.11.2016]
+\emph{\href{http://nearley.js.org/}{Nearley.js}} \ \ \verb!http://nearley.js.org/! [Prístup: 13.11.2016]
 \bibitem{corenlp}
-\emph{\href{https://stanfordnlp.github.io/CoreNLP/}{Stanford CoreNLP}} \ \ \verb!http://nearley.js.org/! [Prístup: 13.11.2016]
+\emph{\href{https://stanfordnlp.github.io/CoreNLP/}{Stanford CoreNLP}} \\ \verb!https://stanfordnlp.github.io/CoreNLP/! [Prístup: 13.11.2016]
 \bibitem{earley-oop}
 \emph{\href{https://github.com/lagodiuk/earley-parser-js}{earley-parser-js}}  \\
 \verb@https://github.com/lagodiuk/earley-parser-js@ [Prístup: 4.4.2017]
@@ -1458,10 +1461,10 @@ Dick Grune, Ceriel J.H. Jacobs, \emph{Parsing Techniques: A Practical Guide. 2. 
 \begin{itemize}
 \item Digitálna príloha - CD obsahuje:
 	\begin{itemize}
-	\item zdrojovými kódmi aplikácie
+	\item zdrojový kód aplikácie
 	\item návod na inštaláciu
-	\item používateľská príručka
-	\item dokumentácia zdrojového kódu
+	\item používateľskú príručku
+	\item dokumentáciu zdrojového kódu
 	\item tester a vizualizáciu
 	\end{itemize}
 \end{itemize}
