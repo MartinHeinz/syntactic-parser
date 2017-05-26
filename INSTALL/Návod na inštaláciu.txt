@@ -10,3 +10,6 @@ spustite parser.js: "node parser.js"
 
 Akékoľvek zmeny vstupov pre parser sa dajú robiť na konci súboru parser.js(otvoriť v hocijakom textovom editore).
 Bližšie informácie o tom ako používať aplikáciu, je možné nájsť v priečinku README v súbore Používateľská príručka.pdf.
+
+Ak by bolo nutné robiť nejaké úpravy v aplikácii(napr. v priebehu testovania v Multimediálnej čítanke),
+tak najaktuálnejšia verzia aplikácie sa vždy bude nachádzať na githube(link v tomto priečinku - Parser source).
