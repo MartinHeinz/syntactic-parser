@@ -1,7 +1,6 @@
 
 class Tokenizer {
     /**
-     *
      * @param {string} text - input text being tokenized
      * @param {string} path - path to file containing terminalRules
      * @param {Map} config
@@ -9,14 +8,13 @@ class Tokenizer {
      */
     constructor(text, path, config, grammarLanguage) {
         this.language = grammarLanguage;
-        this.text = text;
+        this.text = text.replace(/^\s+/g, "") + "\n";
         this.regex = config["splittingRegex"];
         this.path = path;
         this.HTMLRegex = config["HTMLRegex"];
         this.HTMLTagsPositions = new Map();
         this.rules = new Map();
         this.tokens = [];
-
     }
 
     /**
@@ -70,7 +68,7 @@ class Tokenizer {
         for (let token of tokens) {
             var found = false;
             for (let rule of rules.keys()) {
-                var currRule = new RegExp("^"+rule+"$");
+                var currRule = new RegExp(rule);
                 if (currRule.test(token)) {
                     result.push(rules.get(rule));
                     found = true;
@@ -127,6 +125,7 @@ class Tokenizer {
             this.originalTokens = [];
             return;
         }
+        this.text = this.text.replace(/(<(s|w) id="(s|w)\d">)|(<\/(s|w)>)/g, "");
         this.tokens = this.split(this.text);
         if (this.language === "SK") {
             this.substituteQuotes();

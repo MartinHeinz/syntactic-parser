@@ -2,42 +2,230 @@
   "name": "Story",
   "children": [
     {
-      "name": "Sentences",
+      "name": "Lines",
       "children": [
         {
-          "name": "Sentence",
+          "name": "Line",
           "children": [
             {
-              "name": "BasicSentence",
+              "name": "DirectSpeechDashStart",
               "children": [
                 {
-                  "name": "StartingToken",
+                  "name": "DirectSpeechesDashed",
                   "children": [
                     {
-                      "name": "<s id=\"s1\"><w id=\"w1\">Vstupny</w>"
-                    }
-                  ]
-                },
-                {
-                  "name": "Words",
-                  "children": [
-                    {
-                      "name": "WordToken",
+                      "name": "DSAndISentenceDashRepeated",
                       "children": [
                         {
-                          "name": "<w id=\"w2\">text</w>"
+                          "name": "DirectSpeechStartDashNoTag",
+                          "children": [
+                            {
+                              "name": "DirectSpeechDashSingleNoDot",
+                              "children": [
+                                {
+                                  "name": "Dash",
+                                  "children": [
+                                    {
+                                      "name": "<s id=\"s1\"><s id=\"s2\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "StartingToken",
+                                  "children": [
+                                    {
+                                      "name": "StartingTokenBasic",
+                                      "children": [
+                                        {
+                                          "name": "<w id=\"w1\">Priama</w>"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Words",
+                                  "children": [
+                                    {
+                                      "name": "WordTokens",
+                                      "children": [
+                                        {
+                                          "name": "WordBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w2\">rec</w>"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "DSPunctuation",
+                                  "children": [
+                                    {
+                                      "name": ",</s>"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ISentenceMiddleDash",
+                          "children": [
+                            {
+                              "name": "ISentenceMiddleDashSingle",
+                              "children": [
+                                {
+                                  "name": "Dash",
+                                  "children": [
+                                    {
+                                      "name": "<s id=\"s3\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Words",
+                                  "children": [
+                                    {
+                                      "name": "Words",
+                                      "children": [
+                                        {
+                                          "name": "WordTokens",
+                                          "children": [
+                                            {
+                                              "name": "WordBasic",
+                                              "children": [
+                                                {
+                                                  "name": "<w id=\"w3\">uvadzacia</w>"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "WordTokens",
+                                      "children": [
+                                        {
+                                          "name": "WordBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w4\">veta</w>"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "DSPunctuation",
+                                  "children": [
+                                    {
+                                      "name": ",</s>"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "DirectSpeechEndDash",
+                          "children": [
+                            {
+                              "name": "DirectSpeechEndDashStart",
+                              "children": [
+                                {
+                                  "name": "Dash",
+                                  "children": [
+                                    {
+                                      "name": "<s id=\"s4\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Words",
+                                  "children": [
+                                    {
+                                      "name": "Words",
+                                      "children": [
+                                        {
+                                          "name": "Words",
+                                          "children": [
+                                            {
+                                              "name": "WordTokens",
+                                              "children": [
+                                                {
+                                                  "name": "WordBasic",
+                                                  "children": [
+                                                    {
+                                                      "name": "<w id=\"w5\">Dalsia</w>"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "name": "WordTokens",
+                                          "children": [
+                                            {
+                                              "name": "WordBasic",
+                                              "children": [
+                                                {
+                                                  "name": "<w id=\"w6\">priama</w>"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "name": "WordTokens",
+                                      "children": [
+                                        {
+                                          "name": "WordBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w7\">rec</w>"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Punctuation",
+                                  "children": [
+                                    {
+                                      "name": "...</s></s>"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "name": "NewLines",
+              "children": [
                 {
-                  "name": "Punctuation",
-                  "children": [
-                    {
-                      "name": ".</s>"
-                    }
-                  ]
+                  "name": "\n"
                 }
               ]
             }

@@ -12,12 +12,16 @@
     "DSAndISentence": "DirectSpeechStart ISentenceEnd",
     "DSAndISentenceRepeated": "DirectSpeechStart ISAndDSRepeated",
 
-    "Quotation": "QuotationIC | QuotationIDC | QuotationQuote",
-    "QuotationIC": "StartingToken InvertedComa Words InvertedComa Words Punctuation | StartingToken Words InvertedComa Words InvertedComa Words Punctuation",
-    "QuotationIDC": "StartingToken InvertedDoubleComa Words InvertedDoubleComa Words Punctuation | StartingToken Words InvertedDoubleComa Words InvertedDoubleComa Words Punctuation",
-    "QuotationQuote": "StartingToken Quote Words Quote Words Punctuation | StartingToken Words Quote Words Quote Words Punctuation",
 
-    "DSPunctuation": ", | ? | ! | RepeatedPunctuation",
+    "Quotation": "StartingToken Words QuotationsInner Punctuation | StartingToken QuotationsInner Punctuation",
+    "QuotationsInner": "QuotationsInner QuotationInner | QuotationInner",
+    "QuotationInner": "QuotationIC | QuotationIDC | QuotationQuote",
+    "QuotationIC": "InvertedComa Words InvertedComa Words | InvertedComa Words InvertedComa",
+    "QuotationIDC": "InvertedDoubleComa Words InvertedDoubleComa Words | InvertedDoubleComa Words InvertedDoubleComa",
+    "QuotationQuote": "Quote Words Quote Words | Quote Words Quote",
+
+
+    "DSPunctuation": ", | ? | ! | RepeatedPunctuation | Ellipsis",
 
     "ISentenceStart": "StartingToken Words : | StartingToken :",
     "ISentenceMiddleStart": "Words Punctuation",
@@ -29,23 +33,25 @@
     "DirectSpeechStart": "DirectSpeechSingleNoDot | DirectSpeechTwoNoDot | DirectSpeechMoreThanTwoNoDot",
     "DirectSpeechEnd": "DirectSpeechSingleEnd | DirectSpeechTwoEnd | DirectSpeechMoreThanTwoEnd",
 
+    "AltPunctuation": ", | ? | ! | RepeatedPunctuation | Ellipsis | .",
+
     "DirectSpeechSingleEnd":"DirectSpeechSingleEndIC | DirectSpeechSingleEndIDC | DirectSpeechSingleEndQuote",
 
-    "DirectSpeechSingleEndIC": "InvertedComa Words Punctuation InvertedComa",
-    "DirectSpeechSingleEndIDC": "InvertedDoubleComa Words Punctuation InvertedDoubleComa",
-    "DirectSpeechSingleEndQuote": "Quote Words Punctuation Quote",
+    "DirectSpeechSingleEndIC": "InvertedComa Words AltPunctuation InvertedComa",
+    "DirectSpeechSingleEndIDC": "InvertedDoubleComa Words AltPunctuation InvertedDoubleComa",
+    "DirectSpeechSingleEndQuote": "Quote Words AltPunctuation Quote",
 
     "DirectSpeechFirstEnd":"DirectSpeechFirstEndIC | DirectSpeechFirstEndIDC | DirectSpeechFirstEndQuote",
 
-    "DirectSpeechFirstEndIC":"InvertedComa Words Punctuation ",
-    "DirectSpeechFirstEndIDC":"InvertedDoubleComa Words Punctuation ",
-    "DirectSpeechFirstEndQuote":"Quote Words Punctuation ",
+    "DirectSpeechFirstEndIC":"InvertedComa Words AltPunctuation ",
+    "DirectSpeechFirstEndIDC":"InvertedDoubleComa Words AltPunctuation ",
+    "DirectSpeechFirstEndQuote":"Quote Words AltPunctuation ",
 
     "DirectSpeechSecondEnd":"DirectSpeechSecondEndIC | DirectSpeechSecondEndIDC | DirectSpeechSecondEndQuote",
 
-    "DirectSpeechSecondEndIC":" StartingToken Punctuation InvertedComa | StartingToken Words Punctuation InvertedComa",
-    "DirectSpeechSecondEndIDC":" StartingToken Punctuation InvertedDoubleComa | StartingToken Words Punctuation InvertedDoubleComa",
-    "DirectSpeechSecondEndQuote":" StartingToken Punctuation Quote | StartingToken Words Punctuation Quote",
+    "DirectSpeechSecondEndIC":" StartingToken AltPunctuation InvertedComa | StartingToken Words AltPunctuation InvertedComa",
+    "DirectSpeechSecondEndIDC":" StartingToken AltPunctuation InvertedDoubleComa | StartingToken Words AltPunctuation InvertedDoubleComa",
+    "DirectSpeechSecondEndQuote":" StartingToken AltPunctuation Quote | StartingToken Words AltPunctuation Quote",
 
     "DirectSpeechTwoEnd": "DirectSpeechFirstEnd DirectSpeechSecondEnd",
     "DirectSpeechMoreThanTwoEnd": "DirectSpeechFirstEnd SentencesSimple DirectSpeechSecondEnd",
@@ -94,7 +100,7 @@
 
     "StartingToken":"WordCapital | Initial | WordAbbr | Number | AcTitleBeforeName . | TitleAbbr",
     "Words":"Words WordToken | WordToken",
-    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | StableTextAbbrs | NewLines",
+    "WordToken":"WordCapital | WordLower | Initial | Word | Number | : | , | ; | Ellipsis | Other | Dash | AcTitleAfterName . | StableTextAbbrs",
 
     "StableTextAbbrs": "StableTextAbbrs StableTextAbbr | StableTextAbbr",
     "StableTextAbbr": "StableTextAbbrStart . | AcTitleBeforeName . | TitleAbbr",
@@ -107,7 +113,5 @@
 
     "InvertedComa": "‘",
     "InvertedDoubleComa": "“",
-    "Quote": "\"",
-
-    "NewLines": "NewLines NewLine | NewLine"
+    "Quote": "\""
 }

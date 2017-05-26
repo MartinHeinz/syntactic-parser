@@ -1,0 +1,15 @@
+﻿Pre spustenie aplikácie je potrebné mať nainštalovaný Node.js.
+Návod ako nainštalovať Node.js na Linux/Windows na https://nodejs.org/en/download/package-manager/
+
+Pre spustenie a používanie aplikácie odporúčam používať WebStorm IDE: https://www.jetbrains.com/webstorm/
+
+Aplikácia sa dá spustiť aj pomocou príkazového riadku(Bash na Linuxe)
+(na Windows to musí byť aplikácia s názvom "Node.js command prompt" - hľadať v Start menu):
+presuňte sa do priečinku s aplikáciou(../parser/app/): "cd <cesta k aplikácii>"
+spustite parser.js: "node parser.js"
+
+Akékoľvek zmeny vstupov pre parser sa dajú robiť na konci súboru parser.js(otvoriť v hocijakom textovom editore).
+Bližšie informácie o tom ako používať aplikáciu, je možné nájsť v priečinku README v súbore Používateľská príručka.pdf.
+
+Ak by bolo nutné robiť nejaké úpravy v aplikácii(napr. v priebehu testovania v Multimediálnej čítanke),
+tak najaktuálnejšia verzia aplikácie sa vždy bude nachádzať na githube(link v tomto priečinku - Parser source).

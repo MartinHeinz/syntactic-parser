@@ -156,7 +156,7 @@ var tinynlp = (function(){
         for(var i in lastColumn) {
             var state = lastColumn[i];
             if(state.complete() && state.getLeftHandSide() == rootRule ) {
-                // TODO: there might be more than one root rule in the end // Ak nie je completny strom, tak najdi taky co zacina v nultom charte a konci co najdalej(to je najvacsi mozny strom)
+                // there might be more than one root rule in the end
                 // so, there is needed to return an array with all these roots
                 return state;
             }
@@ -164,19 +164,17 @@ var tinynlp = (function(){
         //////////////////////////////////////////////////
         var maxLength = -1;
         var bestRule = null;
-        for(let chart of this.chart.reverse()) {
+        for(let chart of this.chart) {
             for (let rule of chart) {
-                //if (rule.left == 0 && maxLength < rule.right) {
-                if (rule.getLeftHandSide() == rootRule && (rule.right - rule.left) > maxLength) {
-                    //maxLength = rule.right;
-                    maxLength = rule.right - rule.left;
+                if (rule.left == 0 && maxLength < rule.right) {
+                    maxLength = rule.right;
                     bestRule = rule;
                 }
             }
 
         }
-        //console.log("NEUPLNY STROM");
         return bestRule;
+        //////////////////////////////////////////////////
     };
 
     /**

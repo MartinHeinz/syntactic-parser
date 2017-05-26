@@ -1,0 +1,319 @@
+\documentclass[12pt,a4paper]{report}
+\usepackage[top=2.5cm, bottom=2.5cm, right=2cm, left=3.5cm]{geometry}
+
+\usepackage{cmap}
+\usepackage[slovak, english, czech]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[IL2]{fontenc}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage[figurename=Fig.]{caption}
+\graphicspath{ {images/} }
+\usepackage{float}
+
+\usepackage{color}
+\definecolor{lightgray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{darkgray}{rgb}{0.4, 0.4, 0.4}
+%\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+\definecolor{editorGray}{rgb}{0.95, 0.95, 0.95}
+\definecolor{editorOcher}{rgb}{1, 0.5, 0} % #FF7F00 -> rgb(239, 169, 0)
+\definecolor{editorGreen}{rgb}{0, 0.5, 0} % #007C00 -> rgb(0, 124, 0)
+\definecolor{orange}{rgb}{1,0.45,0.13}      
+\definecolor{olive}{rgb}{0.17,0.59,0.20}
+\definecolor{brown}{rgb}{0.69,0.31,0.31}
+\definecolor{purple}{rgb}{0.38,0.18,0.81}
+\definecolor{lightblue}{rgb}{0.1,0.57,0.7}
+\definecolor{lightred}{rgb}{1,0.4,0.5}
+\usepackage{upquote}
+
+\usepackage{bussproofs}
+%\usepackage{lmodern}
+
+\usepackage{Pgfplots}
+\usepackage{amsmath}
+
+\usepackage{amsthm}
+\newtheorem{veta}{Veta}[section]
+\newtheorem{lema}[veta]{Lema}
+\theoremstyle{definition}
+\newtheorem{definicia}{Definícia}[chapter]
+\theoremstyle{remark}
+\newtheorem*{poznamka}{Poznámka}
+
+\definecolor{light-gray}{gray}{0.8}
+
+\usepackage{pdfpages}
+
+\usepackage{setspace}
+\onehalfspacing
+\usepackage{enumitem}
+
+\newcommand*\lif{\mathbin{\to}}
+\usepackage{forest}
+
+\forestset{
+  smullyan tableaux/.style={
+    for tree={
+      math content
+    },
+    where n children=1{
+      !1.before computing xy={l=\baselineskip},
+      !1.no edge
+    }{},
+    closed/.style={
+      label=below:$\times$
+    },
+  },
+}
+
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage{eso-pic}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+% CSS
+\lstdefinelanguage{CSS}{
+  keywords={color,background-image:,margin,padding,font,weight,display,position,top,left,right,bottom,list,style,border,size,white,space,min,width, transition:, transform:, transition-property, transition-duration, transition-timing-function}, 
+  sensitive=true,
+  morecomment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  morestring=[b]',
+  morestring=[b]",
+  alsoletter={:},
+  alsodigit={-}
+}
+
+% JavaScript
+\lstdefinelanguage{JavaScript}{
+  morekeywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, else, case, break},
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morestring=[b]",
+  morestring=[b]'
+}
+
+\lstdefinelanguage{HTML5}{
+  language=html,
+  sensitive=true,   
+  alsoletter={<>=-},    
+  morecomment=[s]{<!-}{-->},
+  tag=[s],
+  otherkeywords={
+  % General
+  <, >,
+  % Standard tags
+    <!DOCTYPE,
+  </html, <html, <head, <title, </title, <style, </style, <link, </head, <meta, />,
+    % body
+    </body, <body,
+    % Divs
+    </div, <div, </div>, 
+    % Paragraphs
+    </p, <p, </p>,
+    % scripts
+    </script, <script,
+  % More tags...
+  <b, </b, <strong, </strong, <small, </small, <i, </i, <canvas, /canvas>, <svg, <rect, <animateTransform, </rect>, </svg>, <video, <source, <iframe, </iframe>, </video>, <image, </image>, <header, </header, <article, </article, 
+  <w, </w, <s, </s
+  },
+  ndkeywords={
+  % General
+  =,
+  % HTML attributes
+  charset=, src=, id=, width=, height=, style=, type=, rel=, href=,
+  % SVG attributes
+  fill=, attributeName=, begin=, dur=, from=, to=, poster=, controls=, x=, y=, repeatCount=, xlink:href=,
+  % properties
+  margin:, padding:, background-image:, border:, top:, left:, position:, width:, height:, margin-top:, margin-bottom:, font-size:, line-height:,
+    % CSS3 properties
+  transform:, -moz-transform:, -webkit-transform:,
+  animation:, -webkit-animation:,
+  transition:,  transition-duration:, transition-property:, transition-timing-function:,
+  }
+}
+
+\lstdefinestyle{htmlcssjs} {%
+  % General design
+%  backgroundcolor=\color{editorGray},
+  basicstyle={\fontsize{10}{11}\ttfamily},   
+  frame=b,
+  % line-numbers
+  xleftmargin={0.75cm},
+  numbers=left,
+  stepnumber=1,
+  firstnumber=1,
+  numberfirstline=true, 
+  % Code design
+  identifierstyle=\color{black},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywordstyle=\color{editorGreen}\bfseries,
+  stringstyle=\color{editorOcher}\ttfamily,
+  commentstyle=\color{brown}\ttfamily,
+  % Code
+  language=HTML5,
+  alsolanguage=JavaScript,
+  alsodigit={.:;},  
+  tabsize=2,
+  showtabs=false,
+  showspaces=false,
+  showstringspaces=false,
+  extendedchars=true,
+  breaklines=true,
+  % German umlauts
+  literate=%
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ű}{{\H{u}}}1 {Ű}{{\H{U}}}1 {ő}{{\H{o}}}1 {Ő}{{\H{O}}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\euro}}1 {£}{{\pounds}}1 {«}{{\guillemotleft}}1
+  {»}{{\guillemotright}}1 {ñ}{{\~n}}1 {Ñ}{{\~N}}1 {¿}{{?`}}1
+  {á}{{\'a}}1
+         {ľ}{{\v{l}}}1
+         {Ľ}{{\v{L}}}1
+         {í}{{\'i}}1
+         {ĺ}{{\'l}}1
+         {Ĺ}{{\'L}}1
+         {ŕ}{{\'r}}1
+         {Ŕ}{{\'R}}1
+         {é}{{\'e}}1
+         {ý}{{\'y}}1
+         {ú}{{\'u}}1
+         {ó}{{\'o}}1
+         {ě}{{\v{e}}}1
+         {š}{{\v{s}}}1
+         {č}{{\v{c}}}1
+         {ř}{{\v{r}}}1
+         {ž}{{\v{z}}}1
+         {ď}{{\v{d}}}1
+         {ť}{{\v{t}}}1
+         {ň}{{\v{n}}}1                
+         {ů}{{\r{u}}}1
+         {Á}{{\'A}}1
+         {Í}{{\'I}}1
+         {É}{{\'E}}1
+         {Ý}{{\'Y}}1
+         {Ú}{{\'U}}1
+         {Ó}{{\'O}}1
+         {Ě}{{\v{E}}}1
+         {Š}{{\v{S}}}1
+         {Č}{{\v{C}}}1
+         {Ř}{{\v{R}}}1
+         {Ž}{{\v{Z}}}1
+         {Ď}{{\v{D}}}1
+         {Ť}{{\v{T}}}1
+         {Ň}{{\v{N}}}1                
+         {Ů}{{\r{U}}}1  
+}
+
+\makeatletter
+\g@addto@macro\@floatboxreset{\centering}
+\makeatother
+\begin{document}
+\chapter*{Používateľská príručka}
+Pre spustenie aplikácie sú potrebné tri JavaScriptové súbory:
+\begin{itemize}
+\item \verb!parser.js!
+\item \verb!earley-oop.js!
+\item \verb!tokenizer.js!
+\end{itemize}
+
+Aplikácia zároveň pre svoje fungovanie potrebuje gramatiku, slovník a konfiguráciu pre jazyk, ktorý parsuje, tieto súbory by sa mali nachádzať vo svojich osobitných podpriečinkoch v priečinku \verb!res!:
+\\
+\begin{forest}
+  for tree={
+    font=\ttfamily,
+    grow'=0,
+    child anchor=west,
+    parent anchor=south,
+    anchor=west,
+    calign=first,
+    edge path={
+      \noexpand\path [draw, \forestoption{edge}]
+      (!u.south west) +(7.5pt,0) |- node[fill,inner sep=1.25pt] {} (.child anchor)\forestoption{edge label};
+    },
+    before typesetting nodes={
+      if n=1
+        {insert before={[,phantom]}}
+        {}
+    },
+    fit=band,
+    before computing xy={l=15pt},
+  }
+[
+	[parser.js
+	]
+	[earley-oop.js
+	]
+	[tokenizer.js
+	]
+	[res
+		[configs $\to$ {\fontfamily{cmr}\selectfont priečinok s konfiguráciami pre dané jazyky}
+			[SK.json]
+			[EN.json]
+		]
+		[grammars $\to$ {\fontfamily{cmr}\selectfont priečinok s gramatikami pre dané jazyky}
+			[SK.json]
+			[EN.json]
+		]
+		[terminalRules $\to$ {\fontfamily{cmr}\selectfont priečinok so slovníkmi pre dané jazyky}
+			[SK.json]
+			[EN.json]
+		]
+	]
+]
+\end{forest}
+
+Na vytvorenie sparsovaného XML z nejakého textu, je treba v súbore \verb!parser.js! vytvoriť inštanciu triedy \verb!Parser!, ktorá dostáva dva parametre. Prvým z nich je text, ktorý sa bude parsovať a druhým je jazyk vo forme reťazca napríklad "SK" alebo "EN". Ďalej sa na túto inštanciu \verb!Parseru! zavolajú funkcie \verb!buildXML()! a \verb!stringifyTree()! prvá z nich doplní do stromu všetky tagy a druhá vráti hotové XML.
+
+\begin{lstlisting}[style=htmlcssjs]
+var p = new Parser("- Tak čo je nové? - spytuje sa zvedavo mama. - Aj sama to vieš, - odpovedá dcéra.", "SK");
+p.buildXML();
+p.stringifyTree()
+\end{lstlisting}
+
+Trieda \verb!Parser! umožňuje aj vytvorenie HTML a JSON reprezentácie stromu pomocou funkcií \verb!getHTMLTree()! a \verb!getJSONTree()!, ktoré ich vrátia ako string, prípadne pomocou funkcií \verb!saveHTMLTree(<path>)! a \verb!saveJSONTree(<path>)!, ktoré ich priamo uložia do súboru.
+
+V prípade, že by bolo potrebné upraviť gramatiku - napríklad pridať pravidlo, tak stačí v priečinku \verb!grammars! v niektorom súbore s gramatikou vytvoriť nový atribút JSON-u vo forme:
+ \begin{lstlisting}[style=htmlcssjs]
+{
+	...,
+	"LavaStranaPravidla": "PrvaMoznost | DruhaMoznost | ...",
+	...,
+}
+\end{lstlisting}
+Alternatívy, ktoré môžu vzniknúť sa oddeľujú pomocou \verb!|! (zvislá čiara).
+
+V gramatike je možné(a aj nutné) použiť tokeny z prislúchajúceho slovníku v priečinku \verb!terminalRules!, ktoré sú vo forme:
+\begin{lstlisting}[style=htmlcssjs]
+{
+	...,
+	"RegexKtoryMatchujeToken": "TypTokenu",
+	"^[0-9]+$":"Num",
+	...,
+}
+\end{lstlisting}
+
+Úpravy gramatiky sa väčšinou nepodaria na prvý pokus a preto je vhodné využívať parserom vygenerovaný HTML strom na debuggovanie, prípadne si vypísať stromy alebo hotové XML do konzoly:
+\begin{lstlisting}[style=htmlcssjs]
+var p = new Parser("Toto je vstupný text", "SK");
+p.buildXML();
+p.saveHTMLTree("../app/res/trees/tree.html"); // subor otvorit vo webovom prehliadaci
+p.printTrees(); // vypise stromy do konzoly
+console.log(p.stringifyTree()); // vypise XML do konzoly
+\end{lstlisting}
+
+\bigskip
+\noindent Aktuálne zdrojové kódy: \ \ {\href{https://github.com/MartinHeinz/syntactic-parser}{\texttt{https://github.com/MartinHeinz/syntactic-parser}}  \\
+
+\end{document}

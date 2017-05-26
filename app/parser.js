@@ -9,8 +9,8 @@ class Parser {
     /**
      * @constructor
      * @example //new Parser("- Nieco, - nieco dalsie... - pokracovanie.", "SK")
-     * @param {string} text
-     * @param {string} grammarLanguage
+     * @param {string} text - input text
+     * @param {string} grammarLanguage - language of used grammar in form - "SK", "EN"
      */
     constructor(text, grammarLanguage) {
         this.config = this.setUpConfig("../app/res/configs/"+ grammarLanguage + ".json");
@@ -27,8 +27,8 @@ class Parser {
     }
 
     /**
-     *
-     * @return {number} bestTree - index of "best" tree in this.trees
+     * Chooses "best" parse tree based on number of sentences, if there is more than one parse tree.
+     * @return {Object} bestTree - "best" parse tree in this.trees
      */
     chooseTree() {
         var bestTree = null;
@@ -67,15 +67,14 @@ class Parser {
     /**
      * Sets up config from file provided through path parameter
      * @param {string} path - path to config file
-     * @return {Map} result - config with executeable regexes
+     * @return {Map} result - config with executable regexes
      */
     setUpConfig(path) {
         var tempConfig = this.loadConfig(path);
         var result = new Map();
         for (let [key, value] of tempConfig) {
             if (key.includes("Regex")) { // value je regex, inak je to rule, path etc.
-                var newVal = new RegExp(value, "g");
-                result[key] = newVal;
+                result[key] = new RegExp(value, "g");
             }
             else {
                 result[key] = value;
@@ -113,8 +112,9 @@ class Parser {
     }
 
     /**
-     * returns Array of leafs from this.tree ordered from leftmost to rightmost.
-     * @return {Array} - array of Nodes
+     * Returns Array of leafs from this.tree ordered from leftmost to rightmost.
+     * @param {Object} tree
+     * @return {Array} - array of Nodes(Leaves)
      */
     static getLeaves(tree) {
         var leaves = [];
@@ -280,7 +280,6 @@ class Parser {
                 return console.log(err);
             }
         });
-        //console.log("file updated");
     }
 
 
@@ -354,7 +353,6 @@ class Parser {
                 return console.log(err);
             }
         });
-        //console.log("file updated");
     }
 
     /**
@@ -409,7 +407,7 @@ class Parser {
     }
 
     /**
-     * Adds all HTML tags from this.tokenizer.HTMLTagsPositions to this.tree except for paragraph tags
+     * Adds all HTML tags from this.tokenizer.HTMLTagsPositions to this.tree except for block tags
      */
     addHTMLTags() {
         var tags = this.tokenizer.HTMLTagsPositions;
@@ -417,7 +415,7 @@ class Parser {
         var realIndex = 0;
         var realIndexOfClosingTag = 0;
         for(let [key, tag] of tags) {
-            if(tag === "<p>" || tag === "</p>" || /<\/\s*(\w+)\s*\S*\s*>/g.test(tag)) {
+            if(/<\/*((p|div|h\d)([^>]*))>/g.test(tag) || /<\/\s*(\w+)\s*\S*\s*>/g.test(tag)) {
                 realIndex++;
                 continue;
             }
@@ -482,8 +480,11 @@ class Parser {
      */
     insertOpeningTag(tree = this.tree, key, tag) {
         if (tree.subtrees.length == 0) {
-            var index = this.findInsertPosition(tree.root);
-            tree.root = tree.root.slice(0, index) + tag + tree.root.slice(index); //TODO isto dobre?
+            var node = Parser.findNode(this.tree, key);
+            if (this.isNodeInSentence(node)) {
+                var index = this.findInsertPosition(tree.root);
+                tree.root = tree.root.slice(0, index) + tag + tree.root.slice(index);
+            }
             return;
         }
         for (let node of tree.subtrees) {
@@ -517,33 +518,36 @@ class Parser {
      */
     insertClosingTag(tree = this.tree, key, tag, flag) {
         if (tree.subtrees.length == 0) {
-            
-            this.config["tagsBeforeContentRegex"].lastIndex = 0;
-            var tagsBeforeContent = this.config["tagsBeforeContentRegex"].exec(tree.root)[0];
-            var contentAndClosingTags = tree.root.slice(tagsBeforeContent.length);
-            this.config["wordRegex"].lastIndex = 0;
-            this.config["formatRegex"].lastIndex = 0;
-            this.config["sentenceEndMultipleRegex"].lastIndex = 0;
-            this.config["sentenceEndTagSingleRegex"].lastIndex = 0;
-            var alreadyContains = new RegExp(tag).test(tree.root);
-            var isEndOfSentence = this.config["sentenceEndTagSingleRegex"].test(tree.root);
-            if (!(alreadyContains && isEndOfSentence && flag)) {
-                if (this.config["wordRegex"].test(tree.root)) {
-                    tree.root = tree.root.slice(0, this.config["wordRegex"].lastIndex) + tag + tree.root.slice(this.config["wordRegex"].lastIndex);
-                }
-                else if (this.config["formatRegex"].test(contentAndClosingTags)) {
-                    this.config["formatRegex"].lastIndex = 0;
-                    var pos2 = this.config["formatRegex"].exec(contentAndClosingTags).index;
-                    tree.root = tree.root.slice(0, tagsBeforeContent.length+ pos2) + tag + tree.root.slice(tagsBeforeContent.length + pos2);
-                }
-                else if (this.config["sentenceEndMultipleRegex"].test(contentAndClosingTags)) {
-                    this.config["sentenceEndMultipleRegex"].lastIndex = 0;
-                    var sentenceTags = this.config["sentenceEndMultipleRegex"].exec(contentAndClosingTags);
-                    var pos3 = sentenceTags.index;
-                    tree.root = tree.root.slice(0, tagsBeforeContent.length + pos3) + tag + tree.root.slice(tagsBeforeContent.length + pos3);
-                }
-                else {
-                    tree.root += tag;
+            var node = Parser.findNode(this.tree, key);
+            if (this.isNodeInSentence(node)) {
+
+                this.config["tagsBeforeContentRegex"].lastIndex = 0;
+                var tagsBeforeContent = this.config["tagsBeforeContentRegex"].exec(tree.root)[0];
+                var contentAndClosingTags = tree.root.slice(tagsBeforeContent.length);
+                this.config["wordRegex"].lastIndex = 0;
+                this.config["formatRegex"].lastIndex = 0;
+                this.config["sentenceEndMultipleRegex"].lastIndex = 0;
+                this.config["sentenceEndTagSingleRegex"].lastIndex = 0;
+                var alreadyContains = new RegExp(tag).test(tree.root);
+                var isEndOfSentence = this.config["sentenceEndTagSingleRegex"].test(tree.root);
+                if (!(alreadyContains && isEndOfSentence && flag)) {
+                    if (this.config["wordRegex"].test(tree.root)) {
+                        tree.root = tree.root.slice(0, this.config["wordRegex"].lastIndex) + tag + tree.root.slice(this.config["wordRegex"].lastIndex);
+                    }
+                    else if (this.config["formatRegex"].test(contentAndClosingTags)) {
+                        this.config["formatRegex"].lastIndex = 0;
+                        var pos2 = this.config["formatRegex"].exec(contentAndClosingTags).index;
+                        tree.root = tree.root.slice(0, tagsBeforeContent.length + pos2) + tag + tree.root.slice(tagsBeforeContent.length + pos2);
+                    }
+                    else if (this.config["sentenceEndMultipleRegex"].test(contentAndClosingTags)) {
+                        this.config["sentenceEndMultipleRegex"].lastIndex = 0;
+                        var sentenceTags = this.config["sentenceEndMultipleRegex"].exec(contentAndClosingTags);
+                        var pos3 = sentenceTags.index;
+                        tree.root = tree.root.slice(0, tagsBeforeContent.length + pos3) + tag + tree.root.slice(tagsBeforeContent.length + pos3);
+                    }
+                    else {
+                        tree.root += tag;
+                    }
                 }
             }
             return;
@@ -560,8 +564,8 @@ class Parser {
      * range specified by openingTagIndex and closingTagIndex.
      * @param {Number} openingTagIndex - index position of opening tag
      * @param {Number} closingTagIndex - index position of closing tag
-     * @param {string} openingTag(e.g. <strong>)
-     * @param {string} closingTag(e.g. </strong>)
+     * @param {string} openingTag
+     * @param {string} closingTag
      */
     fixNestingErrors(openingTagIndex, closingTagIndex, openingTag, closingTag) {
         this.config["sentenceEndTagSingleRegex"].lastIndex = 0;
@@ -578,16 +582,18 @@ class Parser {
                 continue;
             }
             if (leaf.left > openingTagIndex && /^(<s id=\"s\d+\">)+/.test(leaf.root) && !openOnNext) {
-                if (leaves[counter-1].root.includes("</s>")) {
-                    var pos = /<\/s>/.exec(leaves[counter-1].root).index;
-                    leaves[counter-1].root = leaves[counter-1].root.slice(0, pos) + closingTag + leaves[counter-1].root.slice(pos);
-                }
-                else {
-                    leaves[counter-1].root += closingTag;
+                if (this.isNodeInSentence(leaves[counter-1])) {
+                    if (leaves[counter-1].root.includes("</s>")) {
+                        var pos = /<\/s>/.exec(leaves[counter-1].root).index;
+                        leaves[counter-1].root = leaves[counter-1].root.slice(0, pos) + closingTag + leaves[counter-1].root.slice(pos);
+                    }
+                    else {
+                        leaves[counter-1].root += closingTag;
+                    }
                 }
                 openOnNext = true;
             }
-            if (openOnNext) { //zaciatok dalsej vety
+            if (openOnNext && /^(<s id=\"s\d+\">)+/.test(leaf.root)) { //zaciatok dalsej vety
                 var index = this.findInsertPosition(leaf.root);
                 leaf.root = leaf.root.slice(0, index) + openingTag + leaf.root.slice(index);
                 openOnNext = false;
@@ -599,57 +605,115 @@ class Parser {
 
 
     /**
-     * Adds <p> and </p> tags to this.tree, moving them as needed to avoid causing nesting errors, while
+     * Adds paragraph, div and heading tags to this.tree, moving them as needed to avoid causing nesting errors, while
      * keeping structure of input text.
      * Requires sentence tags to be present in this.tree.
+     * Not guaranteed to work with nested block tags.
      */
-    addParagraphTags() {
+    addBlockTags() {
         var realIndex = 0;
-        var nextTag = "<p>";
+        var openingTagRegex = /<((p|div|h\d)([^>]*))>/g;
+        var closingTagRegex = /<\/(p|div|h\d)>/g;
         var openingTagNode = null;
         var closingTagNode = null;
         for(let key of this.tokenizer.HTMLTagsPositions.keys()) {
             let tag = this.tokenizer.HTMLTagsPositions.get(key);
-            if (tag === "<p>" && tag == nextTag) {
+            let openingRegexResult = openingTagRegex.exec(tag);
+            let closingRegexResult = closingTagRegex.exec(tag);
+            if (openingRegexResult != null) {
                 openingTagNode = this.moveToBeginningOfSentence(this.tree, key - realIndex, key);
                 if (openingTagNode == undefined) {
                     continue;
                 }
-                nextTag = "</p>"
+                openingRegexResult.lastIndex = 0;
             }
-            else if (tag === "</p>" && tag === nextTag) {
+            else if (closingRegexResult != null) {
+                var tagIndex = null;
                 if (key - realIndex - 1 < 1) {
-                    closingTagNode = Parser.findNode(this.tree, 1);
+                    tagIndex = 1;
                 }
                 else {
-                    closingTagNode = Parser.findNode(this.tree, key - realIndex - 1);
+                    tagIndex = key - realIndex - 1;
                 }
-
-                var ancestor = this.findLowestCommonAncestor(this.tree, openingTagNode, closingTagNode);
-                this.moveToEndingOfSentence(ancestor);
-                nextTag = "<p>"
+                var ancestor = null;
+                if (this.isInCompoundSentence(this.tree, tagIndex)) {
+                    ancestor = this.getCompoundSentenceRoot(this.tree, Parser.findNode(this.tree, tagIndex));
+                }
+                else {
+                    closingTagNode = Parser.findNode(this.tree, tagIndex);
+                    ancestor = this.findLowestCommonAncestor(this.tree, openingTagNode, closingTagNode);
+                }
+                this.moveToEndingOfSentence(ancestor, closingRegexResult[1]);
+                closingRegexResult.lastIndex = 0;
             }
             realIndex++;
         }
-
     }
 
     /**
-     * moves tag to beginning of sentence its in.
+     * Checks whether node to tagIndex belongs is in compound sentence or not.
+     * @param tree
+     * @param tagIndex - index of leaf to which tag belongs
+     * @return {boolean}
+     */
+    isInCompoundSentence(tree = this.tree, tagIndex) {
+        var counter = 0;
+        let node = Parser.findNode(tree, tagIndex);
+        var parent = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+        while (parent.root !== this.config["rootRule"]) {
+            if (parent.subtrees.length > 1 && this.config["sentenceRule"].includes(parent.root)) {
+                counter++;
+            }
+            parent = Parser.findParent(tree, parent.parent.left, parent.parent.right, parent.parent.root);
+        }
+        if (counter > 1) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Returns tree node which is root of compound sentence to which node belongs.
+     * @param tree
+     * @param node - node from sentence
+     * @return {Object} node
+     */
+    getCompoundSentenceRoot(tree = this.tree, node) {
+        var result = node;
+        var parent = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+        while (parent.root !== this.config["rootRule"]) {
+            if (parent.subtrees.length > 1 && this.config["sentenceRule"].includes(parent.root)) {
+                result = parent;
+            }
+            parent = Parser.findParent(tree, parent.parent.left, parent.parent.right, parent.parent.root);
+        }
+        return result;
+    }
+
+    /**
+     * moves tag to beginning of sentence(possibly beginning of whole compound sentence) its in.
      * @param {Object} tree
      * @param {Number} tagIndex - index of leaf to which tag belongs
      * @param {Number} tagKey - key of tag from this.tokenizer.HTMLTagsPositions
+     * @return {Object} Node, void if Node is undefined
      */
     moveToBeginningOfSentence(tree, tagIndex, tagKey) {
         let tag = this.tokenizer.HTMLTagsPositions.get(tagKey);
         let node = Parser.findNode(tree, tagIndex);
-
         if (node == undefined) {
             return;
         }
-
-        while (!this.config["sentenceRule"].includes(node.root)) {
-            node = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+        if (this.isInCompoundSentence(tree, tagIndex)) {
+            node = this.getCompoundSentenceRoot(tree, node);
+        }
+        else {
+            while (!this.config["sentenceRule"].includes(node.root)) {
+                node = Parser.findParent(tree, node.parent.left, node.parent.right, node.parent.root);
+                if (node.root === this.config["rootRule"]) {
+                    throw new MissingSentenceTagException("Sentence not found in when adding "+ tag + " tag with tagIndex: " + tagIndex + " and tagKey: " + tagKey +
+                        ". Check your config[\"sentenceRule\"] for missing rules.");
+                }
+            }
         }
         while (node.subtrees.length != 0) {
             node = node.subtrees[0];
@@ -659,14 +723,15 @@ class Parser {
     }
 
     /**
-     * Adds </p> tag to end of sentence in which node is
+     * Adds closing paragraph, div or heading tag to end of sentence in which node is
      * @param {Object} node - tree node
+     * @param {string} tag - tag being inserted
      */
-    moveToEndingOfSentence(node) {
+    moveToEndingOfSentence(node, tag) {
         while (node.subtrees.length != 0) {
             node = node.subtrees[node.subtrees.length - 1];
         }
-        node.root += "</p>";
+        node.root += "</"+ tag +">";
     }
 
 
@@ -736,7 +801,8 @@ class Parser {
     }
 
     /**
-     * Adds all opening and closing <s> tags to this.tree based on list of sentence rules from sentenceRule(config["sentenceRule"])
+     * Adds all opening and closing &lt;s&gt; tags to tree based on list of sentence rules from sentenceRule(config["sentenceRule"])
+     * @param {Object} tree
      */
     addSentenceTags(tree = this.tree) {
         var counter = 1;
@@ -775,7 +841,7 @@ class Parser {
     }
 
     /**
-     * Add <s id="s i"> to specified node root
+     * Add &lt;s id="s i"&gt; to specified node root
      * @param {Object} node
      * @param {Number} i - index of sentence
      */
@@ -795,7 +861,7 @@ class Parser {
     }
 
     /**
-     * Adds </s> tag to specified node(leaf)
+     * Adds &lt;/s&gt; tag to specified node(leaf)
      * @param {Object} node
      */
     addClosingSentenceTag(node) {
@@ -806,43 +872,43 @@ class Parser {
     }
 
     /**
-     * Checks whether tree is complete based on number of leaves in tree and tokens in input.
-     * @param {Object} tree
+     * Checks whether this.tree is complete based on number of leaves in tree and tokens in input.
      * @return {boolean}
      */
-    isComplete(tree = this.tree) {
-        var leaves = Parser.getLeaves(tree);
-        if (leaves.length < this.tokenizer.tokens.length) {
+    isComplete() {
+        var leaves = Parser.getLeaves(this.tree);
+        if (leaves.length < this.tokenizer.tokens.length || this.tree.root !== this.config["rootRule"]) {
             return false;
         }
         return true;
     }
 
     /**
-     * Builds whole XML output from tree
-     * @param {Object} tree
+     * Builds whole XML output from this.tree
+     * @return {void}
      */
-    buildXML(tree = this.tree) {
-
-        if (!this.isComplete(tree)) {
-            this.finishIncompleteTree(tree);
+    buildXML() {
+        if (!this.isComplete()) {
+            this.finishIncompleteTree();
         }
         this.substituteLeafs();
         this.addWordTags();
         this.saveWords();
         this.addSentenceTags();
         this.addHTMLTags();
-        this.addParagraphTags();
+        this.addBlockTags();
     }
 
     /**
      * Finishes(or builds whole) tree, that is not complete(parser could not parse whole input(or any)).
-     * @param {Object} tree
      */
-    finishIncompleteTree(tree = this.tree) {
-        var leaves = Parser.getLeaves(tree);
+    finishIncompleteTree() {
+        var leaves = Parser.getLeaves(this.tree);
+        if (this.tree.root !== this.config["rootRule"]) {
+            this.tree = Parser.createNode(0, this.tree.right, this.config["rootRule"], null, this.tree);
+        }
         var startNewSentence = null;
-        if (leaves.length == 0) {
+        if (leaves.length == 0 || !this.containsSentence()) {
             startNewSentence = true;
         }
         else {
@@ -850,19 +916,22 @@ class Parser {
         }
         var sentence = null;
         if (startNewSentence) {
-            sentence = Parser.createNode(tree.right, this.tokenizer.tokens.length, this.config["sentenceRule"][0], tree);
-            tree.subtrees.push(sentence);
+            sentence = Parser.createNode(this.tree.right, this.tokenizer.tokens.length, this.config["sentenceRule"][0], this.tree, null);
+            this.tree.subtrees.push(sentence);
         }
-        else { //moze toto nastat?
+        else {
             var lastLeaf = leaves[leaves.length - 1];
             while (!this.config["sentenceRule"].includes(lastLeaf.root)) {
-                lastLeaf = Parser.findParent(tree, lastLeaf.parent.left, lastLeaf.parent.right, lastLeaf.parent.root);
+                lastLeaf = Parser.findParent(this.tree, lastLeaf.parent.left, lastLeaf.parent.right, lastLeaf.parent.root);
+                if (lastLeaf.root === this.config["rootRule"]) {
+                    break;
+                }
             }
             sentence = lastLeaf;
         }
         for (var i = leaves.length; i < this.tokenizer.tokens.length; i++) {
-            var HelperNode = Parser.createNode(i, i+1, "Helper", sentence);
-            var newNode = Parser.createNode(i, i+1, this.tokenizer.tokens[i], HelperNode);
+            var HelperNode = Parser.createNode(i, i+1, "Helper", sentence, null);
+            var newNode = Parser.createNode(i, i+1, this.tokenizer.tokens[i], HelperNode, null);
 
             sentence.subtrees.push(HelperNode);
             HelperNode.subtrees.push(newNode);
@@ -871,9 +940,32 @@ class Parser {
             sentence.right = this.tokenizer.tokens.length;
             var right = sentence.parent.right;
             sentence.parent.right = this.tokenizer.tokens.length;
-            sentence = Parser.findParent(tree, sentence.parent.left, right, sentence.parent.root)
+            sentence = Parser.findParent(this.tree, sentence.parent.left, right, sentence.parent.root)
         }
         sentence.right = this.tokenizer.tokens.length;
+    }
+
+    /**
+     * Checks whether tree contains any sentence Nodes
+     * @return {boolean}
+     */
+    containsSentence() {
+        var stack = [];
+        var current = null;
+        stack.push(this.tree);
+        while (stack.length != 0) {
+            current = stack.pop();
+
+            if (this.config["rootRule"].includes(current.root)) {
+                return true;
+            }
+            if (current.subtrees.length != 0) {
+                for (let node of current.subtrees) {
+                    stack.push(node);
+                }
+            }
+        }
+        return false;
     }
 
     /**
@@ -883,7 +975,21 @@ class Parser {
      */
     isSentenceFinished(node) {
         this.config["sentenceEndPunctuationRegex"].lastIndex = 0;
-        return this.config["sentenceEndPunctuationRegex"].test(node.root);
+        var isLastInSentence = this.config["sentenceEndPunctuationRegex"].test(node.root);
+        var isInSentence = true;
+        while (!this.config["sentenceRule"].includes(node.root)) {
+            if (node.root === this.config["rootRule"]) {
+                isInSentence = false;
+                break;
+            }
+            node = Parser.findParent(this.tree, node.parent.left, node.parent.right, node.parent.root);
+        }
+        if (isLastInSentence) {
+            return true;
+        }
+        else {
+            return !isInSentence;
+        }
     };
 
     /**
@@ -892,20 +998,32 @@ class Parser {
      * @param {Number} right
      * @param {string} rootValue
      * @param {Object} parentNode
-     * @return {{root: *, left: *, right: *, parent: {root: *, left: (*|number|Number), right: (*|number|Number), subtrees: Array}, subtrees: Array}}
+     * @param {Object} subtrees
+     * @return {{root: string, left: Number, right: Number, parent: ({root: string, left: Number, right: Number, subtrees: Array}|null), subtrees: Array}}
      */
-    static createNode(left, right, rootValue, parentNode) {
+    static createNode(left, right, rootValue, parentNode, subtrees) {
+        if (parentNode != null) {
+            return {
+                root: rootValue,
+                left: left,
+                right: right,
+                parent: {
+                    root: parentNode.root,
+                    left: parentNode.left,
+                    right: parentNode.right,
+                    subtrees: []
+                },
+                subtrees: []
+            };
+        }
         return {
             root: rootValue,
             left: left,
             right: right,
             parent: {
-                root: parentNode.root,
-                left: parentNode.left,
-                right: parentNode.right,
                 subtrees: []
             },
-            subtrees: []
+            subtrees: [subtrees]
         };
     }
 
@@ -931,10 +1049,11 @@ class Parser {
 
     /**
      * Retrieves words from tree and saves them into this.words
-     * Used to get words with <w> tag before addition of remaining tags.
+     * Used to get words without &lt;w&gt; tags before addition of remaining tags.
      * @param tree
      */
     saveWords(tree = this.tree) {
+        var tokens = [];
         var concatWithNext = false;
         var leaves = Parser.getLeaves(tree);
         for (let i = 0; i < leaves.length; i++) {
@@ -942,24 +1061,61 @@ class Parser {
                 if (leaves[i].root.includes("</w>")) {
                     concatWithNext = false;
                 }
-                this.words[this.words.length-1] = this.words[this.words.length-1].concat(leaves[i].root);
+                tokens[tokens.length-1] = tokens[tokens.length-1].concat(leaves[i].root);
             }
             else {
                 if (/<w id="w\d+">/.test(leaves[i].root) && !leaves[i].root.includes("</w>")) {
                     concatWithNext = true;
                 }
-                this.words.push(leaves[i].root);
+                tokens.push(leaves[i].root);
             }
-
         }
+        for (let token of tokens) {
+            if (/^<w id=\"w\d+\">(.+)<\/w>$/g.test(token)) {
+                this.words.push(/^<w id=\"w\d+\">(.+)<\/w>$/g.exec(token)[1])
+            }
+        }
+    }
+
+    /**
+     * Checks whether node is inside of a sentence based on this.config["sentenceRule"] and parent nodes
+     * @param node - node being checked
+     * @return {boolean}
+     */
+    isNodeInSentence(node) {
+        var result = true;
+        while (!this.config["sentenceRule"].includes(node.root)) {
+            if (node.root === this.config["rootRule"]) {
+                result = false;
+                break;
+            }
+            node = Parser.findParent(this.tree, node.parent.left, node.parent.right, node.parent.root);
+        }
+        return result;
     }
 }
 
-var p = new Parser("Vstupny text.", "SK");
+/**
+ * class for custom exception used when sentence is not found when adding paragraph tags back to tree
+ * @class
+ */
+class MissingSentenceTagException {
+    /**
+     * @constructor
+     * @param {string} message
+     */
+    constructor (message) {
+        this.message = message;
+        this.name = "MissingSentenceTagException";
+    }
+}
+
+var p = new Parser(`- Priama rec, - uvadzacia veta, - Dalsia priama rec...`, "SK");
 
 p.buildXML(); // Prida vsetky tagy.
 console.log(p.stringifyTree()); // Vysledne XML.
-console.log(p.words); // Vsetky slova A AJ INTERPUNKCIA NEOZNACENA <w> TAGMI
+console.log(p.words); // Vsetky slova
+
 
 // for (let tree of p.trees) {
 //     p.getJSONTree(tree); // Vrati jenotlive stromy v citatelnej forme
@@ -969,4 +1125,3 @@ p.saveHTMLTree("../app/res/trees/tree.html"); // HTML reprezentacia pouziteho st
 p.saveJSONTree("../app/res/trees/tree.json"); // JSON reprezentacia pouziteho stromu, da sa aj p.getJSONTree()
 
 module.exports = {Parser};
-

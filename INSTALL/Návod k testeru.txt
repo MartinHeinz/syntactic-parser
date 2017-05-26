@@ -1,0 +1,16 @@
+﻿Pre používanie testeru je možné použiť online verziu na:
+http://davinci.fmph.uniba.sk/~heinz4/bakalarska_praca/visualization/tester.html
+
+Ak je to možné, tak pre lepší user experience odporúčam používať tento tester na lokálne spustenom serveri,
+stačí napríklad spustiť pythonovsky server z priečinka visualization(ktorý sa nachádza na priloženom CD):
+    python 2.7: python -m SimpleHTTPServer 8000
+        otvorit si http://127.0.0.1:8000/
+    python 3.x: python -m http.server 8000
+        otvorit si http://127.0.0.1:8000/
+    python 3.4+: python -m http.server 8000 --bind 127.0.0.1
+        otvorit si http://127.0.0.1:8000/
+
+Poznámka: Tento tester nie súčasťou bakalárskej práce, je určený len pre jednoduché debuggovanie a
+vizualizáciu funkčnosti. Keďže tester beží vo webovom prehliadači, nedá sa garantovať efektívnosť parsovania a
+kvalita internetového pripojenia tiež môže ovplyvniť rýchlosť načítavania vizualizácie
+stromov(hlavne ak nie sú nacacheované potrebné knižnice).
