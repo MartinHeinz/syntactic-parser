@@ -1110,7 +1110,7 @@ class MissingSentenceTagException {
     }
 }
 
-var p = new Parser(`Toto ,"citat", "citat", slova slova.`, "SK");
+var p = new Parser(`- Priama rec, - uvadzacia veta, - Dalsia priama rec...`, "SK");
 
 p.buildXML(); // Prida vsetky tagy.
 console.log(p.stringifyTree()); // Vysledne XML.

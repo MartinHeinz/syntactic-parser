@@ -8,106 +8,52 @@
           "name": "Line",
           "children": [
             {
-              "name": "OtherSentences",
+              "name": "DirectSpeechDashStart",
               "children": [
                 {
-                  "name": "SentenceNoNewLine",
+                  "name": "DirectSpeechesDashed",
                   "children": [
                     {
-                      "name": "BasicSentenceNoNewLine",
+                      "name": "DSAndISentenceDashRepeated",
                       "children": [
                         {
-                          "name": "Quotation",
+                          "name": "DirectSpeechStartDashNoTag",
                           "children": [
                             {
-                              "name": "StartingToken",
+                              "name": "DirectSpeechDashSingleNoDot",
                               "children": [
                                 {
-                                  "name": "StartingTokenWithPunctuation",
+                                  "name": "Dash",
                                   "children": [
                                     {
-                                      "name": "WordBasicStart",
-                                      "children": [
-                                        {
-                                          "name": "<s id=\"s1\"><w id=\"w1\">Toto</w>"
-                                        }
-                                      ]
-                                    },
+                                      "name": "<s id=\"s1\"><s id=\"s2\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "StartingToken",
+                                  "children": [
                                     {
-                                      "name": "MidSentencePunctuation",
+                                      "name": "StartingTokenBasic",
                                       "children": [
                                         {
-                                          "name": ","
+                                          "name": "<w id=\"w1\">Priama</w>"
                                         }
                                       ]
                                     }
                                   ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "QuotationsInner",
-                              "children": [
+                                },
                                 {
-                                  "name": "QuotationsInner",
+                                  "name": "Words",
                                   "children": [
                                     {
-                                      "name": "QuotationInner",
+                                      "name": "WordTokens",
                                       "children": [
                                         {
-                                          "name": "QuoteLeft",
+                                          "name": "WordBasic",
                                           "children": [
                                             {
-                                              "name": "„"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "WordsAndPunctuation",
-                                          "children": [
-                                            {
-                                              "name": "WordTokensAndPunctuation",
-                                              "children": [
-                                                {
-                                                  "name": "WordTokens",
-                                                  "children": [
-                                                    {
-                                                      "name": "WordBasic",
-                                                      "children": [
-                                                        {
-                                                          "name": "<w id=\"w2\">citat</w>"
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "QuoteRight",
-                                          "children": [
-                                            {
-                                              "name": "“"
-                                            }
-                                          ]
-                                        },
-                                        {
-                                          "name": "WordsAndPunctuation",
-                                          "children": [
-                                            {
-                                              "name": "WordTokensAndPunctuation",
-                                              "children": [
-                                                {
-                                                  "name": "MidSentencePunctuation",
-                                                  "children": [
-                                                    {
-                                                      "name": ","
-                                                    }
-                                                  ]
-                                                }
-                                              ]
+                                              "name": "<w id=\"w2\">rec</w>"
                                             }
                                           ]
                                         }
@@ -116,32 +62,45 @@
                                   ]
                                 },
                                 {
-                                  "name": "QuotationInner",
+                                  "name": "DSPunctuation",
                                   "children": [
                                     {
-                                      "name": "QuoteLeft",
-                                      "children": [
-                                        {
-                                          "name": "„"
-                                        }
-                                      ]
-                                    },
+                                      "name": ",</s>"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ISentenceMiddleDash",
+                          "children": [
+                            {
+                              "name": "ISentenceMiddleDashSingle",
+                              "children": [
+                                {
+                                  "name": "Dash",
+                                  "children": [
                                     {
-                                      "name": "WordsAndPunctuation",
+                                      "name": "<s id=\"s3\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Words",
+                                  "children": [
+                                    {
+                                      "name": "Words",
                                       "children": [
                                         {
-                                          "name": "WordTokensAndPunctuation",
+                                          "name": "WordTokens",
                                           "children": [
                                             {
-                                              "name": "WordTokens",
+                                              "name": "WordBasic",
                                               "children": [
                                                 {
-                                                  "name": "WordBasic",
-                                                  "children": [
-                                                    {
-                                                      "name": "<w id=\"w3\">citat</w>"
-                                                    }
-                                                  ]
+                                                  "name": "<w id=\"w3\">uvadzacia</w>"
                                                 }
                                               ]
                                             }
@@ -150,50 +109,63 @@
                                       ]
                                     },
                                     {
-                                      "name": "QuoteRight",
+                                      "name": "WordTokens",
                                       "children": [
                                         {
-                                          "name": "“"
-                                        }
-                                      ]
-                                    },
-                                    {
-                                      "name": "WordsAndPunctuation",
-                                      "children": [
-                                        {
-                                          "name": "WordsAndPunctuation",
+                                          "name": "WordBasic",
                                           "children": [
                                             {
-                                              "name": "WordsAndPunctuation",
-                                              "children": [
-                                                {
-                                                  "name": "WordTokensAndPunctuation",
-                                                  "children": [
-                                                    {
-                                                      "name": "MidSentencePunctuation",
-                                                      "children": [
-                                                        {
-                                                          "name": ","
-                                                        }
-                                                      ]
-                                                    }
-                                                  ]
-                                                }
-                                              ]
-                                            },
+                                              "name": "<w id=\"w4\">veta</w>"
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "DSPunctuation",
+                                  "children": [
+                                    {
+                                      "name": ",</s>"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "DirectSpeechEndDash",
+                          "children": [
+                            {
+                              "name": "DirectSpeechEndDashStart",
+                              "children": [
+                                {
+                                  "name": "Dash",
+                                  "children": [
+                                    {
+                                      "name": "<s id=\"s4\">-"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Words",
+                                  "children": [
+                                    {
+                                      "name": "Words",
+                                      "children": [
+                                        {
+                                          "name": "Words",
+                                          "children": [
                                             {
-                                              "name": "WordTokensAndPunctuation",
+                                              "name": "WordTokens",
                                               "children": [
                                                 {
-                                                  "name": "WordTokens",
+                                                  "name": "WordBasic",
                                                   "children": [
                                                     {
-                                                      "name": "WordBasic",
-                                                      "children": [
-                                                        {
-                                                          "name": "<w id=\"w4\">slova</w>"
-                                                        }
-                                                      ]
+                                                      "name": "<w id=\"w5\">Dalsia</w>"
                                                     }
                                                   ]
                                                 }
@@ -202,34 +174,42 @@
                                           ]
                                         },
                                         {
-                                          "name": "WordTokensAndPunctuation",
+                                          "name": "WordTokens",
                                           "children": [
                                             {
-                                              "name": "WordTokens",
+                                              "name": "WordBasic",
                                               "children": [
                                                 {
-                                                  "name": "WordBasic",
-                                                  "children": [
-                                                    {
-                                                      "name": "<w id=\"w5\">slova</w>"
-                                                    }
-                                                  ]
+                                                  "name": "<w id=\"w6\">priama</w>"
                                                 }
                                               ]
                                             }
                                           ]
                                         }
                                       ]
+                                    },
+                                    {
+                                      "name": "WordTokens",
+                                      "children": [
+                                        {
+                                          "name": "WordBasic",
+                                          "children": [
+                                            {
+                                              "name": "<w id=\"w7\">rec</w>"
+                                            }
+                                          ]
+                                        }
+                                      ]
                                     }
                                   ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "Punctuation",
-                              "children": [
+                                },
                                 {
-                                  "name": ".</s>"
+                                  "name": "Punctuation",
+                                  "children": [
+                                    {
+                                      "name": "...</s></s>"
+                                    }
+                                  ]
                                 }
                               ]
                             }
